@@ -1,0 +1,49 @@
+<div class="page-layout">
+    <div class="container">
+        <div class="row col-md-12">
+            <!-- <div class="col-md-2 "> -->
+                <!--Del all cart-->
+                <!--    <button type="button" ng-really-message="Are you sure ?"
+                    class="btn btn-primary w-100" ng-really-click="delCart()">Delete all cart</button>-->
+                <!-- <button type="button" class=" mt-5 btn btn-primary w-100" (click)="delCart()">Delete all cart</button>
+            </div> -->
+
+        </div>
+        <div class="row">
+                <button type="button" class="col-md-2 btn btn-warning w-100" (click)="delCart()">Delete all cart</button>
+         
+            <div class="items">
+                <!-- <div class="scrollbar scrollbar-primary col-md-8  div-item"> -->
+                <!-- <header> -->
+                <div class="category">
+                    <app-category (categoryClicked)="filterByCategory($event)"></app-category>
+
+                    <input type="text" class="form-control" placeholder="Search" #search (keyup)="filterByName($event)">
+                </div>
+                <!-- <app-item-show *ngIf="filteredArray!=null" [itemArray]="filteredArray" ></app-item-show> -->
+                <div class="item-list">
+                    <app-item-show (updateItemEmitter)=getSelectedItem($event) (addItemEmitter)=updateArry() *ngIf="filteredArray!=null"
+                        [itemArray]="filteredArray"></app-item-show>
+                </div>
+                <!-- *ngIf="roleId==2" -->
+                <div class="item" *ngIf="roleId===1">
+                    <app-item-update [item]=item_Emitter></app-item-update>
+                </div>
+
+                <div class="item" *ngIf="roleId!==1">
+                    <app-cart-item [cartItemExArray]="cartItemExArray" (deleteItemEmitter)=updateArry()  ></app-cart-item>
+                </div>
+                <!-- </div> -->
+                <!-- <div class="router-outlet-data">
+
+                <router-outlet></router-outlet>
+            </div> -->
+
+                <!-- //חיפוש -->
+                <!-- <router-outlet name="categoryOutlet"></router-outlet> -->
+
+                <!-- </header> -->
+            </div>
+        </div>
+    </div>
+</div>

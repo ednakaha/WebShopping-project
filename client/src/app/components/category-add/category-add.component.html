@@ -1,0 +1,9 @@
+<div>
+    <h2>New category:</h2>
+    test: {{categoryArray|json}}
+    <label>Name:
+      <input [(ngModel)]='categoryName' required />
+    </label>
+    <button (click)="addCategory()"> add category </button>
+    <button (click)="allCategory()">All</button>
+  </div>

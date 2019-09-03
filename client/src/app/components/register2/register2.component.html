@@ -1,0 +1,25 @@
+<form #newUserForm="ngForm">
+  <fieldset>
+    <legend>Sign in -user "STEP 2"</legend>
+    <label> First name:
+      <input placeholder="First name" [(ngModel)]='firstName' required name="firstName">
+    </label>
+    <label> Last name:
+      <input placeholder="Last name" [(ngModel)]='lastName' required name="lastName">
+    </label>
+    <label> Street
+      <input placeholder="Street" [(ngModel)]='street' required name="street">
+    </label>
+
+    <app-city-show (changeSelectEmitter)="getSelectedCityId($event)"></app-city-show>
+
+    <button type="submit" (click)='addPerson2()' [disabled]="!newUserForm.form.valid">
+      submit
+    </button>
+  </fieldset>
+</form>
+<!--TODO: right arrow
+
+city and street no for admin
+
+add admin/user select +checking just 1 admin -->

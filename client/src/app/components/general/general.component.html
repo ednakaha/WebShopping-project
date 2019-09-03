@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div>
+            <p class="fa fa-shopping-cart  "*ngIf="itemsCounter!=null">Avaliable products in our store: {{itemsCounter}}</p>
+            <!-- <i class="fa fa-shopping-cart fa-2x  icon-grey"> -->
+        </div>
+    </div>
+    <div class="row">
+        <div  >
+            <p class="fa fa-shopping-cart  " *ngIf="ordersCounter!=null">Number of orders submitted in our store: {{ordersCounter}}</p>
+            <!-- <i class="fa fa-shopping-cart fa-2x  icon-grey"> -->
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-warning">
+            <p>Notification:</p><br>
+            <p *ngIf="!isNew">You have open cart from {{updateDateCart}}</p>
+            <p *ngIf="!isNew">Your last purchase was on {{orderDate}}</p>
+            <p *ngIf="isNew">Welcome </p>
+        </div>
+    </div>
+</div>
+<!-- 
+<li class="nav-item">
+    <a [routerLink]="['/users/cart']">
+        <i class="fa fa-shopping-cart fa-2x  icon-grey">
+            <span class="badge">17</span>
+        </i>
+    </a>
+</li> -->

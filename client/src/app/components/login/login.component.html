@@ -1,0 +1,43 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<!--Pulling Awesome Font -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<form #newUserForm="ngForm">
+  <!-- <div class="container"> -->
+  <!-- <div class="row"> -->
+  <!-- <div class="col-md-offset-5 col-md-3"> -->
+  <div class="form-login">
+
+    <h4>Welcome back</h4>
+    <input type="text" [(ngModel)]="user.email" required name='email' class="form-control input-sm chat-input"
+      placeholder="username" />
+
+    <input type="text" [(ngModel)]="user.password" required type='password' name='password'
+      class="form-control input-sm chat-input" placeholder="password" />
+
+    <div class="wrapper">
+      <span class="group-btn">
+        <button class="btn btn-primary btn-md" (click)="login()" [disabled]="!newUserForm.form.valid">Login <i
+            class="fa fa-sign-in"></i></button>
+        <div class="row">
+          <button *ngIf="logged" class="btn btn-primary btn-md" (click)="toShopping()">
+            <div *ngIf="isNew">
+              <p>Start shopping</p>
+            </div>
+            <div *ngIf="!isNew">
+              <p>Resume shopping</p>
+            </div>
+          </button>
+        </div>
+        <a class="nav-link" href='#' [routerLink]='["/register"]'>Sign up</a>
+      </span>
+    </div>
+    <!-- </div> -->
+
+    <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</form>

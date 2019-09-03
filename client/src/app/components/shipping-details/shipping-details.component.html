@@ -1,0 +1,54 @@
+<form #orderForm="ngForm">
+    <div class="container">
+        <div class="row col-md-10">
+            <div>
+                <b>Shipping Details: </b>
+                <hr>
+            </div>
+            <div class="row col-md-12">
+                City:
+                <app-city-show (changeSelectEmitter)="getSelectedCityId($event)"></app-city-show>
+
+            </div>
+            <div class="row col-md-10">
+                <label> Street:
+                    <input placeholder="street Ship" [(ngModel)]='streetShip' ng-dblclick required name="streetShip">
+                </label>
+            </div>
+            <div class="row col-md-10">
+                Shipping Date:
+                <form class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dateShip" [(ngModel)]="dateShip"
+                                ngbDatepicker #d="ngbDatepicker" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row col-md-10">
+                <b> Payments: </b>
+                <hr>
+            </div>
+            <div class="row col-md-10">
+                <label>Credit card:
+                    <input type="number" class="no-spinner" [(ngModel)]='creditCardNo' name='creditCardNo' required />
+                </label>
+            </div>
+        </div>
+
+        <button type="submit" (click)='doOrder()' [disabled]="!orderForm.form.valid">
+            Order
+        </button>
+        <div>
+            <button type="submit" (click)='getCartItemExList()'  >
+                <!-- [disabled] = "!orderDone" -->
+                download text file 
+            </button>
+        </div>
+    </div>
+</form>

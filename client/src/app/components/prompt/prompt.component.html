@@ -1,0 +1,21 @@
+<!-- <div class="modal fade" #promptModal id="encasUnPwModal" data-keyboard="false" data-backdrop="static"> -->
+<div class="modal-header ">
+  <h4 class="modal-title" id="modal-basic-title">Select count</h4>
+</div>
+<div class="modal-body">
+  <div class="mb-2 d-flex justify-content-center">
+  <input [(ngModel)]="count" type="number" min="1" required name="countInp" value="1">
+</div>
+  <!--//todo max=stock-->
+  <div class="row ">
+    <div class="col-md-6">
+      <button (click)="closeModal()" type="submit" class="btn bg-warning w-100"
+       >Close</button>
+    </div>
+    <div class="col-md-6">
+      <button (click)="passBack()" type="submit" class="btn bg-warning w-100">Next</button>
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+<!-- ng-class="{'disabled' : 'countInp<1'}"  -->

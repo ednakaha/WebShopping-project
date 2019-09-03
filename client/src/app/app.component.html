@@ -1,0 +1,39 @@
+<header>
+
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        {{roleId}}
+        <!-- todo -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href='#' [routerLink]='[""]'>Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href='#' [routerLink]='["/cart"]'>cart</a>
+                </li>
+                <!-- <li [style.visibility]="hidden" class="nav-item active"> -->
+                <!-- <ng-container *ngIf="roleId=1"> -->
+                <li class="nav-item active">
+                    <a class="nav-link" href='#' [routerLink]='["/city"]'>city</a>
+                </li>
+                <!-- </ng-container> -->
+                <li class="nav-item active">
+                    <a class="nav-link" href='#' [routerLink]='["/register"]'>register</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href='#' [routerLink]='["/shopping-page"]'>shopping page</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href='#' [routerLink]='["/item-add"]'>item add</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <div> <label class="text-success"> {{firstName}} </label></div>
+            <div> <label class="text-success"> {{email}} </label></div>
+        </div>
+    </nav>
+</header>
+
+<router-outlet></router-outlet>

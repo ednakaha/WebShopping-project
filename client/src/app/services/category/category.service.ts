@@ -1,0 +1,48 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Observable, of } from 'rxjs';
+import { CategoryM } from '../../models/category';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' ,
+  'Authorization': 'Bearer <token>'
+})
+};
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CategoryService {
+
+  constructor(private http: HttpClient) { }
+
+
+  getCategory(id?: string): Observable<CategoryM[]> {
+    if (id) {
+      return this.http.get<CategoryM[]>(environment.url + '/category/get/' + id,httpOptions);
+    }
+    else {
+      return this.http.get<CategoryM[]>(environment.url + '/category/get',httpOptions);
+    }
+  }
+
+  addCategory(category: CategoryM) {//}: boolean {
+    result: Boolean;
+    //debugger;
+    this.http.post<CategoryM>(environment.url + '/category/add', category, httpOptions).subscribe(
+      data => {
+        alert(data)
+        // console.log("POST Request is successful ", data);
+        //result =   true;
+      },
+      error => {
+        alert(error.error)
+        console.log("Error", error);
+        // return false;
+      }
+    )
+    //return false;
+  };
+}

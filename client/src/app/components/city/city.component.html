@@ -1,0 +1,21 @@
+<div>
+  <h2>New city:</h2>
+ test: {{cityArray|json}}
+  <label>Name:
+    <input  [(ngModel)]='cityname'  required />
+  </label>
+  <label>Id:
+    <input  [(ngModel)]='cityid'  required />
+  </label>
+  <!--<label>Start date:
+    <input [(ngModel)]='toDoStartDate' type="date" pattern="YYYY-MM-dd" required />{{today | date}}
+  </label>-->
+ <!-- <select  [(ngModel)]='person' name="person" id="manager" class="form-control" required>
+    <option disabled value="">Select person</option>
+    <option *ngFor="let person of persons" [value]='person.id'> {{person.name}}
+    </option>
+  </select>--->
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="addCity()"> add city </button>
+  <button (click)="getListCity()"> get city </button>
+</div>

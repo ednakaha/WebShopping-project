@@ -1,0 +1,27 @@
+<!-- <div class="container">
+    <div class="row"> -->
+<!-- <div class="col-md- col-md-offset-1"> -->
+
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <ul *ngFor="let category of categoryArray" class="navbar-nav mr-auto">
+        <li>
+            <button (click)="categoryClick(category._id)">
+                <label class="value">{{category.name}}</label>
+            </button>
+            <label>&nbsp;&nbsp;&nbsp; |</label>
+            <!-- <a class="nav-link" href='#' routerLinkActive="active" 
+                [routerLink]='["/shopping-page/item-show/getListItemByCat",category._id]' 
+                >{{category.name}}</a>
+              -->
+            <!-- <a class="nav-link" href='#' routerLinkActive="active" routerLink='/item-show/getListItemByCat/{{category._id}}'>{{category.name}}</a> -->
+
+            <!-- <a [routerLink]="[{ outlets: { categoryOutlet: ['/item-show/getListItemByCat',category._id] } }]" >{{category.name}}</a>   -->
+        </li>
+    </ul>
+</nav>
+<!-- <router-outlet name="categoryOutlet"></router-outlet> -->
+
+<!-- </div> -->
+<!-- <router-outlet></router-outlet> -->
+<!-- </div>
+</div> -->

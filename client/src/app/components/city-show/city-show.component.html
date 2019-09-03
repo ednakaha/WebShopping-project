@@ -1,0 +1,6 @@
+<select [(ngModel)]='cityId_Emitter' name="cityId" id="manager" class="form-control" (change)="setSelectedCityEmitter(cityId_Emitter)"
+    required>
+    <option value="">Select city</option>
+    <option *ngFor="let city of cities" [value]='city._id'> {{city.name}}
+    </option>
+</select>

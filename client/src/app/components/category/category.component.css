@@ -1,0 +1,17 @@
+button{
+    background-color: transparent;
+    border: none;
+}
+label{
+    color: white;
+    
+}
+
+.value{
+    
+    width: 100%
+}
+
+ul{
+  padding: 5px;
+}

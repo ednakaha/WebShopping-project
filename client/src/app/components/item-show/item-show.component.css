@@ -1,0 +1,27 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+   /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');*/
+    background-size: cover;
+  }
+  .form-control {
+    box-shadow: 0 10px 40px 0 #B0C1D9;
+  }
+  .form-control::placeholder  {
+    font-family: FontAwesome;
+  }
+  .cart-item{
+    width: 15%;
+    padding: 2px;
+    display: inline-block;
+  }
+  .item-display{
+
+    border:solid 1px black;
+  }
+
+  h6{
+    text-align: center;
+  }

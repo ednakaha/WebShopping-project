@@ -1,0 +1,28 @@
+<div *ngIf="rerender">
+    <div class="cart-item form-control" *ngFor="let cartItem of cartItemExArray ">
+        <span> <b>{{cartItem.itemDetailsArr[0].name}}</b>:</span>
+        <span> {{cartItem.count}} * {{cartItem.itemDetailsArr[0].price}}₪</span>
+        <span><img src="{{cartItem.itemDetailsArr[0].picturePath | safeHtml}}"
+                alt="{{cartItem.itemDetailsArr[0].name}}"></span>
+
+        <button type="button" class="btn btn-white btn-sm float-right" (click)="delCartItem(cartItem._id)">
+            <i class="fa fa-trash icon"></i> 
+        </button>
+    </div>
+</div>
+<footer>
+    <div class="col-md-8">
+        <hr>
+    </div>
+    <div class="link">
+        <b> Total: <input readonly id="inputTotal" type="text" value='{{ getTotal() }}₪' /></b>
+        <div>
+            <a href='#' [routerLink]='["/order-page"]'>Order</a>
+        </div>
+        <div>
+            <a href='#' [routerLink]='["/shopping-page"]'>Back to shop</a>
+        </div>
+    </div>
+    <!--todo order just on state shopping , back to shop on order state-->
+</footer>
+<!-- <router-outlet></router-outlet> -->

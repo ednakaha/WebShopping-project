@@ -1,0 +1,55 @@
+<div ng-app="" *ngIf="itemArray">
+  <div class="cart-item" *ngFor="let item of itemArray">
+    <div *ngIf="item">
+      <!-- <div (click)="roleId===1 ? updateItemByAdmin(item._id) :false " style="background-color: blue"> -->
+      <div class="item-display">
+        <div (click)="roleId===1 ? updateItemByAdmin(item) :false ">
+          <label class="title-name">{{item.name}}</label>
+          <div class="price">
+            <i class="fas fa-tag"></i>
+            <label class="title-price">{{item.price|currency:'₪'}} </label>
+          </div>
+        </div>
+        <div *ngIf="roleId!==1">
+          <button type="button" (click)="openModal(item)" ngClick="toggle = 'true'"><i class="fas fa-cart-plus"></i> Add
+            to cart </button>
+        </div>
+        <!--todo change button text add to cart q update //on click -and in the server do update-->
+
+        <!--todo hidden-->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--
+  INVOICE 
+  
+  https://codepen.io/marabesi/pen/PwbNOE
+
+  
+  <ul *ngFor="let item of itemArray" class="list-inline overflow-h">
+    <button class="quantity-button" (click)="dec()" data-dir="dwn">-</button>-->
+
+<!--  <button class="quantity-button" (click)="inc()" data-dir="up">+</button>-->
+<!--  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{item.name}}</mat-card-title>
+      <mat-card-subtitle>{{item.price}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src={{item.picturePath}} alt="Photo of item">
+    <mat-card-content>
+      <p><
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+-->
