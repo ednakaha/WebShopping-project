@@ -58,8 +58,10 @@ ItemRouter.route('/get').get(function (req, res) {
 ItemRouter.route('/add').post(function (req, res) {
     console.log('req.body ' + req.body.categoryId + '-' + req.body.price + '-' + req.body.picturePath + '-' + req.body.name);
     const ItemData = new ItemSchema(req.body);
+    console.log('ItemData' +ItemData);
     ItemData.save()
         .then(itemD => {
+            confirm.log('itemD' + itemD)
             //inc GeneralSchema for count iteams
             GeneralSchema.findOneAndUpdate({},
                 { $inc: { itemsCounter: 1 } },
