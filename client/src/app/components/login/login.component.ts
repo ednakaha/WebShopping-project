@@ -23,12 +23,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loginService.login(this.user).subscribe(loginRes => {
-      //create or get the cart of the user
+      //create or get the cart of the user\
       this.cartService.getOrSetCart(this.loginService.getUserId()).subscribe(cartData => {
-        let createdate = String(cartData["createDate"]).slice(0, 16);
-        let updateDate = String(cartData["updateDate"]).slice(0, 16);
+        let createdate = String(cartData[0]["createDate"]).slice(0, 16);
+        let updateDate = String(cartData[0]["updateDate"]).slice(0, 16);
         this.isNew = (createdate === updateDate);
-      
+
         this.logged = true;
       });
       console.log('login ' + loginRes);

@@ -20,24 +20,18 @@
 
     <div class="wrapper">
       <span class="group-btn">
-        <button class="btn btn-primary btn-md" (click)="login()" [disabled]="!newUserForm.form.valid">Login <i
-            class="fa fa-sign-in"></i></button>
         <div class="row">
-          <button *ngIf="logged" class="btn btn-primary btn-md" (click)="toShopping()">
-            <div *ngIf="isNew">
-              <p>Start shopping</p>
-            </div>
-            <div *ngIf="!isNew">
-              <p>Resume shopping</p>
-            </div>
+          <button class="col-md-6 btn btn-primary btn-md" (click)="login()" [disabled]="!newUserForm.form.valid">Login
+            <i class="fa fa-sign-in"></i></button>
+
+          <button class="col-md-6 btn btn-primary btn-md" *ngIf="logged" class="btn btn-primary btn-md"
+            (click)="toShopping()">
+            <p *ngIf="isNew">Start shopping</p>
+            <p *ngIf="!isNew">Resume shopping</p>
           </button>
         </div>
         <a class="nav-link" href='#' [routerLink]='["/register"]'>Sign up</a>
       </span>
     </div>
-    <!-- </div> -->
-
-    <!-- </div> -->
-    <!-- </div> -->
   </div>
 </form>

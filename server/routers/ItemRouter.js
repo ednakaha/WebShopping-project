@@ -18,7 +18,7 @@ ItemRouter.get('/getByCategory/:id', function (req, res) {
 });
 
 ItemRouter.route('/getById/:id').get(function (req, res) {
-      console.log('get item '+ req.params.id);
+    console.log('get item ' + req.params.id);
     ItemSchema.find({ _id: req.params.id }, function (err, itemD) {
         if (err) {
             console.log('getById 400' + err);
@@ -56,12 +56,9 @@ ItemRouter.route('/get').get(function (req, res) {
 //todo OrdersColl on the begining
 //cityColl on the begining
 ItemRouter.route('/add').post(function (req, res) {
-    console.log('req.body ' + req.body.categoryId + '-' + req.body.price + '-' + req.body.picturePath + '-' + req.body.name);
     const ItemData = new ItemSchema(req.body);
-    console.log('ItemData' +ItemData);
     ItemData.save()
         .then(itemD => {
-            confirm.log('itemD' + itemD)
             //inc GeneralSchema for count iteams
             GeneralSchema.findOneAndUpdate({},
                 { $inc: { itemsCounter: 1 } },
@@ -81,16 +78,31 @@ ItemRouter.route('/add').post(function (req, res) {
 }
 );
 
-//todo del +
-//dec generalColl.ordersCounter
-//todo check
-// GeneralSchema.findOneAndUpdate({}, { $inc: { ordersCounter: -1 } },
-//     { new: true }, function (err, response) {
-//         if (err) {
-//             console.log('GeneralSchema err ' + err);
-//         } else {
+// Update document
+ItemRouter.route('/update').put(function (req, res) {
+    console.log(req.body)
+    ItemSchema.findOneAndUpdate(
+        {
+            _id: req.params._id // [query]
+        },
+        {
+            $set: {
+                name: req.body.name,
+                categoryId:req.body.categoryId,
+                price:req.body.price,
+                picturePath:req.body.picturePath
+            }
+         },
+         {
+             upsert: false      // [options] if this document has no title create one
+         },
+         function(err,item) {
+             if (err) { console.log('error occured');
+             } else {
+                 console.log('item '+ item);
+                 res.status(204).send(item);
+             } 
+         });
+ });
 
-//             console.log('GeneralSchema dec response  ' + response);
-//         }
-//     });
 module.exports = ItemRouter;
