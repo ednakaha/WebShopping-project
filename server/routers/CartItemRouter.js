@@ -103,45 +103,53 @@ CartItemRouter.post('/add', function (req, res) {
     const cartItemData = new CartItemSchema(req.body);
     //check if exists same item and cart in the collection. so just do update 
     //  console.log( 'itemId:'+ req.body.itemId + 'cartId:'+req.body.cartId)
-    CartItemSchema.find({ itemId: req.body.itemId, cartId: req.body.cartId }, function (err, docs) {
-        if (docs.length) {
-            //todo update  change button!!!!! 
-            console.log('docs - ' + JSON.stringify(docs));
-            res.status(499).send("Cart item already exists");
-        } else {
-            console.log(cartItemData);
+    CartItemSchema.findOneAndUpdate(
+        { itemId: req.body.itemId, cartId: req.body.cartId },
+        {
+            $set: {
+                count: req.body.count
+            }
+        },
+        function (err, docs) {
+            if (docs) {
+                console.log('docs - ' + JSON.stringify(docs));
+                //   res.status(499).send("Cart item updated");
+                res.json('Item updated successfully');
 
-            cartItemData.save()
-                .then(cartItemD => {
-                    console.log('-------------')
-                    //update field cart.
-                    //todo !!!!!!!! doesn't work 
-                    try {
-                        console.log('cartid' + req.body.cartId)
-                        CartSchema.updateOne({ cartId: req.body.cartId },
-                            { $set: { updateDate: new Date() } },
-                            function (err, response) {
-                                if (err) {
-                                    console.log('itemsCounter err ' + err);
-                                } else {
-                                    console.log('GeneralSchema response  ' + response);
-                                }
-                            })
-                    }
-                    catch (e) {
-                        print('cartItem-update cart ' + e);
-                    };
+            } else {
+                console.log(cartItemData);
+
+                cartItemData.save()
+                    .then(cartItemD => {
+                        console.log('-------------')
+                        //update field cart.
+                        //todo !!!!!!!! doesn't work 
+                        try {
+                            console.log('cartid' + req.body.cartId)
+                            CartSchema.updateOne({ cartId: req.body.cartId },
+                                { $set: { updateDate: new Date() } },
+                                function (err, response) {
+                                    if (err) {
+                                        console.log('itemsCounter err ' + err);
+                                    } else {
+                                        console.log('GeneralSchema response  ' + response);
+                                    }
+                                })
+                        }
+                        catch (e) {
+                            print('cartItem-update cart ' + e);
+                        };
 
 
-                    res.json('Item added successfully');
+                        res.json('Item added successfully');
 
 
-                })
-                .catch(err => {
-                    res.status(400).send("unable to save to database");
-                });
-        }
-    });
+                    })
+                    .catch(err => {
+                        res.status(400).send("unable to save to database");
+                    });
+            }
+        });
 });
 
 // Update document
@@ -191,7 +199,7 @@ CartItemRouter.delete('/deleteCartItem/:id', function (req, res) {
             res.send('error deleting cart item')
         } else {
             console.log('deleteCartItem' + req.params.id);//cartItem['deletedCount']);
-                 res.status(204).send(JSON.stringify(cartItem['deletedCount']));
+            res.status(204).send(JSON.stringify(cartItem['deletedCount']));
         }
     });
 });

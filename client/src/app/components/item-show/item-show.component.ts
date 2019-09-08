@@ -59,6 +59,7 @@ export class ItemShowComponent implements OnInit {
     this.cartItemService.addCartItem(this.cartItem)
       .subscribe(
         data => {
+          debugger;
           alert(data);
           this.addItemEmitter.emit(this.cartItem);
           // console.log("POST Request is successful ", data);

@@ -29,6 +29,17 @@
                         </div>
                     </div>
                 </form>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <ngb-datepicker [(ngModel)]="model" #d="ngbDatepicker"></ngb-datepicker>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()"
+                                    type="button"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="row col-md-10">
                 <b> Payments: </b>
@@ -45,9 +56,9 @@
             Order
         </button>
         <div>
-            <button type="submit" (click)='getCartItemExList()'  >
+            <button type="submit" (click)='getCartItemExList()'>
                 <!-- [disabled] = "!orderDone" -->
-                download text file 
+                download text file
             </button>
         </div>
     </div>
