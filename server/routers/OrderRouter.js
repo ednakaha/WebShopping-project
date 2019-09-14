@@ -19,6 +19,7 @@ OrderRouter.get('/get', function (req, res) {
 
 
 
+
 // get one Member
 OrderRouter.get('/getOrderByUser/:id', function (req, res) {
     OrderSchema.findOne({ personId: req.params.id }, {}, { $orderby: { createdDate: -1 } }).exec(function (err, order) {
@@ -28,6 +29,24 @@ OrderRouter.get('/getOrderByUser/:id', function (req, res) {
         } else {
             console.log('getOrderByUser ' + order);
             res.json(order);
+        }
+    });
+});
+
+// get grouping of orders by date-for calender 
+OrderRouter.get('/getGroupingOrders', function (req, res) {
+    console.log('getGroupingOrders');
+    OrderSchema.aggregate([ {$group : 
+        {_id:"$createdDate", 
+        total:{$sum:1}}}, 
+        {$sort:{createdDate:-1}}]
+        ).exec(function (err, orderGroup) {
+        if (err) {
+            console.log('getGroupingOrders error lookup - ' + err)
+            res.status(404).send('getGroupingOrder Error has occurred! - ' + err);
+        } else {
+            console.log(orderGroup);
+            res.json(orderGroup);
         }
     });
 });

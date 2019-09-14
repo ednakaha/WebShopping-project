@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from 'src/app/services/register/register.service';
 import { CityService } from 'src/app/services/city/city.service';
+import { EnumRole } from '../../../environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
-
+export enum EnumRole1 {
+  Admin = 1,
+  User = 2
+}
 @Component({
   selector: 'app-register2',
   templateUrl: './register2.component.html',
   styleUrls: ['./register2.component.css']
 })
-export class Register2Component implements OnInit {
+export class Register2Component{//} implements OnInit {
   
   //model:
   firstName: string;
@@ -16,11 +21,22 @@ export class Register2Component implements OnInit {
   street:  string;
   roleId: number;
 
+  // roleEnum:EnumRole1;
+  // keys: any[];
+
   emitCityId:string;
 
-  constructor(private registerService: RegisterService ) { }
+  constructor(private registerService: RegisterService ) {
+    // debugger;
+    //todo?
+  // this.keys = Object.keys(this.roleEnum).filter(Number);
+  
+   
+   }
 
-  ngOnInit() {  }
+  ngOnInit() { 
+    debugger;
+   }
 
 
   getSelectedCityId($event){
@@ -28,7 +44,7 @@ export class Register2Component implements OnInit {
   }
 
   addPerson2() {
-    //debugger;
+    debugger;
    this.registerService.addPersonStep2({
       id: -1,
       tz:'',
@@ -38,7 +54,7 @@ export class Register2Component implements OnInit {
       lastName: this.lastName,
       cityId: this.emitCityId,//this.cityId,
       street: this.street,
-      roleId: -1 //todo 
+      roleId: this.roleId 
     }); 
   }
   

@@ -23,6 +23,8 @@ export class ShippingDetailsComponent implements OnInit {
   orderDone: Boolean;
   lastOrder: OrderM;
   model: NgbDateStruct;
+  config: NgbDatepickerConfig;
+  calendar: NgbCalendar;
 
   private setting = {
     element: {
@@ -31,6 +33,7 @@ export class ShippingDetailsComponent implements OnInit {
   }
 
   cartItemExArray: CartItemExpandedM[] | CartItemExpandedM;
+
   markDisabled2(date: { year: number, month: number, date: number }): boolean {
     debugger;
     return date.date <= 3;
@@ -39,29 +42,10 @@ export class ShippingDetailsComponent implements OnInit {
 
 
   constructor(private orderService: OrderService, private loginService: LoginService,
-    private cartItemService: CartItemService, config: NgbDatepickerConfig, calendar: NgbCalendar) {
-    // customize default values of datepickers used by this component tree
-    config.minDate = { year: 1900, month: 1, day: 1 };
-    config.maxDate = { year: 2099, month: 12, day: 31 };
+    private cartItemService: CartItemService) {
 
-    // days that don't belong to current month are not visible
-    config.outsideDays = 'hidden';
+    this.loadGroupOrdersByDate();
 
-    // weekends are disabled
-    //config.markDisabled = (date: NgbDate) => calendar.getWeekday(date) === 6;
-    //config.markDisabled =  (date: NgbDate) => 
-    // date === NgbDate.from({year: 2019, month: 9, day: 1});
-    //const todayNGB = calendar.getToday();
-    //const today = new Date(todayNGB.year, todayNGB.month, todayNGB.day);
-    var array = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
-    function isInArray(array, value) {
-      return !!array.find(item => { return item.getTime() == value.getTime() ;});
-    }
-    config.markDisabled = (date: NgbDateStruct) => {
-      const d = new Date(date.year, date.month, date.day);
-      return (isInArray(array, d));
-      // return d > today;
-    };
     this.orderDone = false;
   }
 
@@ -122,6 +106,34 @@ export class ShippingDetailsComponent implements OnInit {
     element.dispatchEvent(event);
   }
 
+  isDateInArray(array, value) {
+    return !!array.find(item => { return item.getTime() == value.getTime(); });
+  }
+
+  //define calender 
+  setCalender(groupOrdersByDateArray) {
+    // customize default values of datepickers used by this component tree
+    debugger;
+    this.config.minDate = { year: 1900, month: 1, day: 1 };
+    this.config.maxDate = { year: 2099, month: 12, day: 31 };
+
+    // days that don't belong to current month are not visible
+    this.config.outsideDays = 'hidden';
+
+    // weekends are disabled
+    //config.markDisabled = (date: NgbDate) => calendar.getWeekday(date) === 6;
+    //config.markDisabled =  (date: NgbDate) => 
+    // date === NgbDate.from({year: 2019, month: 9, day: 1});
+    //const todayNGB = calendar.getToday();
+    //const today = new Date(todayNGB.year, todayNGB.month, todayNGB.day);
+    // var array = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
+    this.config.markDisabled = (date: NgbDateStruct) => {
+      const d = new Date(date.year, date.month, date.day);
+      return (this.isDateInArray(groupOrdersByDateArray, d));
+    }
+
+  };
+
   getCartItemExList() {
     //debugger;
     this.cartItemService.getcartItemForTextFile(this.loginService.getCartId())
@@ -133,4 +145,15 @@ export class ShippingDetailsComponent implements OnInit {
       });
   }
 
+  loadGroupOrdersByDate() {
+    this.orderService.getGroupingOrders().subscribe(
+      groupO => {
+        //filter just 3 orders for a day
+        var filteredOrders = groupO.filter(e => {
+          return e.total >= 3
+        });
+        this.setCalender(filteredOrders);
+      }
+    )
+  }
 }

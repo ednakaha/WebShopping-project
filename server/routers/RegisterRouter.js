@@ -8,13 +8,13 @@ const globalFile = require('../global');
 function BuildPerson() {
     var _person = new PersonSchema();
 
-    function addStep1(tz, email, password){
+    function addStep1(tz, email, password) {
         _person.tz = tz;
         _person.email = email;
         _person.password = globalFile.saltHashPassword(password);
     }
 
-   
+
     function addStep2(cityid, street, FName, lName, roleId) {
         _person.cityId = cityid;
         _person.street = street;
@@ -24,7 +24,7 @@ function BuildPerson() {
     }
 
     function build() {
-   //     console.log('build');
+        //     console.log('build');
         var p = _person;
         _person = new PersonSchema();
         return p;
@@ -76,7 +76,7 @@ RegisterRouter.route('/addStep1').post(function (req, res) {
     if (LegalTz(req.body.tz)) {
         //const PersonData = new PersonSchema(req.body);
         console.log('before find');
-        PersonSchema.find({$or:[{ tz: req.body.tz} ,{ email:req.body.email}]}, function (err, docs) {
+        PersonSchema.find({ $or: [{ tz: req.body.tz }, { email: req.body.email }] }, function (err, docs) {
             if (docs.length) {
                 res.status(499).send("TZ or Email are already exist");
             } else {
@@ -84,7 +84,7 @@ RegisterRouter.route('/addStep1').post(function (req, res) {
                 p1.addStep1(req.body.tz,
                     req.body.email,
                     req.body.password);
-            //    console.log('after add1');
+                //    console.log('after add1');
                 res.json('Person step1 passed successfully');
             }
         });
@@ -94,28 +94,43 @@ RegisterRouter.route('/addStep1').post(function (req, res) {
     }
 });
 
-RegisterRouter.route('/addStep2').post(function (req, res) {
-    console.log('before add2');
-    p1.addStep2(req.body.cityId,
-        req.body.street,
-        req.body.firstName,
-        req.body.lastName,
-        req.body.roleId);
-  //  console.log('after add2'+JSON.stringify(req.body));
-   // p1.build();
-  //  console.log( JSON.stringify(p1.build()));
+
+function savePerson(personD) {
+    console.log('in save person')
+    p1.addStep2(personD.cityId,
+        personD.street,
+        personD.firstName,
+        personD.lastName,
+        personD.roleId);
     const PersonData = new PersonSchema(p1.build());
-   // console.log(p1.street);
-    console.log('PersonData'+JSON.stringify(PersonData));
+    // console.log(p1.street);
+    console.log('PersonData' + JSON.stringify(PersonData));
     PersonData.save()
         .then(per => {
             console.log('in save')
-            res.json('Person added successfully');
+            // res.json('Person added successfully');
+            return ('Person added successfully');
         })
         .catch(err => {
             console.log('in catch');
-            res.status(400).send("unable to save to database");
+            return ("unable to save to database")
+            // res.status(400).send("unable to save to database");
         });
+}
+
+RegisterRouter.route('/addStep2').post(function (req, res) {
+    //check there is no other admin
+    console.log('req.body.roleId ' + req.body.roleId)
+    if (req.body.roleId === '1') {
+        PersonSchema.find({ roleId: req.body.roleId }, function (err, docs) {
+            if (docs.length) {
+                res.status(499).send("An administrator already exists in the system");
+            } else
+                res.json(savePerson(req.body));
+        });
+    }
+    else
+        res.json(savePerson(req.body));
 }
 );
 

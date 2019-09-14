@@ -9,7 +9,7 @@ CityRouter.route('/get').get(function (req, res) {
       console.log('400' + err);
     }
     else {
-      console.log('in get city' + JSON.stringify(cityD, undefined, 2));
+     // console.log('in get city' + JSON.stringify(cityD, undefined, 2));
       res.json(cityD);
     }
   });

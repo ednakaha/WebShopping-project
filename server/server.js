@@ -50,7 +50,7 @@ mongoose.connect(config.DB, { useNewUrlParser: true }, function (err, db) {   //
           }
         });
 
-        console.log('generalColl result ' + result.ops);
+        // console.log('generalColl result ' + result.ops);
       }
     });
   }

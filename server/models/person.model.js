@@ -10,7 +10,7 @@ const PersonSchema = new Schema({
     password: String,
     cityId: String,
     street: String,
-    roleId: Number
+    roleId: Number  //1-admin 2-user
 },{
     collection: 'personsColl'
 });

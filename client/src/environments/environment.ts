@@ -2,18 +2,18 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export enum EnumStatusOrder{
-  New=1,
+export enum EnumStatusOrder {
+  New = 1,
   Update,
   Close
 }
-export enum EnumRole{
-  Admin=1,
-  User
+export enum EnumRole {
+  Admin = 1,
+  User = 2
 }
 
-export enum EnumStatusCart{
-  Open=1,
+export enum EnumStatusCart {
+  Open = 1,
   Close
 }
 //todo move to prod.ts

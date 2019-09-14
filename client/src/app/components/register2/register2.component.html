@@ -10,9 +10,13 @@
     <label> Street
       <input placeholder="Street" [(ngModel)]='street' required name="street">
     </label>
-
+    <!-- city -->
     <app-city-show (changeSelectEmitter)="getSelectedCityId($event)"></app-city-show>
-
+    <select [(ngModel)]='roleId' name="roleId" id="roleId" class="form-control" required>
+        <option value="1">Admin</option>
+        <option value="2">User</option>
+            <!-- <option *ngFor="let key of keys" [value]="key">{{roleEnum[key]}}</option> -->
+      </select>
     <button type="submit" (click)='addPerson2()' [disabled]="!newUserForm.form.valid">
       submit
     </button>

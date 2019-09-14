@@ -87,7 +87,7 @@ export class LoginService {
   getUserId() {
     return window.localStorage.getItem(environment.USER_DATA);
   }
-  getRoleId() {
+  getRoleId() { //todo Encryption
     return window.localStorage.getItem(environment.USER_ROLE_ID);
   }
 

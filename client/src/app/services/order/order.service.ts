@@ -31,6 +31,12 @@ export class OrderService {
     }
   }
 
+  
+  getGroupingOrders(): Observable<any> {
+    debugger;
+    return this.http.get<any>(environment.url + '/order/getGroupingOrders');
+  }
+
   getOrderByUser(id?: string): Observable<OrderM[]> {
     if (id) {
       return this.http.get<OrderM[]>(environment.url + '/order/getOrderByUser/' + id);

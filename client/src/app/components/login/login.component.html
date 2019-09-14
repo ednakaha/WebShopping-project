@@ -26,8 +26,13 @@
 
           <button class="col-md-6 btn btn-primary btn-md" *ngIf="logged" class="btn btn-primary btn-md"
             (click)="toShopping()">
-            <p *ngIf="isNew">Start shopping</p>
-            <p *ngIf="!isNew">Resume shopping</p>
+            <div *ngIf="roleId===1">
+              <p>Defining products</p>
+            </div>
+            <div *ngIf="roleId===2">
+              <p *ngIf="isNew">Start shopping</p>
+              <p *ngIf="!isNew">Continue shopping</p>
+            </div>
           </button>
         </div>
         <a class="nav-link" href='#' [routerLink]='["/register"]'>Sign up</a>
