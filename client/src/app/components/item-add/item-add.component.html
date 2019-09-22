@@ -26,6 +26,9 @@
     <!-- <span class="glyphicon glyphicon-upload"></span> -->
     <button (click)="addItem()" [disabled]="!itemForm.form.valid"> add item </button>
   </div>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div> 
 </form>
 
 <!--DOCTYPE html>

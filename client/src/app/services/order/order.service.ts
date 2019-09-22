@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { OrderM } from '../../models/order';
 import { Router } from "@angular/router";
 import { catchError, map } from 'rxjs/operators';
+import { OrdersDateGroup } from 'src/app/models/ordersDateGroup';
 
 
 const httpOptions = {
@@ -32,8 +33,7 @@ export class OrderService {
   }
 
   
-  getGroupingOrders(): Observable<any> {
-    debugger;
+  getGroupingOrders(): Observable<OrdersDateGroup[]> {
     return this.http.get<any>(environment.url + '/order/getGroupingOrders');
   }
 

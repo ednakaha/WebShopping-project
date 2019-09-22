@@ -22,6 +22,7 @@ export class ItemShowComponent implements OnInit {
   cartItem: CartItemM;
   roleId: number;
   item: ItemM;
+  errorMessage:string;
 
 
   @Input() itemArray: ItemM[] | ItemM;
@@ -56,17 +57,17 @@ export class ItemShowComponent implements OnInit {
     this.cartItem.createdBy = this.userId;
     this.cartItem.createDate = new Date();
     this.cartItem.updateDate = new Date();
+    
     this.cartItemService.addCartItem(this.cartItem)
       .subscribe(
         data => {
-          debugger;
-          alert(data);
+          this.errorMessage  = String(data);
           this.addItemEmitter.emit(this.cartItem);
           // console.log("POST Request is successful ", data);
           //result =   true;
         },
         error => {
-          alert(error.error)
+          this.errorMessage = error.error;
           console.log("Error", error);
           // return false;
         }

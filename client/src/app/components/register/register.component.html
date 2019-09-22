@@ -20,4 +20,8 @@
       SUBMIT
     </button>
   </fieldset>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{errorMessage}}
+  </div>
+
 <!--TODO: right arrow-->

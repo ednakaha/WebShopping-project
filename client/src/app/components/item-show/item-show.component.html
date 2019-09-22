@@ -16,14 +16,14 @@
             to cart </button>
         </div>
         <!--todo change button text add to cart q update //on click -and in the server do update-->
-
-        <!--todo hidden-->
       </div>
 
     </div>
   </div>
 </div>
-
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{errorMessage}}
+</div>
 <!--
   INVOICE 
   

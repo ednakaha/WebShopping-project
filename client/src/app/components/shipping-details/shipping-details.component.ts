@@ -8,6 +8,7 @@ import { promise } from 'protractor';
 import { CartItemService } from 'src/app/services/cartItem/cart-item.service';
 import { CartItemExpandedM } from 'src/app/models/cartItemExpanded';
 import { NgbDatepickerConfig, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { OrdersDateGroup } from 'src/app/models/ordersDateGroup';
 
 @Component({
   selector: 'app-shipping-details',
@@ -25,6 +26,7 @@ export class ShippingDetailsComponent implements OnInit {
   model: NgbDateStruct;
   config: NgbDatepickerConfig;
   calendar: NgbCalendar;
+  filteredArrayDate: string[] = [];
 
   private setting = {
     element: {
@@ -127,10 +129,14 @@ export class ShippingDetailsComponent implements OnInit {
     //const todayNGB = calendar.getToday();
     //const today = new Date(todayNGB.year, todayNGB.month, todayNGB.day);
     // var array = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
+    debugger;
     this.config.markDisabled = (date: NgbDateStruct) => {
       const d = new Date(date.year, date.month, date.day);
+      debugger;
       return (this.isDateInArray(groupOrdersByDateArray, d));
     }
+
+
 
   };
 
@@ -152,7 +158,15 @@ export class ShippingDetailsComponent implements OnInit {
         var filteredOrders = groupO.filter(e => {
           return e.total >= 3
         });
-        this.setCalender(filteredOrders);
+
+        filteredOrders.forEach(val => {
+          debugger;
+          var currDate = val["_id"];
+          this.filteredArrayDate.push('new Date('+ new Date(currDate).toISOString().slice(0,10)+')');//new Date(currDate));
+        });
+debugger;
+ var array1 = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
+        this.setCalender(array1);//filteredArrayDate);
       }
     )
   }

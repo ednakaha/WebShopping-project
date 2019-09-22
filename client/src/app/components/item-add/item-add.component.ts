@@ -16,6 +16,7 @@ export class ItemAddComponent implements OnInit {
   itemCategoryId: string;
   itemPrice: number;
   itemPicturePath: string;
+  errorMessage:String;
 
   itemArray: ItemM[] | ItemM;
   categoryArray:CategoryM[] | CategoryM;
@@ -38,7 +39,16 @@ export class ItemAddComponent implements OnInit {
       categoryId: this.itemCategoryId,
       price: this.itemPrice,
       picturePath: this.itemPicturePath
-    });
+    }).subscribe(
+      data => {
+        this.errorMessage = String(data)
+        console.log("POST Request is successful ", data);
+      },
+      error => {
+        this.errorMessage = error.error;
+        console.log("Error", error);
+      }
+    );
   }
 
   getListItem() {

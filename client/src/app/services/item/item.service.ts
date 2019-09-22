@@ -52,15 +52,16 @@ export class ItemService {
 
 
   addItem(item: ItemM) {
-    this.http.post<ItemM>(environment.url + '/item/add', item, httpOptions).subscribe(
-      data => {
-        alert(data)
-        console.log("POST Request is successful ", data);
-      },
-      error => {
-        alert(error.error)
-        console.log("Error", error);
-      }
-    )
+    return this.http.post<ItemM>(environment.url + '/item/add', item, httpOptions)
+    // .subscribe(
+    //   data => {
+    //     alert(data)
+    //     console.log("POST Request is successful ", data);
+    //   },
+    //   error => {
+    //     alert(error.error)
+    //     console.log("Error", error);
+    //   }
+    // )
   };
 }

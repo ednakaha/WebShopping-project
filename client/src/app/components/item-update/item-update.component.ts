@@ -3,6 +3,7 @@ import { ItemService } from 'src/app/services/item/item.service';
 import { ItemM } from 'src/app/models/item';
 import { CategoryM } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { DEFAULT_ECDH_CURVE } from 'tls';
 
 @Component({
   selector: 'app-item-update',
@@ -11,11 +12,11 @@ import { CategoryService } from 'src/app/services/category/category.service';
 })
 export class ItemUpdateComponent implements OnInit {
 
-  @Input() item: ItemM;  
+  @Input() item: ItemM;
   itemPicturePath: string;
-  categoryArray:CategoryM[] | CategoryM;
+  categoryArray: CategoryM[] | CategoryM;
 
-  constructor(private itemService: ItemService,  private categoryService:CategoryService) {
+  constructor(private itemService: ItemService, private categoryService: CategoryService) {
 
   }
 
@@ -28,37 +29,40 @@ export class ItemUpdateComponent implements OnInit {
     this.categoryService.getCategory()
       .subscribe(p => {
         debugger;
-        this.categoryArray = p});
+        this.categoryArray = p
+      });
   }
 
   update() {
-    this.item =new ItemM;
+    this.item = new ItemM;
     this.ngOnInit();
-}  
+  }
+
   updateItem() {
     debugger;
     this.itemService.updateItem(this.item);
     this.item = new ItemM();
-    this.itemPicturePath='';
+    this.itemPicturePath = '';
   }
 
   saveItem() {
     debugger;
     this.itemService.addItem(this.item);
     this.item = new ItemM();
-    this.itemPicturePath='';
-    
+    this.itemPicturePath = '';
+
   }
   readURL(event) {
     if (event.target.files && event.target.files[0]) {
-        var reader = new FileReader();
+      var reader = new FileReader();
 
-        reader.onload = (event:any) => {
-            this.itemPicturePath = event.target.result;
-        }
+      reader.onload = (event: any) => {
+      //to do image
+        this.itemPicturePath = event.target.result;
+      }
 
-        reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
     }
-}
+  }
 
 }

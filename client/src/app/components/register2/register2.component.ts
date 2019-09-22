@@ -21,10 +21,12 @@ export class Register2Component{//} implements OnInit {
   street:  string;
   roleId: number;
 
+  errorMessage:string;
   // roleEnum:EnumRole1;
   // keys: any[];
 
   emitCityId:string;
+  router: any;
 
   constructor(private registerService: RegisterService ) {
     // debugger;
@@ -55,7 +57,21 @@ export class Register2Component{//} implements OnInit {
       cityId: this.emitCityId,//this.cityId,
       street: this.street,
       roleId: this.roleId 
-    }); 
+    }).subscribe(
+      data => {
+        // debugger;
+        this.errorMessage = String(data);
+        this.router.navigate(['first-Page']);
+       },
+      error => {
+        // debugger;
+        //edna todo return null
+        this.errorMessage = error.error;
+        console.log("Error", error);
+        // return false;
+      }
+    )
+
   }
   
 
