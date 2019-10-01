@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   logged: boolean;
   isNew: boolean;
   roleId: number;
+  errorMessage:string;
 
   constructor(private loginService: LoginService, private router: Router, private cartService: CartService) { }
 
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
       this.cartService.getOrSetCart(this.loginService.getUserId()).subscribe(cartData => {
         let createdate = String(cartData[0]["createDate"]).slice(0, 16);
         let updateDate = String(cartData[0]["updateDate"]).slice(0, 16);
+        debugger;
         this.isNew = (createdate === updateDate);
         this.roleId = Number(this.loginService.getRoleId());
         this.logged = true;

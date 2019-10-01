@@ -117,7 +117,7 @@ CartItemRouter.post('/add', function (req, res) {
                 res.json('Item updated successfully');
 
             } else {
-                console.log(cartItemData);
+                console.log('cartItemData 1111' + cartItemData);
 
                 cartItemData.save()
                     .then(cartItemD => {
@@ -126,13 +126,13 @@ CartItemRouter.post('/add', function (req, res) {
                         //todo !!!!!!!! doesn't work 
                         try {
                             console.log('cartid' + req.body.cartId)
-                            CartSchema.updateOne({ cartId: req.body.cartId },
+                            CartSchema.update({ cartId: req.body.cartId },
                                 { $set: { updateDate: new Date() } },
                                 function (err, response) {
                                     if (err) {
                                         console.log('itemsCounter err ' + err);
                                     } else {
-                                        console.log('GeneralSchema response  ' + response);
+                                        console.log('GeneralSchema response  ' + response + 'date' + new Date());
                                     }
                                 })
                         }

@@ -6,10 +6,7 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 <form #newUserForm="ngForm">
-  <!-- <div class="container"> -->
-  <!-- <div class="row"> -->
-  <!-- <div class="col-md-offset-5 col-md-3"> -->
-  <div class="form-login">
+   <div class="form-login">
 
     <h4>Welcome back</h4>
     <input type="text" [(ngModel)]="user.email" required name='email' class="form-control input-sm chat-input"
@@ -24,19 +21,23 @@
           <button class="col-md-6 btn btn-primary btn-md" (click)="login()" [disabled]="!newUserForm.form.valid">Login
             <i class="fa fa-sign-in"></i></button>
 
-          <button class="col-md-6 btn btn-primary btn-md" *ngIf="logged" class="btn btn-primary btn-md"
+          <button class=" col-md-6  btn btn-primary btn-md" *ngIf="logged" class="btn btn-primary btn-md"
             (click)="toShopping()">
-            <div *ngIf="roleId===1">
+            <div *ngIf="roleId===1"> <!--admin-->
               <p>Defining products</p>
             </div>
-            <div *ngIf="roleId===2">
+            <div *ngIf="roleId===2">  <!--user--> 
               <p *ngIf="isNew">Start shopping</p>
               <p *ngIf="!isNew">Continue shopping</p>
             </div>
           </button>
+          {{isNew}}
         </div>
         <a class="nav-link" href='#' [routerLink]='["/register"]'>Sign up</a>
       </span>
     </div>
   </div>
 </form>
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  {{errorMessage}}
+</div>
