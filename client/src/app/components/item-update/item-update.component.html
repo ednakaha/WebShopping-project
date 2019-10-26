@@ -9,17 +9,13 @@
   <div *ngIf="item._id">
     <h6>Product id:</h6> <input [(ngModel)]="item._id" #ctrl="ngModel" required>
   </div>
-  <h6>Product price: </h6> <input type="number" [(ngModel)]="item.price" #ctrl="ngModel" required>
-  <h6>₪</h6>
+  <h6>Product price: </h6> <input type="number" [(ngModel)]="item.price" #ctrl="ngModel" required>₪
   <h6>Picture:</h6>
   <div class="form-group" ng-class="{'has-error' : myForm.name.$invalid && !myForm.name.$pristine}">
-    Select image path: <input type="file" [(ngModel)]='itemPicturePath' name="myFile" (change)="readURL($event)"
-      required>
-
-    <!-- [(ngModel)]='itemPicturePath' required><br><br> -->
+    <input type="file" name="myFile" (change)="readURL($event)" required>
   </div>
   <div class="col-xs-4">
-    <img id="blah" [src]="itemPicturePath" alt={{name}} class="img-responsive img-rounded" />
+    <img id="blah" [src]="item.picturePath" alt={{name}} class="img-responsive img-rounded" />
   </div>
   <!-- todo image+ src -->
   <h6>Category:</h6>
@@ -34,4 +30,7 @@
   <!-- select category -->
 
   <button type="button" (click)="item._id!=undefined ? updateItem(): saveItem() ">Save </button>{{item._id!=undefined }}
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
 </div>

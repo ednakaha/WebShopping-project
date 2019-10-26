@@ -13,8 +13,10 @@ import { DEFAULT_ECDH_CURVE } from 'tls';
 export class ItemUpdateComponent implements OnInit {
 
   @Input() item: ItemM;
-  itemPicturePath: string;
+  //itemPicturePath: string;
   categoryArray: CategoryM[] | CategoryM;
+  errorMessage: string;
+  bad_picture: boolean;
 
   constructor(private itemService: ItemService, private categoryService: CategoryService) {
 
@@ -42,27 +44,53 @@ export class ItemUpdateComponent implements OnInit {
     debugger;
     this.itemService.updateItem(this.item);
     this.item = new ItemM();
-    this.itemPicturePath = '';
+    this.item.picturePath = '';
   }
 
   saveItem() {
     debugger;
-    this.itemService.addItem(this.item);
-    this.item = new ItemM();
-    this.itemPicturePath = '';
+    if (this.bad_picture == true)
+      this.errorMessage = "The picture is too big"
+    else {
+      this.itemService.addItem(this.item).subscribe(
+        data => {
+          debugger;
+          this.errorMessage = String(data);
+        },
+        error => {
+          debugger;
+          this.errorMessage = error.error;
+          console.log("Error", error);
 
+        }
+      );
+      this.item = new ItemM();
+      this.item.picturePath = '';
+    }
   }
   readURL(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
       reader.onload = (event: any) => {
-      //to do image
-        this.itemPicturePath = event.target.result;
+        //to do image
+        debugger;
+        this.item.picturePath = event.target.result;
       }
 
       reader.readAsDataURL(event.target.files[0]);
+      if (event.target.files[0].size > 500000) {
+        this.errorMessage = "Limited to 500 kb";
+        this.bad_picture = true;
+        return;
+      }
+      this.bad_picture = false;
+      reader.onload = (event: any) => { // called once readAsDataURL is completed
+        this.item.picturePath = event.target.result;
+      }
     }
   }
 
 }
+
+

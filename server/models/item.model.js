@@ -6,7 +6,7 @@ const ItemSchema = new Schema({
     name: String,
     categoryId: String,
     price: Number,
-    picturePath: String
+    picturePath: Buffer
 },{
     collection: 'ItemsColl'
 });
