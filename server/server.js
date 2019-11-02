@@ -20,6 +20,8 @@ const CartRouter = require('./routers/CartRouter');
 const OrderRouter = require('./routers/OrderRouter');
 const GeneralRouter = require('./routers/GeneralRouter');
 const GeneralSchema = require('./models/general.model');
+const CitySchema = require('./models/city.model');
+const CategorySchema = require('./models/category.model');
 
 
 mongoose.connect(config.DB, { useNewUrlParser: true }, function (err, db) {   //here db is the client obj
@@ -35,17 +37,29 @@ mongoose.connect(config.DB, { useNewUrlParser: true }, function (err, db) {   //
       }
       else {
         GeneralSchema.findOne({}, function (err, response) {
-          console.log('GeneralSchema.response ' + response!=null);
+          console.log('GeneralSchema.response ' + response != null);
           if (err) {
             console.log('GeneralSchema.exists ' + err);
           } else {
-            if (response===null)//generalColl doesn't exist
+            if (response === null)//generalColl doesn't exist
             {
-              console.log(' in GeneralSchema.response ');
+              console.log('New DB - in GeneralSchema.response ');
               const generalData = new GeneralSchema();
               generalData.ordersCounter = 0;//init
               generalData.itemsCounter = 0;
               generalData.save();
+
+              console.log('Added new city ');
+
+              const cityData = new CitySchema();
+              cityData.name = 'Jerusalem';
+              cityData.save();
+
+              console.log('Added new Category');
+              const CategoryData = new CategorySchema();
+              CategoryData.name = 'Fruits'
+              CategoryData.save();
+
             }
           }
         });

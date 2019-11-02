@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment.prod';
 import { CartM } from 'src/app/models/cart';
 import { LoginService } from 'src/app/services/login/login.service';
 import { OrderService } from 'src/app/services/order/order.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-general',
@@ -41,14 +42,15 @@ export class GeneralComponent implements OnInit {
       let createdate = String(cartData["createDate"]).slice(0, 16);
       let updateDate = String(cartData["updateDate"]).slice(0, 16);
       this.isNew = (createdate === updateDate);
-      this.updateDateCart = String(cartData["updateDate"]).slice(0, 16);
+      // this.updateDateCart = String(cartData["updateDate"]).slice(0, 16);
+      this.updateDateCart = moment(String(cartData["updateDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');
     })
   }
 
   getOrders() {
     this.orderService.getOrderByUser(this.loginService.getUserId()).subscribe(orderData => {
       debugger;
-      this.orderDate = String(orderData["createdDate"]).slice(0, 16);
+      this.orderDate = moment(String(orderData["createdDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');
     })
   }
 

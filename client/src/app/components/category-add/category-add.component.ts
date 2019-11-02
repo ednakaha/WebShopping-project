@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../services/category/category.service';
 import { CategoryM } from 'src/app/models/category';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-category-add',
@@ -18,12 +19,16 @@ export class CategoryAddComponent implements OnInit {
 
   //categoryArray: CategoryM[] | CategoryM;
   addResult: boolean;
-  constructor(private categoryService: CategoryService) { }
+  roleId: number;
+
+  constructor(private categoryService: CategoryService,private loginService: LoginService) { }
+
   categoryArray: CategoryM[] | CategoryM;
 
   ngOnInit() {
-
+    this.roleId = Number(this.loginService.getRoleId());
     this.allCategory();
+
   }
 
   allCategory() {

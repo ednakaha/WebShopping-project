@@ -21,6 +21,7 @@
     "@angular/router": "~8.0.1",
     "@ng-bootstrap/ng-bootstrap": "^5.0.0-rc.0",
     "bootstrap": "^4.3.1",
+    "moment": "^2.24.0",
     "ng-sidebar": "^8.0.0",
     "ngx-highlight": "0.0.3",
     "rxjs": "~6.4.0",

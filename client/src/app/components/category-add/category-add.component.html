@@ -1,4 +1,6 @@
-<div class="row">
+<div *ngIf="roleId===1">
+  <!--admin-->
+  <div class="row">
     <h2>New category:</h2>
     test: {{categoryArray|json}}
     <label>Name:
@@ -7,3 +9,4 @@
     <button (click)="addCategory()"> add category </button>
     <button (click)="allCategory()">All</button>
   </div>
+</div>

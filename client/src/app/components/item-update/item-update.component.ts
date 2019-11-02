@@ -30,7 +30,6 @@ export class ItemUpdateComponent implements OnInit {
     //debugger;
     this.categoryService.getCategory()
       .subscribe(p => {
-        debugger;
         this.categoryArray = p
       });
   }

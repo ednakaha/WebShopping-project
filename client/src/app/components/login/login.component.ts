@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   logged: boolean;
   isNew: boolean;
   roleId: number;
-  errorMessage:string;
+  errorMessage: string;
 
   constructor(private loginService: LoginService, private router: Router, private cartService: CartService) { }
 

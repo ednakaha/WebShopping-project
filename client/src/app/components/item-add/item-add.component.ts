@@ -3,6 +3,7 @@ import { ItemService } from '../../services/item/item.service';
 import { ItemM } from 'src/app/models/item';
 import { CategoryService } from '../../services/category/category.service';
 import { CategoryM } from 'src/app/models/category';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-item',
@@ -20,11 +21,13 @@ export class ItemAddComponent implements OnInit {
 
   itemArray: ItemM[] | ItemM;
   categoryArray:CategoryM[] | CategoryM;
+  roleId: number;
 
-  constructor(private itemService: ItemService,  private categoryService:CategoryService) { }
+  constructor(private itemService: ItemService,  private categoryService:CategoryService, private loginService: LoginService) { }
 
   ngOnInit() {
     this.getCategoryList();
+    this.roleId = Number(this.loginService.getRoleId());
   }
 
   getCategoryList() {

@@ -9,6 +9,7 @@ import { CartItemService } from 'src/app/services/cartItem/cart-item.service';
 import { CartItemExpandedM } from 'src/app/models/cartItemExpanded';
 import { NgbDatepickerConfig, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { OrdersDateGroup } from 'src/app/models/ordersDateGroup';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-shipping-details',
@@ -162,11 +163,13 @@ export class ShippingDetailsComponent implements OnInit {
         filteredOrders.forEach(val => {
           debugger;
           var currDate = val["_id"];
-          this.filteredArrayDate.push('new Date('+ new Date(currDate).toISOString().slice(0,10)+')');//new Date(currDate));
+        //  this.filteredArrayDate.push('new Date('+ new Date(currDate).toISOString().slice(0,10)+')');//new Date(currDate));
+        this.filteredArrayDate.push('new Date('+ moment(String(currDate).slice(0, 16)).format('MMMM DD, YYYY HH:mm:ss')+')');
+
         });
 debugger;
- var array1 = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
-        this.setCalender(array1);//filteredArrayDate);
+//  var array1 = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
+        this.setCalender(this.filteredArrayDate);
       }
     )
   }
