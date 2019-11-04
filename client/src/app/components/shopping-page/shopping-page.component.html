@@ -1,9 +1,10 @@
 <div class="page-layout">
     <div class="container">
-        <div class="row col-md-12">
-        </div>
+  
         <div class="row">
-            <button type="button" class="col-md-2 btn btn-warning w-100" (click)="delCart()">Delete all cart</button>
+            <div *ngIf="roleId!=1 ">
+                <button type="button" class="btn btn-warning" (click)="delCart()">Delete cart</button>
+            </div>
 
             <div class="items">
                 <div class="category">
@@ -29,4 +30,4 @@
 </div>
 <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
     {{errorMessage}}
-  </div>
+</div>

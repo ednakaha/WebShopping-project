@@ -62,4 +62,7 @@
             </button>
         </div>
     </div>
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+            {{errorMessage}}
+          </div>
 </form>

@@ -51,7 +51,7 @@ export class CartItemService {
 
   addCartItem(cartItem: CartItemM) {//}: boolean {
     //debugger;
-   return this.http.post<CartItemM>(environment.url + '/cartItem/add', cartItem, httpOptions)
+    return this.http.post<CartItemM>(environment.url + '/cartItem/add', cartItem, httpOptions);
     // .subscribe(
     //   data => {
     //     alert(data)
@@ -67,36 +67,36 @@ export class CartItemService {
   };
 
   delItemCartById(id: string) {
-   return this.http.delete<any>(environment.url + '/cartItem/deleteCartItem/' + id, httpOptions)
-      // .subscribe(data => {
-      //   alert('Delete cart item successfuly');
-        
-      // },
-      //   error => {
-      //     alert(error.error)
-      //     console.log("Error", error);
-      //     // return false;
-      //   }
-      // )
+    return this.http.delete<any>(environment.url + '/cartItem/deleteCartItem/' + id, httpOptions)
+    // .subscribe(data => {
+    //   alert('Delete cart item successfuly');
+
+    // },
+    //   error => {
+    //     alert(error.error)
+    //     console.log("Error", error);
+    //     // return false;
+    //   }
+    // )
   }
 
 
   delAllItemsCart(cartId: string) {
     //debugger;
-    this.http.delete<any>(environment.url + '/cartItem/delete/' + cartId, httpOptions)
-      .subscribe(data => {
-        //debugger;
-        // alert(data)
-        alert('Delete successfuly');
-        //todo why data is null. in service there is data 
-        // res.status(204).send(JSON.stringify(cartItem['deletedCount']));
+    return this.http.delete<any>(environment.url + '/cartItem/delete/' + cartId, httpOptions)
+  //     .subscribe(data => {
+  //       debugger;
+  //       alert('Delete successfuly----' +data);
+  //       //todo why data is null. in service there is data 
+  //       // res.status(204).send(JSON.stringify(cartItem['deletedCount']));
 
-      },
-        error => {
-          alert(error.error)
-          console.log("Error", error);
-          // return false;
-        }
-      )
-  }
+  //     },
+  //       error => {
+  //         debugger;
+  //         alert(error.error)
+  //         console.log("Error", error);
+  //         // return false;
+  //       }
+  //     )
+   }
 }

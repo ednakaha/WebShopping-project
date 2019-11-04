@@ -9,24 +9,24 @@
                 <li class="nav-item active">
                     <a class="nav-link" href='#' [routerLink]='[""]'>Home</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href='#' [routerLink]='["/cart"]'>cart</a>
-                </li>
                 <!-- <li [style.visibility]="hidden" class="nav-item active"> -->
                 <!-- <ng-container *ngIf="roleId=1"> -->
-                <li class="nav-item active">
-                    <a class="nav-link" href='#' [routerLink]='["/city"]'>city</a>
+                <li class="nav-item active" *ngIf="roleId===1">
+                    <a class="nav-link" href='#' [routerLink]='["/city"]'>Add city</a>
                 </li>
-                <!-- </ng-container> -->
-                <li class="nav-item active">
+                <li class="nav-item active" *ngIf="roleId===1">
+                    <a class="nav-link" href='#' [routerLink]='["/category-add"]'>Add category</a>
+                </li>
+                <li class="nav-item active" *ngIf="roleId===1">
+                    <a class="nav-link" href='#' [routerLink]='["/category"]'>Show category</a>
+                </li>
+               <li class="nav-item active">
                     <a class="nav-link" href='#' [routerLink]='["/register"]'>register</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item active" *ngIf="roleId!=1">
                     <a class="nav-link" href='#' [routerLink]='["/shopping-page"]'>shopping page</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href='#' [routerLink]='["/item-add"]'>item add</a>
-                </li>
+
             </ul>
         </div>
         <div class="col-md-3">

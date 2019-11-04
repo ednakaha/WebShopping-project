@@ -18,6 +18,7 @@ export class CartItemComponent implements OnInit {
   @Input() cartItemExArray: CartItemExpandedM[];
   rerender = true;
   @Output() deleteItemEmitter: EventEmitter<void> = new EventEmitter<void>();
+  errorMessage: any;
 
   constructor(private loginService: LoginService, private cartService: CartService,
     private cartItemService: CartItemService, private router: Router, private itemService: ItemService) {
@@ -38,21 +39,19 @@ export class CartItemComponent implements OnInit {
   }
   delCartItem(id: string) {
     //this.rerender = false;
-    if (confirm("Are you sure to delete the item?")) {
+    if (confirm("Are you sure you want to delete the item?")) {
       this.cartItemService.delItemCartById(id)
         .subscribe(
-             data => {
-          //   console.log('Delete cart item successfuly');
-          //   this.deleteItemEmitter.emit;
-          // },
-          //   error => {
-          //     alert(error.error)
-          //     console.log("Error", error);
-          //     // return false;
-          //   }
-           this.deleteItemEmitter.emit() 
+          data => {
+            debugger;
+            this.errorMessage = String(data);
+            this.deleteItemEmitter.emit()
+            // console.log("POST Request is successful ", data);
+            //result =   true;
+          },
+          error => {
+            this.errorMessage = error.error;
           }
-
         )
       // this.rerender = true;
       //todo !!!!!! refresh
@@ -74,7 +73,7 @@ export class CartItemComponent implements OnInit {
         this.totalAmount = total;
       }
     }
-    return total;
+    return total.toFixed(2);
   }
 
   getCartItemExList() {

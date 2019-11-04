@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'first-Page', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'first-Page', component: FirstPageComponent },
+  { path: 'category-add', component: CategoryComponent },
   { path: 'cart', component: CartComponent, canActivate: [LoggedGuard] },
   { path: 'cart-item/:id', component: CartItemComponent, canActivate: [LoggedGuard] },
   { path: 'city', component: CityComponent, canActivate: [LoggedGuard] },

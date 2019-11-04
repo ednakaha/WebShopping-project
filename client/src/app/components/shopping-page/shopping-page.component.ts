@@ -1,6 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { CartService } from '../../services/cart/cart.service';
-import { CategoryService } from '../../services/category/category.service';
 import { CartItemService } from '../../services/cartItem/cart-item.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Router } from '@angular/router';
@@ -23,6 +21,7 @@ export class ShoppingPageComponent implements OnInit {
   // @Output("itemArray") changeQueryEmitter: EventEmitter<ItemM[]> = new EventEmitter<ItemM[]>();
 
   filteredArray: ItemM[];
+  errorMessage: string;
   constructor(private cartItemService: CartItemService,
     private itemService: ItemService,
     private loginService: LoginService, private router: Router) { }
@@ -42,17 +41,25 @@ export class ShoppingPageComponent implements OnInit {
     this.cartItemService.getCartItemExpanded(this.loginService.getCartId())
       .subscribe(cd => {
         this.cartItemExArray = cd;
-        //debugger;
+        debugger;
       });
   }
 
 
   delCart() {
-    if (confirm("Are you sure to delete the cart?")) {
-      this.cartItemService.delAllItemsCart(this.loginService.getCartId());
+    if (confirm("Are you sure you want to delete the cart?")) {
+      this.cartItemService.delAllItemsCart(this.loginService.getCartId())
+        .subscribe(
+          data => {
+            this.errorMessage = String(data);
+          },
+          error => {
+            this.errorMessage = error.error;
+          }
+        )
     }
     //refresh page after deleting
-    window.location.reload();
+    // window.location.reload();
   }
 
   getListItem() {

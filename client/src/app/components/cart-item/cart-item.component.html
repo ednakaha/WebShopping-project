@@ -6,7 +6,7 @@
                 alt="{{cartItem.itemDetailsArr[0].name}}"></span>
 
         <button type="button" class="btn btn-white btn-sm float-right" (click)="delCartItem(cartItem._id)">
-            <i class="fa fa-trash icon"></i> 
+            <i class="fa fa-trash icon"></i>
         </button>
     </div>
 </div>
@@ -25,4 +25,7 @@
     </div>
     <!--todo order just on state shopping , back to shop on order state-->
 </footer>
+<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+</div>
 <!-- <router-outlet></router-outlet> -->

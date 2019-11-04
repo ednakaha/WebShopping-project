@@ -180,12 +180,13 @@ CartItemRouter.put('/update/:id', function (req, res) {
 
 // Delete all cart document
 CartItemRouter.delete('/delete/:id', function (req, res) {
-    CartItemSchema.deleteMany({ cartId: req.params.id }, function (err, cartItem) {
+    CartItemSchema.deleteMany({ cartId: req.params.id }, function (err, cartItem) { }
+    ).exec(function (err, cartItems) {
         if (err) {
-            res.send('error deleting')
+            res.send(404, 'Error has occurred! - cart')
         } else {
-            console.log(cartItem['deletedCount']);
-            res.status(204).send(JSON.stringify(cartItem['deletedCount']));
+            console.log('deleting');
+            res.json('Cart successfully deleted');
         }
     });
 });
@@ -193,13 +194,14 @@ CartItemRouter.delete('/delete/:id', function (req, res) {
 //Delete cartItem By id
 CartItemRouter.delete('/deleteCartItem/:id', function (req, res) {
     console.log('in deleteCartItem')
-    CartItemSchema.deleteOne({ _id: req.params.id }, function (err, cartItem) {
+    CartItemSchema.deleteOne({ _id: req.params.id }, function (err, cartItem) { }
+    ).exec(function (err, cartItems) {
         if (err) {
-            console.log('deleteCartItem ' + err);
-            res.send('error deleting cart item')
+            console.log('err deleteCartItem ' + err);
+            res.json('Error deleting cart item ' + err)
         } else {
-            console.log('deleteCartItem' + req.params.id);//cartItem['deletedCount']);
-            res.status(204).send(JSON.stringify(cartItem['deletedCount']));
+            console.log('else deleteCartItem ' + req.params.id);//cartItem['deletedCount']);
+            res.json('Cart item successfully deleted');
         }
     });
 });

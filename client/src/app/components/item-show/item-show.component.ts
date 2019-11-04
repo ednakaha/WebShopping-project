@@ -68,8 +68,6 @@ export class ItemShowComponent implements OnInit {
         },
         error => {
           this.errorMessage = error.error;
-          console.log("Error", error);
-          // return false;
         }
       )
 

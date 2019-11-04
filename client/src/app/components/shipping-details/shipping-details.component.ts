@@ -36,6 +36,7 @@ export class ShippingDetailsComponent implements OnInit {
   }
 
   cartItemExArray: CartItemExpandedM[] | CartItemExpandedM;
+  errorMessage: string;
 
   markDisabled2(date: { year: number, month: number, date: number }): boolean {
     debugger;
@@ -73,7 +74,11 @@ export class ShippingDetailsComponent implements OnInit {
       status: EnumStatusOrder.Close
     }).subscribe(orderRes => {
       //debugger;
+      this.errorMessage  = String(orderRes);
       this.orderDone = orderRes;
+    },
+    error => {
+      this.errorMessage = error.error;
     });
   }
 
@@ -163,12 +168,12 @@ export class ShippingDetailsComponent implements OnInit {
         filteredOrders.forEach(val => {
           debugger;
           var currDate = val["_id"];
-        //  this.filteredArrayDate.push('new Date('+ new Date(currDate).toISOString().slice(0,10)+')');//new Date(currDate));
-        this.filteredArrayDate.push('new Date('+ moment(String(currDate).slice(0, 16)).format('MMMM DD, YYYY HH:mm:ss')+')');
+          //  this.filteredArrayDate.push('new Date('+ new Date(currDate).toISOString().slice(0,10)+')');//new Date(currDate));
+          this.filteredArrayDate.push('new Date(' + moment(String(currDate).slice(0, 16)).format('MMMM DD, YYYY HH:mm:ss') + ')');
 
         });
-debugger;
-//  var array1 = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
+      //  debugger;
+        //  var array1 = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
         this.setCalender(this.filteredArrayDate);
       }
     )
