@@ -41,7 +41,17 @@ export class ItemUpdateComponent implements OnInit {
 
   updateItem() {
     debugger;
-    this.itemService.updateItem(this.item);
+    this.itemService.updateItem(this.item).subscribe(
+      data => {
+        debugger;
+        this.errorMessage = String(data);
+      },
+      error => {
+        debugger;
+        this.errorMessage = error.error;
+        console.log("Error", error);
+      }
+    );
     this.item = new ItemM();
     this.item.picturePath = '';
   }

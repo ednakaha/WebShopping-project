@@ -59,7 +59,7 @@ export class ShoppingPageComponent implements OnInit {
         )
     }
     //refresh page after deleting
-    // window.location.reload();
+     window.location.reload();
   }
 
   getListItem() {

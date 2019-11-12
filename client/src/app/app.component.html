@@ -14,6 +14,9 @@
                 <li class="nav-item active" *ngIf="roleId===1">
                     <a class="nav-link" href='#' [routerLink]='["/city"]'>Add city</a>
                 </li>
+                <!-- <li class="nav-item active" *ngIf="roleId===1">
+                    <a class="nav-link" href='#' [routerLink]='["/city-show"]'>Show city</a>
+                </li> -->
                 <li class="nav-item active" *ngIf="roleId===1">
                     <a class="nav-link" href='#' [routerLink]='["/category-add"]'>Add category</a>
                 </li>
@@ -32,6 +35,9 @@
         <div class="col-md-3">
             <div> <label class="text-success"> {{firstName}} </label></div>
             <div> <label class="text-success"> {{email}} </label></div>
+            <div *ngIf="roleId===1"> <label class="text-success">Adminstrator</label></div>          
+            <div *ngIf="roleId>1"> <label class="text-success">User</label></div>
+ 
         </div>
     </nav>
 </header>

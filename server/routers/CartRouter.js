@@ -127,10 +127,10 @@ CartRouter.delete('/delete/:id', function (req, res) {
             _id: req.params.id
         }, function (err, cart) {
             if (err) {
-                res.send('error deleting')
+                res.json('error deleting')
             } else {
                 console.log(cart);
-                res.status(204).send(cart);
+                res.status(204).json(cart);
             }
         });
 });

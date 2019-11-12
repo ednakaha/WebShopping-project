@@ -151,7 +151,7 @@ OrderRouter.put('/update/:id', function (req, res) {
 OrderRouter.delete('/delete/:id', function (req, res) {
     OrderSchema.delete({ cartId: req.params.id }, function (err, cartItem) {
         if (err) {
-            res.send('error deleting')
+            res.json('error deleting')
         } else {
             console.log(cartItem['deletedCount']);
             //dec generalColl.ordersCounter

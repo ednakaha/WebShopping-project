@@ -80,10 +80,11 @@ ItemRouter.route('/add').post(function (req, res) {
 
 // Update document
 ItemRouter.route('/update').put(function (req, res) {
-    console.log(req.body)
+    console.log('item-update ');
+    console.log('item-update '+req.body._id);
     ItemSchema.findOneAndUpdate(
         {
-            _id: req.params._id // [query]
+            _id: req.body._id // [query]
         },
         {
             $set: {
@@ -97,10 +98,10 @@ ItemRouter.route('/update').put(function (req, res) {
              upsert: false      // [options] if this document has no title create one
          },
          function(err,item) {
-             if (err) { console.log('error occured');
+             if (err) { console.log('item error occured');
              } else {
-                 console.log('item '+ item);
-                 res.status(204).send(item);
+                 console.log('Item - Done');
+                 res.json('Item - done');
              } 
          });
  });

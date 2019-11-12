@@ -1,12 +1,16 @@
 <div *ngIf="roleId===1">
   <!--admin-->
   <div class="row">
-    <h2>New category:</h2>
-    test: {{categoryArray|json}}
-    <label>Name:
-      <input [(ngModel)]='categoryName' required />
-    </label>
+  <div class="form-group">
+    <input placeholder="categoryName" [(ngModel)]='categoryName' required name="categoryName"
+      class="form-control input-sm chat-input">
+    <!-- </label> -->
+  </div>
+  <div class="form-group">
     <button (click)="addCategory()"> add category </button>
+  </div>
+  <div class="form-group">
     <button (click)="allCategory()">All</button>
+    </div>
   </div>
 </div>

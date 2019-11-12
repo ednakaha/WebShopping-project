@@ -46,8 +46,9 @@ export class ItemService {
   }
 
   updateItem(item: ItemM) {
-    this.http.put<ItemM>(environment.url + '/item/update', item, httpOptions).subscribe(
-      data => { })
+    debugger;
+    return this.http.put<ItemM>(environment.url + '/item/update', item, httpOptions);//;.subscribe(
+    //  data => { })
   }
 
 
