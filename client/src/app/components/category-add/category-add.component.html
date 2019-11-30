@@ -1,16 +1,16 @@
 <div *ngIf="roleId===1">
   <!--admin-->
   <div class="row">
-  <div class="form-group">
-    <input placeholder="categoryName" [(ngModel)]='categoryName' required name="categoryName"
-      class="form-control input-sm chat-input">
-    <!-- </label> -->
-  </div>
-  <div class="form-group">
-    <button (click)="addCategory()"> add category </button>
-  </div>
-  <div class="form-group">
-    <button (click)="allCategory()">All</button>
-    </div>
+    <form #itemForm="ngForm" class="col-3">
+      <div class="form-group">
+        <input placeholder="categoryName" [(ngModel)]='categoryName' required name="categoryName"
+          class="form-control input-sm chat-input">
+        <!-- </label> -->
+      </div>
+      <div class="form-group">
+        <button [disabled]="!itemForm.form.valid" (click)="addCategory()"> add category </button>
+      </div>
+
+    </form>
   </div>
 </div>

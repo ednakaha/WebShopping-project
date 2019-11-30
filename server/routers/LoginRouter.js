@@ -34,7 +34,8 @@ LoginRouter.route('/').post(function (req, res) {
           });
         }
         else {
-          res.status(403).json('Wrong username or password');
+          console.log('Wrong username or password');
+          res.status(402).json('Wrong username or password');
         }
       }
     });

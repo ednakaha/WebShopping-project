@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    debugger;
     this.loginService.login(this.user).subscribe(loginRes => {
       //create or get the cart of the user
       this.cartService.getOrSetCart(this.loginService.getUserId()).subscribe(cartData => {
@@ -34,8 +35,16 @@ export class LoginComponent implements OnInit {
         this.roleId = Number(this.loginService.getRoleId());
         this.logged = true;
       });
+      debugger;
       console.log('login ' + loginRes);
-    })
+      this.errorMessage = String(loginRes);
+    },
+      error => {
+        debugger;
+        this.errorMessage = 'error' + error.error;
+      }
+
+    );
   }
 
   toShopping() {

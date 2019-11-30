@@ -24,10 +24,10 @@
                     <a class="nav-link" href='#' [routerLink]='["/category"]'>Show category</a>
                 </li>
                <li class="nav-item active">
-                    <a class="nav-link" href='#' [routerLink]='["/register"]'>register</a>
+                    <a class="nav-link" href='#' [routerLink]='["/register"]'>Register</a>
                 </li>
-                <li class="nav-item active" *ngIf="roleId!=1">
-                    <a class="nav-link" href='#' [routerLink]='["/shopping-page"]'>shopping page</a>
+                <li class="nav-item active" *ngIf="roleId>0">
+                    <a class="nav-link" href='#' [routerLink]='["/shopping-page"]'>Shopping page</a>
                 </li>
 
             </ul>

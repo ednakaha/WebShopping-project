@@ -39,18 +39,18 @@ export class LoginService {
   login(u): Observable<Object> {
     return this.http.post(environment.url + '/login', u).pipe(
       catchError((errorRes) => {
-        //debugger;
+        debugger;
         window.localStorage.removeItem(environment.USER_TOKEN);
         window.localStorage.removeItem(environment.USER_DATA);
         window.localStorage.removeItem(environment.USER_ROLE_ID);
         //  window.localStorage.removeItem(environment.CART_DATA);
-        alert('login error ' + errorRes.error);
-        console.log(' login error' + errorRes);
-        return of(undefined);
+       // alert('login error ' + errorRes.error);
+         console.log(' login error' + errorRes.error);
+        return errorRes.error;//of(undefined);
       }),
       map((loginRes: string) => {
         if (loginRes) {
-          //debugger;
+          debugger;
           this.userToken = loginRes['token'];
           this.userData = loginRes['user'];
           window.localStorage.removeItem(environment.USER_TOKEN);
@@ -62,12 +62,13 @@ export class LoginService {
           window.localStorage.setItem(environment.USER_ROLE_ID,  String(this.userData['roleId']));
           
 
-          alert('Login successfully');
+       //   alert('Login successfully');
 
           this.subject.next({ userDataSubject: this.userData });
 
           console.log(loginRes);
-          return loginRes;
+         // return loginRes;
+         return 'Login successfully';
         }
       })
     );

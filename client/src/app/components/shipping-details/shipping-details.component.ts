@@ -28,6 +28,7 @@ export class ShippingDetailsComponent implements OnInit {
   config: NgbDatepickerConfig;
   calendar: NgbCalendar;
   filteredArrayDate: string[] = [];
+  textFile: string;
 
   private setting = {
     element: {
@@ -74,22 +75,22 @@ export class ShippingDetailsComponent implements OnInit {
       status: EnumStatusOrder.Close
     }).subscribe(orderRes => {
       //debugger;
-      this.errorMessage  = String(orderRes);
+      this.errorMessage = String(orderRes);
       this.orderDone = orderRes;
     },
-    error => {
-      this.errorMessage = error.error;
-    });
+      error => {
+        this.errorMessage = error.error;
+      });
   }
 
 
 
   dynamicDownloadTxt(res: any) {
-    //debugger;
-    // if (res!= undefined){
+    this.textFile = JSON.stringify(res);
+    this.textFile = this.textFile.split('"').join('').split('[').join('').split(']').join('').split(',').join('\r\n');
     this.dyanmicDownloadByHtmlTag({
       fileName: 'Order file',
-      text: JSON.stringify(res)
+      text: this.textFile
     }
     );
   }
@@ -172,7 +173,7 @@ export class ShippingDetailsComponent implements OnInit {
           this.filteredArrayDate.push('new Date(' + moment(String(currDate).slice(0, 16)).format('MMMM DD, YYYY HH:mm:ss') + ')');
 
         });
-      //  debugger;
+        //  debugger;
         //  var array1 = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
         this.setCalender(this.filteredArrayDate);
       }

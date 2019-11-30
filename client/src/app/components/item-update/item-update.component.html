@@ -6,17 +6,18 @@
       <h4>{{item.name}}</h4>
     </div>
     <hr>
-    <h6>Product name: </h6> <input [(ngModel)]="item.name" #ctrl="ngModel" required>
+    <h6>Product name: </h6> <input [(ngModel)]="item.name" name="name" #ctrl="ngModel" required>
     <div *ngIf="item._id">
-      <h6>Product id:</h6> <input [(ngModel)]="item._id" #ctrl="ngModel" required>
+      <h6>Product id:</h6> <input [(ngModel)]="item._id" name="_id" #ctrl="ngModel" required>
     </div>
-    <h6>Product price: </h6> <input type="number" [(ngModel)]="item.price" #ctrl="ngModel" required>₪
+    <h6>Product price: </h6> <input type="number" min="0.00"name="price"  [(ngModel)]="item.price" #ctrl="ngModel" required>₪
     <h6>Picture:</h6>
     <div class="form-group" ng-class="{'has-error' : myForm.name.$invalid && !myForm.name.$pristine}">
       <input type="file" name="myFile" (change)="readURL($event)" required>
     </div>
     <div class="col-xs-4">
-      <img id="blah" [src]="item.picturePath" alt={{name}} class="img-responsive img-rounded" />
+      <img  [src]="item.picturePath" name="img" alt={{name}} class="img-responsive img-rounded" />
+      <input type='file' (change)="onSelectFile($event)">
     </div>
     <!-- todo image+ src -->
     <h6>Category:</h6>

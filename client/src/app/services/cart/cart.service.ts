@@ -22,7 +22,7 @@ export class CartService {
       catchError((errorRes) => {
         //debugger;
         window.localStorage.removeItem(environment.CART_DATA);
-        alert('Cart error ' + errorRes.error);
+       // alert('Cart error ' + errorRes.error);
         console.log(' Cart error' + errorRes);
         return of(undefined);
       }),

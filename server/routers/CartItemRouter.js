@@ -43,8 +43,7 @@ CartItemRouter.get('/cartItemForTextFile/:id', function (req, res) {
             let textArray = [];
             let str;
             cartItemsEx.forEach(element => {
-                str = element.itemDetailsArr[0].name + ' ' + element.sum;
-                //     str = str.split('\n');
+                str = element.itemDetailsArr[0].name + ' - ' + element.sum +'₪';
                 console.log('element' + str);
                 textArray.push(str);
             });

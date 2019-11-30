@@ -77,7 +77,11 @@ export class ShoppingPageComponent implements OnInit {
   }
 
   filterByCategory(categoryId) {
-    this.filteredArray = this.itemArray.filter(val => val.categoryId.includes(categoryId));
+    debugger;
+    this.filteredArray = this.itemArray.filter(val =>{
+      debugger;
+      return  val.categoryId.includes(categoryId)});
+       debugger;
 
   }
 

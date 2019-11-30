@@ -14,7 +14,7 @@
     </div>
     <div class="row">
         <div class="text-warning">
-            <p>Notification:</p><br>
+            <p *ngIf="!isNew">Notification:</p>
             <p *ngIf="!isNew">You have open cart from: {{updateDateCart}}</p>
             <p *ngIf="!isNew">Your last purchase was on: {{orderDate}}</p>
             <p *ngIf="isNew">Welcome! </p>
