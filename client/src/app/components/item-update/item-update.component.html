@@ -1,40 +1,42 @@
-<form #itemForm="ngForm">
-  <!-- <div> -->
-    <i class="fas fa-plus" style="float: right;" (click)="update()"></i>
-    <div *ngIf="item">
+<!-- <form [formGroup]="form" #itemForm="ngForm" (ngSubmit)="onSubmit()"> -->
+<i class="fas fa-plus" style="float: right;" (click)="update()"></i>
+<div *ngIf="item">
 
-      <h4>{{item.name}}</h4>
-    </div>
-    <hr>
-    <h6>Product name: </h6> <input [(ngModel)]="item.name" name="name" #ctrl="ngModel" required>
-    <div *ngIf="item._id">
-      <h6>Product id:</h6> <input [(ngModel)]="item._id" name="_id" #ctrl="ngModel" required>
-    </div>
-    <h6>Product price: </h6> <input type="number" min="0.00"name="price"  [(ngModel)]="item.price" #ctrl="ngModel" required>₪
-    <h6>Picture:</h6>
-    <div class="form-group" ng-class="{'has-error' : myForm.name.$invalid && !myForm.name.$pristine}">
-      <input type="file" name="myFile" (change)="readURL($event)" required>
-    </div>
-    <div class="col-xs-4">
-      <img  [src]="item.picturePath" name="img" alt={{name}} class="img-responsive img-rounded" />
-      <input type='file' (change)="onSelectFile($event)">
-    </div>
-    <!-- todo image+ src -->
-    <h6>Category:</h6>
+  <h4>{{item.name}}</h4>
+</div>
+<hr>
+<h6>Product name: </h6> <input [(ngModel)]="item.name" name="name" required>
+<!-- #ctrl="ngModel"  -->
+<div *ngIf="item._id">
+  <h6>Product id:</h6> <input [(ngModel)]="item._id" name="_id" required>
+</div>
+<h6>Product price: </h6> <input type="number" min="0.00" name="price" [(ngModel)]="item.price" required>₪
+<h6>Picture:</h6>
 
-    <select [(ngModel)]='item.categoryId' name="itemCategoryId" #ctrl="ngModel" id="categoryId" class="form-control"
-      required>
-      <option value="">Select category</option>
-      <option *ngFor="let category of categoryArray" [value]='category._id' [selected]="category._id===item.categoryId">
-        {{category.name}}
-      </option>
-    </select>
-    <!-- select category -->
+<div class="wrapper">
+  <h2>Angular Image Upload Demo</h2>
 
-    <button type="button" [disabled]="!itemForm.form.valid"
-      (click)="item._id!=undefined ? updateItem(): saveItem() ">Save </button>
-    <div *ngIf="errorMessage" class="alert alert-danger animation" role="alert">
-      {{errorMessage}}
-    </div>
-  <!-- </div> -->
-</form>
+  <div class="file-upload">
+    <input   [(ngModel)] = "SelfileName" type="file" name="image" ng2FileSelect [uploader]="uploader" accept="image/x-png,image/gif,image/jpeg" />
+    <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+      Upload
+    </button>
+  </div>
+
+</div>
+<h6>Category:</h6>
+
+<select [(ngModel)]='item.categoryId' name="itemCategoryId" #ctrl="ngModel" id="categoryId" class="form-control"
+  required>
+  <option value="">Select category</option>
+  <option *ngFor="let category of categoryArray" [value]='category._id' [selected]="category._id===item.categoryId">
+    {{category.name}}
+  </option>
+</select>
+<!-- select category -->
+
+<button type="button" [disabled]="!itemForm.form.valid" (click)="item._id!=undefined ? updateItem(): saveItem() ">Save
+</button>
+<div *ngIf="errorMessage" class="alert alert-danger animation" role="alert">
+  {{errorMessage}}
+</div>

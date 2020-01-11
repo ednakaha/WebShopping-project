@@ -23,7 +23,8 @@ export const environment = {
   USER_TOKEN: 'jwt',
   USER_DATA: 'UserData',
   CART_DATA: 'CartData',
-  USER_ROLE_ID: 'roleId'
+  USER_ROLE_ID: 'roleId',
+  IMAGES_FOLDER:'../../server/uploads'
 };
 
 /*

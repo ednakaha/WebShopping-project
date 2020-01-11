@@ -1,30 +1,57 @@
 <div ng-app="" *ngIf="itemArray">
-  <div class="cart-item" *ngFor="let item of itemArray">
-    <div *ngIf="item">
-      <!-- <div (click)="roleId===1 ? updateItemByAdmin(item._id) :false " style="background-color: blue"> -->
-      <div class="item-display">
-        <!-- todo work? -->
-        <div (click)="roleId===1 ? updateItemByAdmin(item) :false ">
-          <label class="title-name">{{item.name}}</label>
-          <div class="price">
-            <i class="fas fa-tag"></i>
-            <label class="title-price">{{item.price|currency:'₪'}} </label>
-          </div>
-        </div>
-        <div *ngIf="roleId!==1">
-          <button type="button" (click)="openModal(item)" ngClick="toggle = 'true'"><i class="fas fa-cart-plus"></i> Add
-            to cart </button>
-        </div>
-        <!--todo change button text add to cart q update //on click -and in the server do update-->
-      </div>
+  <div class="container">
 
+    <!-- <div class="cart-item" *ngFor="let item of itemArray"> -->
+    <div *ngFor="let item of itemArray">
+      <div class="item-display">
+        <div class="row">
+          <!-- <div class="col-md-"> -->
+          <!-- <div *ngIf="item"> -->
+          <!-- <div (click)="roleId===1 ? updateItemByAdmin(item._id) :false " style="background-color: blue"> -->
+
+          <!-- todo work? -->
+          <!-- <div class="row"> -->
+          <div class="col-md-3">
+            <img class="img-fluid img-thumbnail" src='{{ "assets/images/" + item.picturePath}}' alt="no picture"
+              style="max-width: 100px; max-height: 100px;" />
+            <!-- <img src="@Href(myImagesFolder)/{{item.picturePath}}" /> -->
+          </div>
+          <!-- </div> -->
+
+
+
+          <div class="col-md-6" (click)="roleId===1 ? updateItemByAdmin(item) :false ">
+            <!-- <div > -->
+            <div class="row">
+              <div class="col-md-8">
+                <h4 class="title-name">{{item.name}}</h4>
+                <!-- </div> -->
+              </div>
+              <!-- <div class="row"> -->
+              <div class="col-md-3">
+                <div class="price">
+                  <i class="fas fa-tag"></i>
+                  <label class="title-price">{{item.price|currency:'₪'}} </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+          <div *ngIf="roleId!==1">
+            <button type="button" (click)="openModal(item)" ngClick="toggle = 'true'"><i class="fas fa-cart-plus"></i>
+              Add to cart </button>
+          </div>
+          <!-- </div> -->
+          <!--todo change button text add to cart q update //on click -and in the server do update-->
+          <!-- </div> -->
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-  {{errorMessage}}
-</div>
-<!--
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{errorMessage}}
+  </div>
+  <!--
   INVOICE 
   
   https://codepen.io/marabesi/pen/PwbNOE
@@ -33,8 +60,8 @@
   <ul *ngFor="let item of itemArray" class="list-inline overflow-h">
     <button class="quantity-button" (click)="dec()" data-dir="dwn">-</button>-->
 
-<!--  <button class="quantity-button" (click)="inc()" data-dir="up">+</button>-->
-<!--  <mat-card class="example-card">
+  <!--  <button class="quantity-button" (click)="inc()" data-dir="up">+</button>-->
+  <!--  <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{item.name}}</mat-card-title>

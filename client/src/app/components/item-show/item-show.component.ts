@@ -7,6 +7,7 @@ import { CartItemService } from '../../services/cartItem/cart-item.service'
 import { LoginService } from 'src/app/services/login/login.service';
 import { PromptComponent } from '../prompt/prompt.component'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-show',
@@ -22,7 +23,8 @@ export class ItemShowComponent implements OnInit {
   cartItem: CartItemM;
   roleId: number;
   item: ItemM;
-  errorMessage:string;
+  errorMessage: string;
+  myImagesFolder: string;
 
 
   @Input() itemArray: ItemM[] | ItemM;
@@ -35,6 +37,8 @@ export class ItemShowComponent implements OnInit {
   constructor(private route: ActivatedRoute, private itemService: ItemService,
     private loginService: LoginService, private cartItemService: CartItemService,
     private modalService: NgbModal) {
+      
+    this.myImagesFolder = environment.IMAGES_FOLDER;
 
   }
 
@@ -57,11 +61,11 @@ export class ItemShowComponent implements OnInit {
     this.cartItem.createdBy = this.userId;
     this.cartItem.createDate = new Date();
     this.cartItem.updateDate = new Date();
-    
+
     this.cartItemService.addCartItem(this.cartItem)
       .subscribe(
         data => {
-          this.errorMessage  = String(data);
+          this.errorMessage = String(data);
           this.addItemEmitter.emit(this.cartItem);
           // console.log("POST Request is successful ", data);
           //result =   true;

@@ -4,5 +4,4 @@ export const environment = {
   USER_TOKEN: 'jwt',
   USER_DATA: 'UserData',
   CART_DATA: 'CartData'
-
 };

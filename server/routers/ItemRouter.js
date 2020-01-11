@@ -2,6 +2,7 @@ const express = require('express');
 const ItemRouter = express.Router();
 const ItemSchema = require('../models/item.model');
 const GeneralSchema = require('../models/general.model');
+var fs = require('fs');
 
 
 ItemRouter.get('/getByCategory/:id', function (req, res) {
@@ -56,10 +57,21 @@ ItemRouter.route('/get').get(function (req, res) {
 //todo OrdersColl on the begining
 //cityColl on the begining
 ItemRouter.route('/add').post(function (req, res) {
+    // var imgP = 'C:/Users/user1/Pictures/pic.png';
+    // req.body.picturePath =imgP;// fs.readFileSync(imgP);
+    // console.log('item picturePath1 ' + req.body.picturePath);
+
     const ItemData = new ItemSchema(req.body);
+
+    // a.img.contentType = 'image/png';
+    // a.save(function (err, a) {
+    //   if (err) throw err;
+    // console.log('item picturePath2 ' + req.body.picturePath);
     ItemData.save()
         .then(itemD => {
             //inc GeneralSchema for count iteams
+              console.log('item picturePath3 ' + req.body.picturePath);
+
             GeneralSchema.findOneAndUpdate({},
                 { $inc: { itemsCounter: 1 } },
                 { new: true }, function (err, response) {
@@ -81,7 +93,7 @@ ItemRouter.route('/add').post(function (req, res) {
 // Update document
 ItemRouter.route('/update').put(function (req, res) {
     console.log('item-update ');
-    console.log('item-update '+req.body._id);
+    console.log('item-update ' + req.body._id);
     ItemSchema.findOneAndUpdate(
         {
             _id: req.body._id // [query]
@@ -89,21 +101,22 @@ ItemRouter.route('/update').put(function (req, res) {
         {
             $set: {
                 name: req.body.name,
-                categoryId:req.body.categoryId,
-                price:req.body.price,
-                picturePath:req.body.picturePath
+                categoryId: req.body.categoryId,
+                price: req.body.price,
+                picturePath: req.body.picturePath
             }
-         },
-         {
-             upsert: false      // [options] if this document has no title create one
-         },
-         function(err,item) {
-             if (err) { console.log('item error occured');
-             } else {
-                 console.log('Item - Done');
-                 res.json('Item - done');
-             } 
-         });
- });
+        },
+        {
+            upsert: false      // [options] if this document has no title create one
+        },
+        function (err, item) {
+            if (err) {
+                console.log('item error occured');
+            } else {
+                console.log('Item - Done');
+                res.json('Item - done');
+            }
+        });
+});
 
 module.exports = ItemRouter;

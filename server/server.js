@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,13 +23,14 @@ const GeneralRouter = require('./routers/GeneralRouter');
 const GeneralSchema = require('./models/general.model');
 const CitySchema = require('./models/city.model');
 const CategorySchema = require('./models/category.model');
-
+const UploadRouter = require('./routers/UploadRouter');
 
 mongoose.connect(config.DB, { useNewUrlParser: true }, function (err, db) {   //here db is the client obj
   if (err) {
     console.log('Can not connect to the database ' + err);
   }// throw err;
   else {
+    //For first time
     //Create generalColl collection in mongoDb 
     //if none exists, with a starting value of 0 for a items counter and orders counter 
     db.createCollection("generalColl", function (err, result) {
@@ -69,10 +71,11 @@ mongoose.connect(config.DB, { useNewUrlParser: true }, function (err, db) {   //
     });
   }
 });
-
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
 // todo general/get in this list?
 app.use(function (req, res, next) {
@@ -82,6 +85,7 @@ app.use(function (req, res, next) {
     (req.path === '/register/addStep1') ||
     (req.path === '/city/get') ||
     (req.path === '/general/get') ||
+    (req.path === '/api/upload') ||
     (req.path === '/register/addStep2')) {
     console.log('in login');
     next();
@@ -120,12 +124,61 @@ app.use('/cartItem', CartItemRouter);
 app.use('/cart', CartRouter);
 app.use('/order', OrderRouter);
 app.use('/general', GeneralRouter);
+app.use('/upload', UploadRouter);
 
 app.get('/', function (req, res) {
   res.send('Happy to see u');
 });
 
 
+
 app.listen(PORT, () => {
   console.log('Server is running on PORT:', PORT);
+});
+
+
+
+
+
+// File upload settings  
+const PATH =
+//  './uploads';
+'../client/src/assets/images';
+
+
+let storage = multer.diskStorage(
+  {
+    destination: (req, file, cb) => {
+      console.log('cb');
+      cb(null, PATH);
+    },
+    filename: (req, file, cb) => {
+      let currentFileName = file.fieldname + '_' + file.originalname;//+ '-' + Date.now();
+      cb(null, currentFileName);
+    }
+  });
+
+let upload = multer({
+  storage: storage
+});
+
+app.get('/api', function (req, res) {
+  res.end('File catcher');
+});
+
+// POST File
+app.post('/api/upload', upload.single('image'), function (req, res) {
+  if (!req.file) {
+    console.log("No file is available!");
+    return res.send({
+      success: false
+    });
+
+  } else {
+    console.log( 'File is available!');
+    // return res.send({
+    return res.json({
+      success: true
+    })
+  }
 });

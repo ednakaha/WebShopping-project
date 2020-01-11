@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { HttpClient,  } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable, of } from 'rxjs';
 import { ItemM } from '../../models/item';
+import { HttpClient, HttpEvent, HttpHeaders,HttpErrorResponse, HttpEventType } from  '@angular/common/http';
+import { map } from  'rxjs/operators';
+import { LoginService } from '../login/login.service';
+import { DEFAULT_ECDH_CURVE } from 'tls';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,7 +21,7 @@ const httpOptions = {
 export class ItemService {
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private loginService:LoginService) { }
 
   getItemByCategory(category: string): Observable<ItemM[] | ItemM> {
     //debugger;
@@ -53,6 +58,7 @@ export class ItemService {
 
 
   addItem(item: ItemM) {
+    debugger;
     return this.http.post<ItemM>(environment.url + '/item/add', item, httpOptions)
     // .subscribe(
     //   data => {
@@ -65,4 +71,26 @@ export class ItemService {
     //   }
     // )
   };
+//https://www.techiediaries.com/angular-file-upload-progress-bar/
+  public upload(data, userId) {
+
+    return this.http.post<any>(environment.url+'/upload/save', data, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(map((event) => {
+      debugger;
+      switch (event.type) {
+
+        case HttpEventType.UploadProgress:
+          const progress = Math.round(100 * event.loaded / event.total);
+          return { status: 'progress', message: progress };
+
+        case HttpEventType.Response:
+          return event.body;
+        default:
+          return `Unhandled event: ${event.type}`;
+      }
+    })
+    );
+  }
 }

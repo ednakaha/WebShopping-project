@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-first-page',
@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./first-page.component.css']
 })
 export class FirstPageComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {
+ 
   }
 
 }

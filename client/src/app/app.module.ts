@@ -1,6 +1,5 @@
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -17,7 +16,6 @@ import { ShoppingPageComponent } from './components/shopping-page/shopping-page.
 import { Jwt } from './intercpectors/jwt';
 import { ItemShowComponent } from './components/item-show/item-show.component';
 import { CategoryAddComponent } from './components/category-add/category-add.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PromptComponent } from './components/prompt/prompt.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
@@ -30,6 +28,9 @@ import { FirstPageComponent } from './components/first-page/first-page.component
 import { AboutComponent } from './components/about/about.component';
 import { GeneralComponent } from './components/general/general.component';
 import { ItemUpdateComponent } from './components/item-update/item-update.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 // import { HighlightModule } from '../../node_modules/ngx-highlight/highlight.module';
 
@@ -58,7 +59,8 @@ import { ItemUpdateComponent } from './components/item-update/item-update.compon
     FirstPageComponent,
     AboutComponent,
     GeneralComponent,
-    ItemUpdateComponent
+    ItemUpdateComponent,
+    FileSelectDirective
     //MatCardModule
   ],
   imports: [
@@ -69,7 +71,9 @@ import { ItemUpdateComponent } from './components/item-update/item-update.compon
     BrowserAnimationsModule,
     ReactiveFormsModule,
     NgbModule,
-    SidebarModule.forRoot()//,
+    SidebarModule.forRoot(),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() // ToastrModule added
     // HighlightModule
   ],
   providers: [

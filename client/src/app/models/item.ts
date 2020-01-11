@@ -3,5 +3,5 @@ export class ItemM {
     name: string;
     categoryId: string;
     price: number;
-    picturePath: string;
+    picturePath: string; //pictureName
   }
