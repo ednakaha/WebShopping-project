@@ -52,9 +52,15 @@ export class ShoppingPageComponent implements OnInit {
         .subscribe(
           data => {
             this.errorMessage = String(data);
+            setTimeout(function() {
+              this.errorMessage = '';
+          }.bind(this), 3000);
           },
           error => {
             this.errorMessage = error.error;
+            setTimeout(function() {
+              this.errorMessage = '';
+          }.bind(this), 3000);
           }
         )
     }

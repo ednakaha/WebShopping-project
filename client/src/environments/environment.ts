@@ -24,6 +24,8 @@ export const environment = {
   USER_DATA: 'UserData',
   CART_DATA: 'CartData',
   USER_ROLE_ID: 'roleId',
+  EMAIL:'email',
+  FIRST_NAME:'firstName',
   IMAGES_FOLDER:'../../server/uploads'
 };
 

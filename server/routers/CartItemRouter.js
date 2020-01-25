@@ -116,7 +116,7 @@ CartItemRouter.post('/add', function (req, res) {
                 res.json('Item updated successfully');
 
             } else {
-                console.log('cartItemData 1111' + cartItemData);
+                console.log('cartItemData ' + cartItemData);
 
                 cartItemData.save()
                     .then(cartItemD => {

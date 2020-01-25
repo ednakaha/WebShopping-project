@@ -50,11 +50,17 @@ export class RegisterComponent implements OnInit {
         data => {
           debugger;
           this.errorMessage = String(data);
+          setTimeout(function() {
+            this.errorMessage = '';
+        }.bind(this), 3000);
           this.router.navigate(['/register2']);
          },
         error => {
           debugger;
           this.errorMessage = error.error;
+          setTimeout(function() {
+            this.errorMessage = '';
+        }.bind(this), 3000);
           console.log("Error", error);
           // return false;
         }

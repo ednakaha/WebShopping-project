@@ -61,6 +61,9 @@ export class Register2Component{//} implements OnInit {
       data => {
         // debugger;
         this.errorMessage = String(data);
+        setTimeout(function() {
+          this.errorMessage = '';
+      }.bind(this), 3000);
         this.router.navigate(['first-Page']);
        },
       error => {
@@ -68,6 +71,9 @@ export class Register2Component{//} implements OnInit {
         //edna todo return null
         this.errorMessage = error.error;
         console.log("Error", error);
+        setTimeout(function() {
+          this.errorMessage = '';
+      }.bind(this), 3000);
         // return false;
       }
     )

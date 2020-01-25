@@ -67,11 +67,17 @@ export class ItemShowComponent implements OnInit {
         data => {
           this.errorMessage = String(data);
           this.addItemEmitter.emit(this.cartItem);
+          setTimeout(function() {
+            this.errorMessage = '';
+        }.bind(this), 3000);
           // console.log("POST Request is successful ", data);
           //result =   true;
         },
         error => {
           this.errorMessage = error.error;
+          setTimeout(function() {
+            this.errorMessage = '';
+        }.bind(this), 3000);
         }
       )
 

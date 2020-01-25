@@ -79,13 +79,18 @@ export class ItemUpdateComponent implements OnInit {
 
     this.itemService.updateItem(this.item).subscribe(
       data => {
-        debugger;
         this.errorMessage = String(data);
+        setTimeout(function () {
+          this.errorMessage = '';
+          // console.log(this.edited);
+        }.bind(this), 3000);
       },
       error => {
-        debugger;
         this.errorMessage = error.error;
         console.log("Error", error);
+        setTimeout(function () {
+          this.errorMessage = '';
+        }.bind(this), 3000);
       }
     );
     debugger;
@@ -102,14 +107,18 @@ export class ItemUpdateComponent implements OnInit {
 
       this.itemService.addItem(this.item).subscribe(
         data => {
-          debugger;
           this.errorMessage = String(data);
+          setTimeout(function () {
+            this.errorMessage = '';
+          }.bind(this), 3000);
         },
         error => {
           debugger;
           this.errorMessage = error.error;
           console.log("Error", error);
-
+          setTimeout(function () {
+            this.errorMessage = '';
+          }.bind(this), 3000);
         }
       );
       debugger;

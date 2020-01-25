@@ -1,9 +1,9 @@
 <div *ngIf="rerender">
     <div class="cart-item form-control" *ngFor="let cartItem of cartItemExArray ">
-        <span> <b>{{cartItem.itemDetailsArr[0].name}}</b>:</span>
+        <span><b>{{cartItem.itemDetailsArr[0].name}}</b>:</span>
         <span> {{cartItem.count}} * {{cartItem.itemDetailsArr[0].price}}₪</span>
-        <span><img src="{{cartItem.itemDetailsArr[0].picturePath | safeHtml}}"
-                alt="{{cartItem.itemDetailsArr[0].name}}"></span>
+        <!-- <span><img src="{{cartItem.itemDetailsArr[0].picturePath | safeHtml}}"
+                alt="{{cartItem.itemDetailsArr[0].name}}"></span> -->
 
         <button type="button" class="btn btn-white btn-sm float-right" (click)="delCartItem(cartItem._id)">
             <i class="fa fa-trash icon"></i>
@@ -26,7 +26,7 @@
     <!--todo order just on state shopping , back to shop on order state-->
 </footer>
 <div *ngIf="errorMessage" class="alert alert-danger" role="alert" data-auto-dismiss="500">
-   11111 {{errorMessage}}
+ {{errorMessage}}
 </div>
 <div class="alert alert-warning alert-dismissible fade show">
     <strong>Warning!</strong> Please enter a valid value in all the required fields before proceeding.

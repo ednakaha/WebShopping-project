@@ -46,11 +46,17 @@ export class CartItemComponent implements OnInit {
             debugger;
             this.errorMessage = String(data);
             this.deleteItemEmitter.emit()
+            setTimeout(function() {
+              this.errorMessage = '';
+          }.bind(this), 3000);
             // console.log("POST Request is successful ", data);
             //result =   true;
           },
           error => {
             this.errorMessage = error.error;
+            setTimeout(function() {
+              this.errorMessage = '';
+          }.bind(this), 3000);
           }
         )
       // this.rerender = true;
@@ -66,7 +72,7 @@ export class CartItemComponent implements OnInit {
   //Total Amount
   getTotal() {
     let total = 0;
-    // //debugger;
+    debugger;
     for (var i in this.cartItemExArray) {
       if (this.cartItemExArray[i].sum) {
         total += this.cartItemExArray[i].sum;
@@ -81,7 +87,7 @@ export class CartItemComponent implements OnInit {
     this.cartItemService.getCartItemExpanded(this.loginService.getCartId())
       .subscribe(cd => {
         this.cartItemExArray = cd;
-        //debugger;
+        debugger;
       });
   }
 

@@ -31,14 +31,17 @@ export class CategoryComponent implements OnInit {
 
   allCategory() {
     this.categoryService.getCategory()
-      .subscribe(cd => this.categoryArray = cd);
-    //  alert(this.categoryArray);
+      .subscribe(cd =>{
+         this.categoryArray = cd;
+       //  alert(this.categoryArray);
+      });
+   
   }
 
-  getListCategory() {
-    //  //debugger;
-    this.categoryService.getCategory()
-      .subscribe(p => this.categoryArray = p);
-  }
+  // getListCategory() {
+  //    debugger;
+  //   this.categoryService.getCategory()
+  //     .subscribe(p => this.categoryArray = p);
+  // }
 
 }

@@ -60,6 +60,8 @@ export class LoginService {
           window.localStorage.setItem(environment.USER_TOKEN, this.userToken);
           window.localStorage.setItem(environment.USER_DATA, this.userData['_id']);
           window.localStorage.setItem(environment.USER_ROLE_ID,  String(this.userData['roleId']));
+          window.localStorage.setItem(environment.EMAIL,  String(this.userData['email']));
+          window.localStorage.setItem(environment.FIRST_NAME,  String(this.userData['firstName']));
           
 
        //   alert('Login successfully');
@@ -67,7 +69,7 @@ export class LoginService {
           this.subject.next({ userDataSubject: this.userData });
 
           console.log(loginRes);
-         // return loginRes;
+        // location.reload();
          return 'Login successfully';
         }
       })
@@ -90,6 +92,13 @@ export class LoginService {
   }
   getRoleId() { //todo Encryption
     return window.localStorage.getItem(environment.USER_ROLE_ID);
+  }
+  getEmail(){
+    return window.localStorage.getItem(environment.EMAIL);   
+  }
+  getFirstName(){
+    return window.localStorage.getItem(environment.FIRST_NAME);
+  
   }
 
 }

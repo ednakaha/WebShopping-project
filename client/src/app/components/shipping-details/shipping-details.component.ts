@@ -77,9 +77,15 @@ export class ShippingDetailsComponent implements OnInit {
       //debugger;
       this.errorMessage = String(orderRes);
       this.orderDone = orderRes;
+      setTimeout(function() {
+        this.errorMessage = '';
+    }.bind(this), 3000);
     },
       error => {
         this.errorMessage = error.error;
+        setTimeout(function() {
+          this.errorMessage = '';
+      }.bind(this), 3000);
       });
   }
 

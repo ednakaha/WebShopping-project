@@ -46,10 +46,16 @@ export class ItemAddComponent implements OnInit {
       data => {
         this.errorMessage = String(data)
         console.log("POST Request is successful ", data);
+        setTimeout(function() {
+          this.errorMessage = '';
+      }.bind(this), 3000);
       },
       error => {
         this.errorMessage = error.error;
         console.log("Error", error);
+        setTimeout(function() {
+          this.errorMessage = '';
+      }.bind(this), 3000);
       }
     );
   }

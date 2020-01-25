@@ -17,13 +17,16 @@ export class AppComponent {
   title = 'client';
 
   constructor(private loginService: LoginService) {
-    this.subscription = this.loginService.getMessage().subscribe(message => {
-      //debugger;
-     //  this.userDataSubject = message;
-      this.email = message.userDataSubject.email;
-      this.firstName = message.userDataSubject.firstName;
-      this.roleId = message.userDataSubject.roleId;
-    });
+    this.email =loginService.getEmail();
+    this.firstName = loginService.getFirstName();
+    this.roleId = Number(loginService.getRoleId());
+    // this.subscription = this.loginService.getMessage().subscribe(message => {
+    //   //debugger;
+    //  //  this.userDataSubject = message;
+    //   this.email = message.userDataSubject.email;
+    //   this.firstName = message.userDataSubject.firstName;
+    //   this.roleId = message.userDataSubject.roleId;
+    // });
 
 
   }
