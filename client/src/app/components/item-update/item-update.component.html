@@ -14,29 +14,41 @@
 <h6>Picture:</h6>
 
 <div class="wrapper">
-  <h2>Angular Image Upload Demo</h2>
-
   <div class="file-upload">
-    <input   [(ngModel)] = "SelfileName" type="file" name="image" ng2FileSelect [uploader]="uploader" accept="image/x-png,image/gif,image/jpeg" />
+    <input [(ngModel)]="SelfileName" type="file" name="image" ng2FileSelect [uploader]="uploader"
+      accept="image/x-png,image/gif,image/jpeg" />
+    <img src='{{ "assets/images/" + item.picturePath}}' alt="no picture" style="max-width: 100px; max-height: 100px;" />
     <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
       Upload
     </button>
   </div>
 
+
 </div>
 <h6>Category:</h6>
-
-<select [(ngModel)]='item.categoryId' name="itemCategoryId" #ctrl="ngModel" id="categoryId" class="form-control"
-  required>
-  <option value="">Select category</option>
-  <option *ngFor="let category of categoryArray" [value]='category._id' [selected]="category._id===item.categoryId">
-    {{category.name}}
-  </option>
-</select>
+<div class="col-md-6">
+  <div class="row">
+    <select [(ngModel)]='item.categoryId' name="itemCategoryId" #ctrl="ngModel" id="categoryId" class="form-control"
+      required>
+      <option value="">Select category</option>
+      <option *ngFor="let category of categoryArray" [value]='category._id' [selected]="category._id===item.categoryId">
+        {{category.name}}
+      </option>
+    </select>
+  </div>
+</div>
 <!-- select category -->
-
-<button type="button" [disabled]="!itemForm.form.valid" (click)="item._id!=undefined ? updateItem(): saveItem() ">Save
-</button>
-<div *ngIf="errorMessage" class="alert alert-danger animation" role="alert">
-  {{errorMessage}}
+<div class="col-md-6">
+  <div class="row">
+    <button type="button" [disabled]="!itemForm.form.valid"
+      (click)="item._id!=undefined ? updateItem(): saveItem() ">Save
+    </button>
+  </div>
+</div>
+<div class="col-md-12">
+  <div class="row">
+    <div *ngIf="errorMessage" class="col-md-10 alert alert-danger animation" role="alert">
+      {{errorMessage}}
+    </div>
+  </div>
 </div>

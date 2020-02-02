@@ -6,34 +6,40 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 <form #newUserForm="ngForm">
-   <div class="form-login">
+  <div class="form-login">
 
     <h4>Welcome back</h4>
-    <input type="text" [(ngModel)]="user.email" required name='email' class="form-control input-sm chat-input"
-      placeholder="username" />
-
-    <input type="text" [(ngModel)]="user.password" required type='password' name='password'
-      class="form-control input-sm chat-input" placeholder="password" />
-
+    <div class=" px-md-5">
+      <input type="text" [(ngModel)]="user.email" required name='email' class="form-control input-sm chat-input"
+        placeholder="username" />
+    </div>
+    <div class=" px-md-5">
+      <input type="text" [(ngModel)]="user.password" required type='password' name='password'
+        class="form-control input-sm chat-input " placeholder="password" />
+    </div>
     <div class="wrapper">
-      <span class="group-btn">
+      <span class="group-btn  px-md-5">
         <div class="row">
-          <button class="col-md-6 btn btn-primary btn-md" (click)="login()" [disabled]="!newUserForm.form.valid">Login
+          <button class="p-3 border col-md-6  btn btn-primary btn-md" (click)="login()" [disabled]="!newUserForm.form.valid">Login
             <i class="fa fa-sign-in"></i></button>
 
-          <button class=" col-md-6  btn btn-primary btn-md" *ngIf="logged" class="btn btn-primary btn-md"
+          <button class="p-3 border  col-md-6   btn btn-primary btn-md" *ngIf="logged" 
             (click)="toShopping()">
-            <div *ngIf="roleId===1"> <!--admin-->
+            <div *ngIf="roleId===1">
+              <!--admin-->
               <p>Defining products</p>
             </div>
-            <div *ngIf="roleId===2">  <!--user--> 
+            <div *ngIf="roleId===2">
+              <!--user-->
               <p *ngIf="isNew">Start shopping</p>
               <p *ngIf="!isNew">Continue shopping</p>
             </div>
           </button>
           <!-- {{isNew}} -->
         </div>
-        <a class="nav-link" href='#' [routerLink]='["/register"]'>Sign up</a>
+        <div class=" px-md-5">
+          <a class="nav-link" href='#' [routerLink]='["/register"]'>Sign up</a>
+        </div>
       </span>
     </div>
   </div>

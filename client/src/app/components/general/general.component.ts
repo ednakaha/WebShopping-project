@@ -7,6 +7,7 @@ import { CartM } from 'src/app/models/cart';
 import { LoginService } from 'src/app/services/login/login.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import * as moment from 'moment';
+import { PersonM } from 'src/app/models/person';
 
 @Component({
   selector: 'app-general',
@@ -20,14 +21,22 @@ export class GeneralComponent implements OnInit {
   isNew: boolean;
   updateDateCart: string;
   orderDate: string;
+  firstName: string;
+  aCurrentUser: PersonM;
 
   constructor(private generalService: GeneralService, private cartService: CartService,
-    private loginService: LoginService, private orderService: OrderService) { }
+    private loginService: LoginService, private orderService: OrderService) {
+    this.loginService.currentUser.subscribe(currLog => {
+      this.aCurrentUser = currLog;
+      this.firstName = this.aCurrentUser['firstName'];
+    });
+  }
 
   ngOnInit() {
     this.getGeneral();
     this.getCart();
     this.getOrders();
+    // this.firstName = this.loginService.getFirstName();
   }
 
   getGeneral() {

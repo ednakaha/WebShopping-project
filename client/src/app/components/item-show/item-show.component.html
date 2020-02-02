@@ -14,29 +14,22 @@
           <div class="col-md-3">
             <img class="img-fluid img-thumbnail" src='{{ "assets/images/" + item.picturePath}}' alt="no picture"
               style="max-width: 100px; max-height: 100px;" />
-            <!-- <img src="@Href(myImagesFolder)/{{item.picturePath}}" /> -->
           </div>
           <!-- </div> -->
 
 
 
-          <div class="col-md-6" (click)="roleId===1 ? updateItemByAdmin(item) :false ">
-            <!-- <div > -->
+          <div class="col-md-4" (click)="roleId===1 ? updateItemByAdmin(item) :false ">
             <div class="row">
-              <div class="col-md-8">
-                <h4 class="title-name">{{item.name}}</h4>
-                <!-- </div> -->
-              </div>
-              <!-- <div class="row"> -->
-              <div class="col-md-3">
-                <div class="price">
-                  <i class="fas fa-tag"></i>
-                  <label class="title-price">{{item.price|currency:'₪'}} </label>
-                </div>
-              </div>
+              <h4 class="title-name">{{item.name}}</h4>
             </div>
           </div>
-          <!-- </div> -->
+          <div class="col-md-3 ">
+            <div class="row">
+              <i class="fas fa-tag"></i>
+              <label class="title-price">{{item.price|currency:'₪'}} </label>
+            </div>
+          </div>
           <div *ngIf="roleId!==1">
             <button type="button" (click)="openModal(item)" ngClick="toggle = 'true'"><i class="fas fa-cart-plus"></i>
               Add to cart </button>

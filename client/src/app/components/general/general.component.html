@@ -1,23 +1,25 @@
 <div class="container">
     <div class="row">
-        <div>
-            <p class="fa fa-shopping-cart  "*ngIf="itemsCounter!=null">Avaliable products in our store: {{itemsCounter}}</p>
+        <div class="text-secondary">
+            <p class="h5" *ngIf="!isNew">Notification:</p>
+            <p class="h5" *ngIf="!isNew">You have open cart from: {{updateDateCart}}</p>
+            <p class="h5" *ngIf="!isNew">Your last purchase was on: {{orderDate}}</p>
+            <p class="h3" *ngIf="isNew">Welcome {{firstName}}!</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="h4 text-secondary">
+            <p class="fa fa-shopping-cart " *ngIf="itemsCounter!=null">Avaliable products in our store: {{itemsCounter}}
+            </p>
             <!-- <i class="fa fa-shopping-cart fa-2x  icon-grey"> -->
         </div>
     </div>
     <div class="row">
-        <div  >
-            <p class="fa fa-shopping-cart  " *ngIf="ordersCounter!=null">Number of orders submitted in our store: {{ordersCounter}}</p>
+        <div class="h4 text-secondary">
+            <p class="fa fa-shopping-cart " *ngIf="ordersCounter!=null">Number of orders submitted in our store:
+                {{ordersCounter}}</p>
             <!-- <i class="fa fa-shopping-cart fa-2x  icon-grey"> -->
 
-        </div>
-    </div>
-    <div class="row">
-        <div class="text-warning">
-            <p *ngIf="!isNew">Notification:</p>
-            <p *ngIf="!isNew">You have open cart from: {{updateDateCart}}</p>
-            <p *ngIf="!isNew">Your last purchase was on: {{orderDate}}</p>
-            <p *ngIf="isNew">Welcome! </p>
         </div>
     </div>
 </div>

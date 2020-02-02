@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from './services/login/login.service';
 import { Subscription } from 'rxjs';
+import { PersonM } from './models/person';
 
 @Component({
   selector: 'app-root',
@@ -13,21 +14,20 @@ export class AppComponent {
  // userDataSubject: any;
   subscription: Subscription;
   roleId :number;
+  aCurrentUser:PersonM;
 
   title = 'client';
 
   constructor(private loginService: LoginService) {
-    this.email =loginService.getEmail();
-    this.firstName = loginService.getFirstName();
-    this.roleId = Number(loginService.getRoleId());
-    // this.subscription = this.loginService.getMessage().subscribe(message => {
-    //   //debugger;
-    //  //  this.userDataSubject = message;
-    //   this.email = message.userDataSubject.email;
-    //   this.firstName = message.userDataSubject.firstName;
-    //   this.roleId = message.userDataSubject.roleId;
-    // });
 
+    this.loginService.currentUser.subscribe(cuUser => {
+      debugger;
+      this.aCurrentUser = cuUser;
+      this.firstName = this.aCurrentUser['firstName'];
+      this.email = this.aCurrentUser['email'];
+      this.roleId = this.aCurrentUser['roleId'];
+  });
+  
 
   }
 }

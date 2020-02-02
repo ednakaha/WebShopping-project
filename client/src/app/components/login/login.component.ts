@@ -38,16 +38,16 @@ export class LoginComponent implements OnInit {
       debugger;
       console.log('login ' + loginRes);
       this.errorMessage = String(loginRes);
-      setTimeout(function() {
+      setTimeout(function () {
         this.errorMessage = '';
-    }.bind(this), 3000);
+      }.bind(this), 3000);
     },
       error => {
         debugger;
-        this.errorMessage = 'error' + error.error;
-        setTimeout(function() {
+        this.errorMessage = 'Error user name or password';
+        setTimeout(function () {
           this.errorMessage = '';
-      }.bind(this), 3000);
+        }.bind(this), 3000);
       }
 
     );

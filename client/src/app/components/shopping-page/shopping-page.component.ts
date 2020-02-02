@@ -92,7 +92,7 @@ export class ShoppingPageComponent implements OnInit {
   }
 
   getSelectedItem(item) {
-    console.log("--getSelectedItem---", item)
+  //  console.log("--getSelectedItem---", item)
     this.item_Emitter = item
   }
   updateArry() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment, EnumRole } from 'src/environments/environment';
-import { Observable, of, Subscription, Subject } from 'rxjs';
+import { Observable, of, Subscription, Subject, BehaviorSubject } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { PersonM } from 'src/app/models/person';
 //import { CartM } from 'src/app/models/cart';
@@ -14,8 +14,9 @@ import { PersonM } from 'src/app/models/person';
 export class LoginService {
   private userToken: string;
   private userData: PersonM;  //todo type
+  currentUser:BehaviorSubject<PersonM> = new BehaviorSubject<PersonM>(new PersonM);
 
-  private subject = new Subject<any>();
+ // private subject = new Subject<any>();
 
  // private <> subject next pulse
   // private cartData: CartM;
@@ -29,12 +30,12 @@ export class LoginService {
   // }
 
   clearMessage() {
-      this.subject.next();
+      this.currentUser.next(new PersonM);
   }
 
-  getMessage(): Observable<any> {
-      return this.subject.asObservable();
-  }
+  // getMessage(): Observable<any> {
+  //     return this.subject.asObservable();
+  // }
 
   login(u): Observable<Object> {
     return this.http.post(environment.url + '/login', u).pipe(
@@ -45,6 +46,7 @@ export class LoginService {
         window.localStorage.removeItem(environment.USER_ROLE_ID);
         //  window.localStorage.removeItem(environment.CART_DATA);
        // alert('login error ' + errorRes.error);
+       this.clearMessage();
          console.log(' login error' + errorRes.error);
         return errorRes.error;//of(undefined);
       }),
@@ -52,10 +54,17 @@ export class LoginService {
         if (loginRes) {
           debugger;
           this.userToken = loginRes['token'];
+          this.userData = new PersonM();
           this.userData = loginRes['user'];
+
+          
+          this.currentUser.next(this.userData);
+        
           window.localStorage.removeItem(environment.USER_TOKEN);
           window.localStorage.removeItem(environment.USER_DATA);
           window.localStorage.removeItem(environment.USER_ROLE_ID);
+          window.localStorage.removeItem(environment.EMAIL);
+          window.localStorage.removeItem(environment.FIRST_NAME);
 
           window.localStorage.setItem(environment.USER_TOKEN, this.userToken);
           window.localStorage.setItem(environment.USER_DATA, this.userData['_id']);
@@ -66,7 +75,7 @@ export class LoginService {
 
        //   alert('Login successfully');
 
-          this.subject.next({ userDataSubject: this.userData });
+        //  this.subject.next({ userDataSubject: this.userData });
 
           console.log(loginRes);
         // location.reload();
