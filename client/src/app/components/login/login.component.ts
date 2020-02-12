@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service'
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart/cart.service';
-import { CityService } from 'src/app/services/city/city.service';
+import * as moment from 'moment';
+import { OrderService } from 'src/app/services/order/order.service';
 
 
 @Component({
@@ -16,24 +17,41 @@ export class LoginComponent implements OnInit {
   isNew: boolean;
   roleId: number;
   errorMessage: string;
+  userId: string;
+  updateDateCart: string;
+  orderDate: string;
 
-  constructor(private loginService: LoginService, private router: Router, private cartService: CartService) { }
+
+  constructor(private loginService: LoginService,private orderService: OrderService, private router: Router, private cartService: CartService) {
+     this.cartService.IsNewUser.subscribe(isNew => {
+      this.isNew = isNew;
+    })
+  }
 
   ngOnInit() {
     this.user = {};
   }
+  getOrders() {
+    this.orderService.getOrderByUser(this.userId).subscribe(orderData => {
+      debugger;
+      this.orderDate = moment(String(orderData["createdDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');
+      debugger;
+    })
+  }
+
 
   login() {
     debugger;
     this.loginService.login(this.user).subscribe(loginRes => {
       //create or get the cart of the user
-      this.cartService.getOrSetCart(this.loginService.getUserId()).subscribe(cartData => {
-        let createdate = String(cartData[0]["createDate"]).slice(0, 16);
-        let updateDate = String(cartData[0]["updateDate"]).slice(0, 16);
-        debugger;
-        this.isNew = (createdate === updateDate);
+      this.userId = this.loginService.getUserId();
+      this.cartService.getOrSetCart(this.userId).subscribe(cartData => {
         this.roleId = Number(this.loginService.getRoleId());
         this.logged = true;
+        debugger;
+        this.updateDateCart = moment(String(cartData[0]["updateDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');
+       debugger;
+        this.getOrders();
       });
       debugger;
       console.log('login ' + loginRes);

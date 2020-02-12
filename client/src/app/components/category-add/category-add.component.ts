@@ -21,11 +21,12 @@ export class CategoryAddComponent implements OnInit {
   addResult: boolean;
   roleId: number;
 
-  constructor(private categoryService: CategoryService,private loginService: LoginService) { }
+  constructor(private categoryService: CategoryService, private loginService: LoginService) { }
 
   categoryArray: CategoryM[] | CategoryM;
 
   ngOnInit() {
+    debugger;
     this.roleId = Number(this.loginService.getRoleId());
     this.allCategory();
 
@@ -34,21 +35,13 @@ export class CategoryAddComponent implements OnInit {
   allCategory() {
     this.categoryService.getCategory()
       .subscribe(cd => this.categoryArray = cd);
- //   alert(this.categoryArray);
   }
 
   addCategory() {
     this.categoryService.addCategory({
-      id:'',
+      id: '',
       name: this.categoryName
     })
-    /*.subscribe(res => {
-      this.addResult = res
-      if (this.addResult) {
-        this.formValues.resetForm();
-      }
-    });*/
-    // this.form.resetForm;
   }
 
 

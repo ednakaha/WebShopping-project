@@ -2,6 +2,7 @@ const express = require('express');
 const OrderRouter = express.Router();
 const OrderSchema = require('../models/order.model');
 const GeneralSchema = require('../models/general.model');
+const CartSchema = require('../models/cart.model');
 
 
 OrderRouter.get('/get', function (req, res) {
@@ -22,7 +23,8 @@ OrderRouter.get('/get', function (req, res) {
 
 // get one Member
 OrderRouter.get('/getOrderByUser/:id', function (req, res) {
-    OrderSchema.findOne({ personId: req.params.id }, {}, { $orderby: { createdDate: -1 } }).exec(function (err, order) {
+    //OrderSchema.findOne({ personId: req.params.id }, {}, { $orderby: { createdDate: -1 } }).exec(function (err, order) {
+        OrderSchema.findOne({ personId: req.params.id }, { $sort: { createdDate: desc } }).exec(function (err, order) {
         if (err) {
             console.log(err);
             res.send(404, 'Error Occurred!')
@@ -36,11 +38,15 @@ OrderRouter.get('/getOrderByUser/:id', function (req, res) {
 // get grouping of orders by date-for calender 
 OrderRouter.get('/getGroupingOrders', function (req, res) {
     console.log('getGroupingOrders');
-    OrderSchema.aggregate([ {$group : 
-        {_id:"$createdDate", 
-        total:{$sum:1}}}, 
-        {$sort:{createdDate:-1}}]
-        ).exec(function (err, orderGroup) {
+    OrderSchema.aggregate([{
+        $group:
+        {
+            _id: "$createdDate",
+            total: { $sum: 1 }
+        }
+    },
+    { $sort: { createdDate: -1 } }]
+    ).exec(function (err, orderGroup) {
         if (err) {
             console.log('getGroupingOrders error lookup - ' + err)
             res.status(404).send('getGroupingOrder Error has occurred! - ' + err);
@@ -88,9 +94,8 @@ OrderRouter.get('/getByCart/:id', function (req, res) {
 OrderRouter.route('/addOrder').post(function (req, res) {
     //OrderRouter.post('/add', function (req, res) {
     const orderData = new OrderSchema(req.body);
-    //check if exists same item and cart in the collection. so just do update 
-    // console.log( 'itemId:'+ req.body.itemId + 'cartId:'+req.body.cartId)
-    OrderSchema.find({ itemId: req.body.itemId, cartId: req.body.cartId }, function (err, docs) {
+    //check if exists same item and cart in the collection. so just do updating
+    OrderSchema.find({ itemId: req.body.itemId, cartId: req.body.cartId, status: 1 }, function (err, docs) {
         if (docs.length) {
             //todo update  change button!!!!! 
             console.log('docs - ' + JSON.stringify(docs));
@@ -111,10 +116,29 @@ OrderRouter.route('/addOrder').post(function (req, res) {
                                 console.log('GeneralSchema response  ' + response);
                             }
                         });
+
+                    //Change status of Cart to closed
+                    CartSchema.findOneAndUpdate(
+                        {
+                            _id: req.body.cartId // [query]
+                        },
+                        {
+                            $set: {
+                                status: 2 // closed after ordering [doc]
+                            }
+                        },
+                        function (err, response) {
+                            if (err) {
+                                console.log('cart -update status err ' + err);
+                            } else {
+                                //console.log('response  ' + response + 'date' + new Date());
+                                //   res.status(204).send(updCart);
+                            }
+                        });
                     res.json('Order added successfully');
                 })
                 .catch(err => {
-                    res.status(400).send("unable to save to database");
+                    res.status(400).send(" order  - unable to save to database");
                     console.log(err);
                 });
         }

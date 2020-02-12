@@ -72,7 +72,7 @@ export class CartItemComponent implements OnInit {
   //Total Amount
   getTotal() {
     let total = 0;
-    debugger;
+ //   debugger;
     for (var i in this.cartItemExArray) {
       if (this.cartItemExArray[i].sum) {
         total += this.cartItemExArray[i].sum;

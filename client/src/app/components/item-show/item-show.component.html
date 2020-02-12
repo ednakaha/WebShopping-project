@@ -1,24 +1,13 @@
 <div ng-app="" *ngIf="itemArray">
   <div class="container">
-
-    <!-- <div class="cart-item" *ngFor="let item of itemArray"> -->
     <div *ngFor="let item of itemArray">
       <div class="item-display">
         <div class="row">
-          <!-- <div class="col-md-"> -->
-          <!-- <div *ngIf="item"> -->
-          <!-- <div (click)="roleId===1 ? updateItemByAdmin(item._id) :false " style="background-color: blue"> -->
 
-          <!-- todo work? -->
-          <!-- <div class="row"> -->
           <div class="col-md-3">
             <img class="img-fluid img-thumbnail" src='{{ "assets/images/" + item.picturePath}}' alt="no picture"
               style="max-width: 100px; max-height: 100px;" />
           </div>
-          <!-- </div> -->
-
-
-
           <div class="col-md-4" (click)="roleId===1 ? updateItemByAdmin(item) :false ">
             <div class="row">
               <h4 class="title-name">{{item.name}}</h4>

@@ -4,7 +4,7 @@
 
 export enum EnumStatusOrder {
   New = 1,
-  Update,
+ // Update,
   Close
 }
 export enum EnumRole {
@@ -23,6 +23,8 @@ export const environment = {
   USER_TOKEN: 'jwt',
   USER_DATA: 'UserData',
   CART_DATA: 'CartData',
+  IS_NEW: 'isNew',
+  FULL_DATA: 'FullData',
   USER_ROLE_ID: 'roleId',
   EMAIL:'email',
   FIRST_NAME:'firstName',

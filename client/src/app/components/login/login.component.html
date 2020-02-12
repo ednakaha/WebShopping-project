@@ -40,6 +40,18 @@
         <div class=" px-md-5">
           <a class="nav-link" href='#' [routerLink]='["/register"]'>Sign up</a>
         </div>
+        <div *ngIf="logged" >
+          <div class="row">
+            <div class="text-secondary">
+                <p class="h5" *ngIf="!isNew">Notification:</p>
+                <p class="h5" *ngIf="!isNew">You have open cart from: {{updateDateCart}}</p>
+                <p class="h5" *ngIf="!isNew && orderDate">Your last purchase was on: {{orderDate}}</p>
+            </div>
+        </div>
+        IsNew {{isNew}}
+        userId {{userId}}
+        firstName {{firstName}}
+        </div>
       </span>
     </div>
   </div>

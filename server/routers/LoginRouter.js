@@ -16,6 +16,7 @@ LoginRouter.route('/').post(function (req, res) {
         console.log('400' + err);
       }
       else {
+        debugger;
         if (LoginD.length > 0) {
           console.log('get login id postData' + postData.email + '-' + postData.password);
 

@@ -61,7 +61,6 @@ export class ItemAddComponent implements OnInit {
   }
 
   getListItem() {
-    //  //debugger;
     this.itemService.getItem()
       .subscribe(p => this.itemArray = p);
   }

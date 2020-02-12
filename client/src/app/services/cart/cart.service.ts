@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { CartM } from '../../models/cart';
 import { catchError, map } from 'rxjs/operators';
 
@@ -14,26 +14,33 @@ const httpOptions = {
 })
 export class CartService {
   private cartData: CartM;
+  IsNewUser:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(private http: HttpClient) { }
 
-  getOrSetCart(userId: string): Observable<CartM[] | CartM> {
-    //debugger;
+  getOrSetCart(userId: string):  Observable<CartM[] | CartM> {
+    debugger;
     return this.http.get<CartM>(environment.url + '/cart/getOrSetCart/' + userId).pipe(
       catchError((errorRes) => {
         //debugger;
         window.localStorage.removeItem(environment.CART_DATA);
-       // alert('Cart error ' + errorRes.error);
+        // alert('Cart error ' + errorRes.error);
         console.log(' Cart error' + errorRes);
         return of(undefined);
       }),
       map((cartRes) => {
         if (cartRes) {
-          this.cartData = cartRes;
+          debugger;
+          this.cartData = cartRes["cartData"];
+          let isNew = cartRes["isNew"]
           window.localStorage.removeItem(environment.CART_DATA);
           window.localStorage.setItem(environment.CART_DATA, this.cartData[0]._id);
-         // alert('Cart added successfully');
-          console.log('cart added ' +  JSON.stringify(this.cartData));
-          return cartRes;
+          window.localStorage.removeItem(environment.IS_NEW);
+          window.localStorage.setItem(environment.IS_NEW,isNew);
+          // alert('Cart added successfully');
+          //console.log('cart added ' + JSON.stringify(this.cartData));
+          this.IsNewUser.next(isNew);
+          return this.cartData;
         }
       })
     );

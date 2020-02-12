@@ -34,7 +34,7 @@ CartRouter.get('/get/:id', function (req, res) {
 // get one Member
 CartRouter.get('/getCartByUser/:id', function (req, res) {
     console.log('getting on Member');
-    CartSchema.findOne({personId: req.params.id},{},{$orderby: { updateDate : -1 }}).exec(function (err, cart) {
+    CartSchema.findOne({ personId: req.params.id }, {}, { $orderby: { updateDate: -1 } }).exec(function (err, cart) {
         if (err) {
             console.log(err);
             res.send(404, 'Error Occurred!')
@@ -47,17 +47,23 @@ CartRouter.get('/getCartByUser/:id', function (req, res) {
 
 //get exists cart , if not-create a new one
 CartRouter.get('/getOrSetCart/:id', function (req, res) {
+    let isNew = true; //todo update on open???
+
     console.log('getOrSet - ' + JSON.stringify(req.params));
-    CartSchema.find({ personId: req.params.id, status: '1' }, function (err, data) {
+    CartSchema.find({ personId: req.params.id }, function (err, data) {
         if (err) {
             console.log('getorset error - ' + err);
             res.status(400).send('getorset error - ' + err);
         } else {
-            if (data.length > 0) {  //on Open's status
+            if (data.length > 0) {
                 console.log('cart founded-' + JSON.stringify(data));
-                res.json(data);  //todo update on open
-            } else {//create new cart
-                console.log('getOrSet new cart')
+                isNew = false;
+            }
+            let openCartRow = data.filter(cart => {
+                return cart.status === 1;
+            });
+            if (openCartRow.length === 0) {//create new cart
+                console.log('getOrSet new cart , isNew:' + isNew);
                 const cartData = new CartSchema();
                 cartData.personId = req.params.id;
                 cartData.status = 1;//open
@@ -68,11 +74,18 @@ CartRouter.get('/getOrSetCart/:id', function (req, res) {
                         res.json({
                             status: 'New cart added successfully',
                             cartData: cartD,
+                            isNew
                         });
                     })
                     .catch(err => {
                         res.status(400).send("unable to save to database " + err);
                     });
+            }
+            else {
+                res.json({
+                    cartData: openCartRow,
+                    isNew
+                });
             }
         }
     });

@@ -33,15 +33,11 @@ export class CategoryComponent implements OnInit {
     this.categoryService.getCategory()
       .subscribe(cd =>{
          this.categoryArray = cd;
-       //  alert(this.categoryArray);
+         alert('2'+this.categoryArray);
       });
+
    
   }
 
-  // getListCategory() {
-  //    debugger;
-  //   this.categoryService.getCategory()
-  //     .subscribe(p => this.categoryArray = p);
-  // }
 
 }

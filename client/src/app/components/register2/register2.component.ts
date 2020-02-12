@@ -64,7 +64,7 @@ export class Register2Component{//} implements OnInit {
         setTimeout(function() {
           this.errorMessage = '';
       }.bind(this), 3000);
-        this.router.navigate(['first-Page']);
+        this.router.navigate(['/first-Page']);
        },
       error => {
         // debugger;

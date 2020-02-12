@@ -37,29 +37,14 @@ export class OrderService {
     return this.http.get<any>(environment.url + '/order/getGroupingOrders');
   }
 
-  getOrderByUser(id?: string): Observable<OrderM[]> {
+  getOrderByUser(id: string): Observable<OrderM[]> {
     if (id) {
       return this.http.get<OrderM[]>(environment.url + '/order/getOrderByUser/' + id);
     }
   }
-  /*
-    addOrder(Order: OrderM):Observable<Boolean> {
-      //debugger;
-      return  this.http.post<OrderM>(environment.url + '/order/addOrder', Order, httpOptions).subscribe(
-        data => {
-          alert('Order successfully passed');
-          return true;
-          //   this.router.navigate(['/login'])
-          //todo message
-        },
-        error => {
-          alert('Order failed: ' + error.error)
-          console.log("Error", error);
-          return false;
-        }
-      )};*/
 
   addOrder(Order: OrderM): Observable<any> {
+    debugger;
     return this.http.post<OrderM>(environment.url + '/order/addOrder', Order, httpOptions);
     // .pipe(
     //   catchError((errorRes) => {

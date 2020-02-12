@@ -18,25 +18,27 @@ export class GeneralComponent implements OnInit {
 
   ordersCounter: string;
   itemsCounter: string;
-  isNew: boolean;
-  updateDateCart: string;
-  orderDate: string;
+  //isNew: boolean;
+  // updateDateCart: string;
+  
   firstName: string;
   aCurrentUser: PersonM;
+  userId: string;
 
   constructor(private generalService: GeneralService, private cartService: CartService,
     private loginService: LoginService, private orderService: OrderService) {
     this.loginService.currentUser.subscribe(currLog => {
+      debugger;
       this.aCurrentUser = currLog;
-      this.firstName = this.aCurrentUser['firstName'];
+      //this.firstName = this.aCurrentUser['firstName'];
+      this.userId = this.aCurrentUser['_id'];
     });
+   
   }
 
   ngOnInit() {
     this.getGeneral();
-    this.getCart();
-    this.getOrders();
-    // this.firstName = this.loginService.getFirstName();
+   // this.firstName = this.loginService.getFirstName();
   }
 
   getGeneral() {
@@ -46,22 +48,9 @@ export class GeneralComponent implements OnInit {
         this.itemsCounter = p[0].itemsCounter;
       });
   }
-  getCart() {
-    this.cartService.getCartByUser(this.loginService.getUserId()).subscribe(cartData => {
-      let createdate = String(cartData["createDate"]).slice(0, 16);
-      let updateDate = String(cartData["updateDate"]).slice(0, 16);
-      this.isNew = (createdate === updateDate);
-      // this.updateDateCart = String(cartData["updateDate"]).slice(0, 16);
-      this.updateDateCart = moment(String(cartData["updateDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');
-    })
-  }
+ 
 
-  getOrders() {
-    this.orderService.getOrderByUser(this.loginService.getUserId()).subscribe(orderData => {
-      debugger;
-      this.orderDate = moment(String(orderData["createdDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');
-    })
-  }
+  
 
   //todo update cart on changes
 }

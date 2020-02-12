@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from './services/login/login.service';
 import { Subscription } from 'rxjs';
 import { PersonM } from './models/person';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,12 @@ import { PersonM } from './models/person';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  firstName: string
-  email: string
- // userDataSubject: any;
+  firstName: string;
+  email: string;
+  // userDataSubject: any;
   subscription: Subscription;
-  roleId :number;
-  aCurrentUser:PersonM;
+  roleId: number;
+  aCurrentUser: PersonM;
 
   title = 'client';
 
@@ -22,12 +23,23 @@ export class AppComponent {
 
     this.loginService.currentUser.subscribe(cuUser => {
       debugger;
-      this.aCurrentUser = cuUser;
-      this.firstName = this.aCurrentUser['firstName'];
-      this.email = this.aCurrentUser['email'];
-      this.roleId = this.aCurrentUser['roleId'];
-  });
-  
+      if (cuUser.hasOwnProperty('firstName')) {
+        this.aCurrentUser = cuUser;
+        this.firstName = this.aCurrentUser['firstName'];
+        this.email = this.aCurrentUser['email'];
+        this.roleId = this.aCurrentUser['roleId'];
+      }
+      else {
+        let storedProp = localStorage.getItem(environment.FULL_DATA);
+        if (storedProp) {
+          this.aCurrentUser = JSON.parse(storedProp);
+          this.firstName = this.aCurrentUser['firstName'];
+          this.email = this.aCurrentUser['email'];
+          this.roleId = this.aCurrentUser['roleId'];
+        }
+      }
+    });
+
 
   }
 }

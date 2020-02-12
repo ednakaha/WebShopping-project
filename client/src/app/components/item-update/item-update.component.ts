@@ -60,11 +60,12 @@ export class ItemUpdateComponent implements OnInit {
   }
 
   getCategoryList() {
-    //debugger;
+    debugger;
     this.categoryService.getCategory()
       .subscribe(p => {
         this.categoryArray = p
       });
+   //   alert('4'+this.categoryArray);
   }
 
   update() {

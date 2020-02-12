@@ -41,6 +41,7 @@ export class LoginService {
     return this.http.post(environment.url + '/login', u).pipe(
       catchError((errorRes) => {
         debugger;
+        window.localStorage.removeItem(environment.FULL_DATA);
         window.localStorage.removeItem(environment.USER_TOKEN);
         window.localStorage.removeItem(environment.USER_DATA);
         window.localStorage.removeItem(environment.USER_ROLE_ID);
@@ -57,15 +58,15 @@ export class LoginService {
           this.userData = new PersonM();
           this.userData = loginRes['user'];
 
-          
-          this.currentUser.next(this.userData);
         
           window.localStorage.removeItem(environment.USER_TOKEN);
           window.localStorage.removeItem(environment.USER_DATA);
           window.localStorage.removeItem(environment.USER_ROLE_ID);
           window.localStorage.removeItem(environment.EMAIL);
           window.localStorage.removeItem(environment.FIRST_NAME);
+          window.localStorage.removeItem(environment.FULL_DATA);
 
+          window.localStorage.setItem(environment.FULL_DATA,  JSON.stringify(this.userData));
           window.localStorage.setItem(environment.USER_TOKEN, this.userToken);
           window.localStorage.setItem(environment.USER_DATA, this.userData['_id']);
           window.localStorage.setItem(environment.USER_ROLE_ID,  String(this.userData['roleId']));
@@ -76,7 +77,8 @@ export class LoginService {
        //   alert('Login successfully');
 
         //  this.subject.next({ userDataSubject: this.userData });
-
+        this.currentUser.next(this.userData);
+        
           console.log(loginRes);
         // location.reload();
          return 'Login successfully';
@@ -89,6 +91,9 @@ export class LoginService {
     return window.localStorage.getItem(environment.USER_TOKEN);
   }
 
+  getIsNew(): boolean {
+    return Boolean(window.localStorage.getItem(environment.IS_NEW));
+  }
   isLogged() {
     return this.getToken() != null;
   }

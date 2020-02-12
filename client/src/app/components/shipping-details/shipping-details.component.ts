@@ -61,7 +61,7 @@ export class ShippingDetailsComponent implements OnInit {
   ngOnInit() {
   }
   doOrder() {
-    //debugger;
+    // debugger;
     this.orderService.addOrder({
       id: "",
       personId: this.loginService.getUserId(),
@@ -73,8 +73,9 @@ export class ShippingDetailsComponent implements OnInit {
       createdDate: new Date(),
       lastPaymentCreditCard: String(this.creditCardNo).slice(-4),
       status: EnumStatusOrder.Close
-    }).subscribe(orderRes => {
-      //debugger;
+    }
+    ).subscribe(orderRes => {
+
       this.errorMessage = String(orderRes);
       this.orderDone = orderRes;
       setTimeout(function() {
@@ -82,6 +83,7 @@ export class ShippingDetailsComponent implements OnInit {
     }.bind(this), 3000);
     },
       error => {
+        // debugger;
         this.errorMessage = error.error;
         setTimeout(function() {
           this.errorMessage = '';
