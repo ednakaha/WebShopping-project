@@ -2,7 +2,8 @@
     font-size: 16px;
     text-align: center;
     text-decoration: none;
-    border-left: 10px solid rgb(218, 200, 43); /* yellow */
+    border-left: 10px solid purple
+     /* rgb(218, 200, 43); yellow */
 }
 
 .ng-invalid:not(form)  {

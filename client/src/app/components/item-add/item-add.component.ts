@@ -31,9 +31,11 @@ export class ItemAddComponent implements OnInit {
   }
 
   getCategoryList() {
+    alert('8');
     //debugger;
-    this.categoryService.getCategory()
-      .subscribe(p => this.categoryArray = p);
+    // this.categoryService.getCategory()
+    //   .subscribe(p => this.categoryArray = p);
+    //edna
   }
   addItem() {
     this.itemService.addItem({

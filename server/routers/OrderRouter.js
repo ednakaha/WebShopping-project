@@ -24,7 +24,7 @@ OrderRouter.get('/get', function (req, res) {
 // get one Member
 OrderRouter.get('/getOrderByUser/:id', function (req, res) {
     //OrderSchema.findOne({ personId: req.params.id }, {}, { $orderby: { createdDate: -1 } }).exec(function (err, order) {
-        OrderSchema.findOne({ personId: req.params.id }, { $sort: { createdDate: desc } }).exec(function (err, order) {
+    OrderSchema.findOne({ personId: req.params.id }).sort({ createdDate: -1 }).exec(function (err, order) {
         if (err) {
             console.log(err);
             res.send(404, 'Error Occurred!')

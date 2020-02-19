@@ -10,6 +10,7 @@ import { CartItemExpandedM } from 'src/app/models/cartItemExpanded';
 import { NgbDatepickerConfig, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { OrdersDateGroup } from 'src/app/models/ordersDateGroup';
 import * as moment from 'moment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-shipping-details',
@@ -38,6 +39,8 @@ export class ShippingDetailsComponent implements OnInit {
 
   cartItemExArray: CartItemExpandedM[] | CartItemExpandedM;
   errorMessage: string;
+ 
+  
 
   markDisabled2(date: { year: number, month: number, date: number }): boolean {
     debugger;
@@ -47,7 +50,7 @@ export class ShippingDetailsComponent implements OnInit {
 
 
   constructor(private orderService: OrderService, private loginService: LoginService,
-    private cartItemService: CartItemService) {
+    private cartItemService: CartItemService,private router: Router) {
 
     this.loadGroupOrdersByDate();
 
@@ -92,7 +95,9 @@ export class ShippingDetailsComponent implements OnInit {
   }
 
 
-
+navigateToHome(){
+  this.router.navigate(['/first-Page']);
+}
   dynamicDownloadTxt(res: any) {
     this.textFile = JSON.stringify(res);
     this.textFile = this.textFile.split('"').join('').split('[').join('').split(']').join('').split(',').join('\r\n');

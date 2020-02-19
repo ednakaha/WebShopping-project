@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.user = {};
   }
   getOrders() {
+    debugger;
     this.orderService.getOrderByUser(this.userId).subscribe(orderData => {
       debugger;
       this.orderDate = moment(String(orderData["createdDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');

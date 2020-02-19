@@ -45,10 +45,10 @@ export class CategoryAddComponent implements OnInit {
   }
 
 
-  getListCategory() {
-    //  //debugger;
-    this.categoryService.getCategory()
-      .subscribe(p => this.categoryArray = p);
-  }
+  // getListCategory() {
+  //   //  //debugger;
+  //   this.categoryService.getCategory()
+  //     .subscribe(p => this.categoryArray = p);
+  // }
 
 }

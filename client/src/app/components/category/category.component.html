@@ -1,6 +1,5 @@
 
-category {{categoryArray}}
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark"  *ngIf="categoryArray || categoryArray.length >0 ">
+<nav class="navbar navbar-expand-lg navbar  bg-dark"  *ngIf="categoryArray ">
     <ul *ngFor="let category of categoryArray" class="navbar-nav mr-auto">
         <li>
             <button (click)="categoryClick(category._id)">

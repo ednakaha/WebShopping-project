@@ -1,6 +1,6 @@
 <header>
 
-    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar navbar-dark"  style="background-color:purple" >
         <!-- todo -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -32,10 +32,10 @@
             </ul>
         </div>
         <div class="col-md-3">
-            <div> <label class="text-secondary"> {{firstName}} </label></div>
-            <div> <label class="text-secondary"> {{email}} </label></div>
-            <div *ngIf="roleId===1"> <label class="text-secondary">Adminstrator</label></div>          
-            <div *ngIf="roleId>1"> <label class="text-secondary">User</label></div>
+            <div> <label class="text-white"> {{firstName}}   ;    {{email}} </label></div>
+            <!-- <div> <label class="text-secondary"> {{email}} </label></div> -->
+            <div *ngIf="roleId===1"> <label class="text-white">Adminstrator</label></div>          
+            <div *ngIf="roleId>1"> <label class="text-white">User</label></div>
  
         </div>
     </nav>

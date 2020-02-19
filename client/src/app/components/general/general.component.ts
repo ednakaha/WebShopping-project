@@ -30,7 +30,7 @@ export class GeneralComponent implements OnInit {
     this.loginService.currentUser.subscribe(currLog => {
       debugger;
       this.aCurrentUser = currLog;
-      //this.firstName = this.aCurrentUser['firstName'];
+      this.firstName = this.aCurrentUser['firstName'];
       this.userId = this.aCurrentUser['_id'];
     });
    

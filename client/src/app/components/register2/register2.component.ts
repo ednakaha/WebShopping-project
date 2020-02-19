@@ -3,6 +3,7 @@ import { RegisterService } from 'src/app/services/register/register.service';
 import { CityService } from 'src/app/services/city/city.service';
 import { EnumRole } from '../../../environments/environment';
 import { environment } from 'src/environments/environment.prod';
+import { Router } from '@angular/router';
 
 export enum EnumRole1 {
   Admin = 1,
@@ -13,72 +14,72 @@ export enum EnumRole1 {
   templateUrl: './register2.component.html',
   styleUrls: ['./register2.component.css']
 })
-export class Register2Component{//} implements OnInit {
-  
+export class Register2Component {//} implements OnInit {
+
   //model:
   firstName: string;
-  lastName:  string;
-  street:  string;
+  lastName: string;
+  street: string;
   roleId: number;
 
-  errorMessage:string;
+  errorMessage: string;
   // roleEnum:EnumRole1;
   // keys: any[];
 
-  emitCityId:string;
-  router: any;
+  emitCityId: string;
 
-  constructor(private registerService: RegisterService ) {
+
+  constructor(private registerService: RegisterService, private router: Router) {
     // debugger;
     //todo?
-  // this.keys = Object.keys(this.roleEnum).filter(Number);
-  
-   
-   }
+    // this.keys = Object.keys(this.roleEnum).filter(Number);
 
-  ngOnInit() { 
+
+  }
+
+  ngOnInit() {
     debugger;
-   }
+  }
 
 
-  getSelectedCityId($event){
+  getSelectedCityId($event) {
     this.emitCityId = $event;
   }
 
   addPerson2() {
     debugger;
-   this.registerService.addPersonStep2({
+    this.registerService.addPersonStep2({
       id: -1,
-      tz:'',
+      tz: '',
       email: '',
-      password:'',// this.password,
+      password: '',// this.password,
       firstName: this.firstName,
       lastName: this.lastName,
       cityId: this.emitCityId,//this.cityId,
       street: this.street,
-      roleId: this.roleId 
+      roleId: this.roleId
     }).subscribe(
       data => {
         // debugger;
         this.errorMessage = String(data);
-        setTimeout(function() {
+        setTimeout(function () {
           this.errorMessage = '';
-      }.bind(this), 3000);
+        }.bind(this), 3000);
         this.router.navigate(['/first-Page']);
-       },
+      },
       error => {
         // debugger;
         //edna todo return null
         this.errorMessage = error.error;
         console.log("Error", error);
-        setTimeout(function() {
+        setTimeout(function () {
           this.errorMessage = '';
-      }.bind(this), 3000);
+        }.bind(this), 3000);
         // return false;
       }
     )
 
   }
-  
+
 
 }

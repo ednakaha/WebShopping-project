@@ -19,7 +19,9 @@ export class CategoryComponent implements OnInit {
   @Output() categoryClicked=new EventEmitter<string>(); 
 
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService) { 
+   // this.allCategory();
+  }
 
   ngOnInit() {
     this.allCategory();
@@ -30,11 +32,11 @@ export class CategoryComponent implements OnInit {
   }
 
   allCategory() {
+    debugger;
     this.categoryService.getCategory()
       .subscribe(cd =>{
          this.categoryArray = cd;
-         alert('2'+this.categoryArray);
-      });
+       });
 
    
   }

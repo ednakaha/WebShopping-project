@@ -1,16 +1,24 @@
 <div class="page-layout">
     <div class="container">
-  
-        <div class="row">
-            <div *ngIf="roleId!=1 ">
-                <button type="button" class="btn btn-warning" (click)="delCart()">Delete cart</button>
-            </div>
 
-            <div class="items">
+        <div class="row">
+            <!-- <div *ngIf="roleId!=1 ">
+                <button type="button" class="btn btn-warning" style="background-color:purple" (click)="delCart()">Delete cart</button>
+            </div> -->
+
+            <div class="items mt-5">
                 <div class="category">
                     <app-category (categoryClicked)="filterByCategory($event)"></app-category>
-
-                    <input type="text" class="form-control" placeholder="Search" #search (keyup)="filterByName($event)">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="Search" #search
+                                (keyup)="filterByName($event)">
+                        </div>
+                        <div *ngIf="roleId!=1 " class="col-md-2">
+                            <button type="button" class="btn text-white " style="background-color:purple"
+                                (click)="delCart()">Delete cart</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="item-list">
                     <app-item-show (updateItemEmitter)=getSelectedItem($event) (addItemEmitter)=updateArry()

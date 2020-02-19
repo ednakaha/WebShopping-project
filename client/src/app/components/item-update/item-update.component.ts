@@ -50,7 +50,7 @@ export class ItemUpdateComponent implements OnInit {
     this.uploader.onCompleteItem = (item: any, status: any) => {
       debugger;
       console.log('Uploaded File Details:', item);
-      this.toastr.success('File successfully uploaded!');
+    //  this.toastr.success('File successfully uploaded!');
     };
 
 
@@ -63,9 +63,9 @@ export class ItemUpdateComponent implements OnInit {
     debugger;
     this.categoryService.getCategory()
       .subscribe(p => {
+        debugger;
         this.categoryArray = p
       });
-   //   alert('4'+this.categoryArray);
   }
 
   update() {
@@ -75,6 +75,7 @@ export class ItemUpdateComponent implements OnInit {
 
   updateItem() {
     debugger;
+    this.uploader.uploadAll()
     this.SelfileName = this.SelfileName.split('\\').pop().split('/').pop(); //just filename
     this.item.picturePath = UPLOAD_ALIAS + '_' + this.SelfileName;
 
@@ -100,6 +101,7 @@ export class ItemUpdateComponent implements OnInit {
 
   saveItem() {
     debugger;
+    this.uploader.uploadAll()
     if (this.bad_picture == true)
       this.errorMessage = "The picture is too big"
     else {
