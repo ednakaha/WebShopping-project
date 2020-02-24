@@ -16,7 +16,7 @@ export class CityService {
 
   constructor(private http: HttpClient) { }
 
-  
+
   getCity(id?: string): Observable<CityM[] | CityM> {
     if (id) {
       return this.http.get<CityM>(environment.url + '/city/get/' + id);
@@ -26,16 +26,7 @@ export class CityService {
     }
   }
 
-  addCity(city: CityM) {
-    this.http.post<CityM>(environment.url + '/city/add', city,httpOptions).subscribe(
-      data => {
-        alert(data)
-        console.log("POST Request is successful ", data);
-      },
-      error => {
-        alert(error.error)
-        console.log("Error", error);
-      }
-    )
+  addCity(city: CityM): Observable<CityM[] | CityM> {
+    return this.http.post<CityM>(environment.url + '/city/add', city, httpOptions);
   };
 }

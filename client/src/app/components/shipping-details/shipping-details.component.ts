@@ -30,6 +30,7 @@ export class ShippingDetailsComponent implements OnInit {
   calendar: NgbCalendar;
   filteredArrayDate: string[] = [];
   textFile: string;
+  ShipDate:Date;
 
   private setting = {
     element: {
@@ -43,7 +44,7 @@ export class ShippingDetailsComponent implements OnInit {
   
 
   markDisabled2(date: { year: number, month: number, date: number }): boolean {
-    debugger;
+
     return date.date <= 3;
   }
 
@@ -64,7 +65,6 @@ export class ShippingDetailsComponent implements OnInit {
   ngOnInit() {
   }
   doOrder() {
-    // debugger;
     this.orderService.addOrder({
       id: "",
       personId: this.loginService.getUserId(),
@@ -72,7 +72,7 @@ export class ShippingDetailsComponent implements OnInit {
       finalSum: 0,  //todo total!!!!
       cityIdShip: this.emitCityId,
       streetShip: this.streetShip,
-      dateShip: new Date(this.dateShip),//todo fix date from object to date - now it's null
+      dateShip:this.ShipDate,// new Date(this.dateShip),//todo fix date from object to date - now it's null
       createdDate: new Date(),
       lastPaymentCreditCard: String(this.creditCardNo).slice(-4),
       status: EnumStatusOrder.Close

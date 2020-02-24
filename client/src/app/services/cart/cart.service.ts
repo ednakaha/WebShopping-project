@@ -64,11 +64,6 @@ export class CartService {
 
   addCart(cart: CartM) {
     {
-      cart: CartM;
-      //edna todo cart = {
-
-      // }
-      // //debugger;
       this.http.post<CartM>(environment.url + '/cart/add', cart, httpOptions).subscribe(
         data => {
           alert(data)
@@ -78,10 +73,12 @@ export class CartService {
         error => {
           alert(error.error)
           console.log("Error", error);
-          // return false;
         }
       )
-      //return false;
     };
   };
+
+  updateTotalSumByCartId(currCart:CartM){
+    return this.http.post<CartM>(environment.url + '/cart/updateTotal', currCart, httpOptions)
+  }
 }

@@ -2,9 +2,6 @@
     <div class="cart-item form-control" *ngFor="let cartItem of cartItemExArray ">
         <span><b>{{cartItem.itemDetailsArr[0].name}}</b>:</span>
         <span> {{cartItem.count}} * {{cartItem.itemDetailsArr[0].price}}₪</span>
-        <!-- <span><img src="{{cartItem.itemDetailsArr[0].picturePath | safeHtml}}"
-                alt="{{cartItem.itemDetailsArr[0].name}}"></span> -->
-
         <button type="button" class="btn btn-white btn-sm float-right" (click)="delCartItem(cartItem._id)">
             <i class="fa fa-trash icon"></i>
         </button>
@@ -14,18 +11,20 @@
     <div class="col-md-8">
         <hr>
     </div>
-    <div class="ml-4 link">
+    <div *ngIf="rerender" class="ml-4 link">
         <b> Total: <input readonly id="inputTotal" type="text" value='{{ getTotal() }}₪' /></b>
-        <div  class="m-2">
+    </div>
+    <div class="ml-4 link">
+        <div class="m-2">
             <a href='#' [routerLink]='["/order-page"]'>Order</a>
         </div>
-        <div  class="m-2">
+        <div class="m-2">
             <a href='#' [routerLink]='["/shopping-page"]'>Back to shop</a>
         </div>
     </div>
     <!--todo order just on state shopping , back to shop on order state-->
 </footer>
 <div *ngIf="errorMessage" class="alert alert-danger" role="alert" data-auto-dismiss="500">
- {{errorMessage}}
+    {{errorMessage}}
 </div>
 <!-- <router-outlet></router-outlet> -->

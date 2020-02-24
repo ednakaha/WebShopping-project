@@ -13,7 +13,7 @@ export class CityComponent implements OnInit {
   //model
   cityid: string;
   cityname: string;
-
+  errorMessage: string;
   cityArray: CityM[] | CityM;
   roleId: number;
 
@@ -25,10 +25,24 @@ export class CityComponent implements OnInit {
 
 
   addCity() {
+    debugger;
     this.cityService.addCity({
       id:-1, 
       name: this.cityname
-    });
+    }) .subscribe(
+      data => {
+        this.errorMessage = String(data);
+        setTimeout(function() {
+          this.errorMessage = '';
+      }.bind(this), 3000);
+      },
+      error => {
+        this.errorMessage = error.error;
+        setTimeout(function() {
+          this.errorMessage = '';
+      }.bind(this), 3000);
+      }
+    );
   }
   getListCity() {
     //  //debugger;

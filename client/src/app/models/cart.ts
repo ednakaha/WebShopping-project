@@ -6,4 +6,5 @@ export class CartM {
     createDate: Date;
     updatedate?: Date;
     status:EnumStatusCart;
+    sum:Number;
   }

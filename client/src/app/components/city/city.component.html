@@ -1,7 +1,7 @@
 <div *ngIf="roleId===1">
   <!--admin-->
   <div class="row">
-    <form #itemForm="ngForm" class="col-3">
+    <form #itemForm="ngForm" class="col-md-4 m-5" style="background-color: beige;">
 
       <h2>New city:</h2>
       <div class="form-group">
@@ -11,15 +11,11 @@
         </label>
       </div>
 
-      <!-- <div class="form-group">
-        <label>Id:
-          <input [(ngModel)]='cityid' required />
-        </label>
-      </div> -->
-
-      <!-- (click) passes input value to add() and then clears the input -->
+       <!-- (click) passes input value to add() and then clears the input -->
       <button (click)="addCity()"  [disabled]="!itemForm.form.valid"> add city </button>
-      <!-- <button (click)="getListCity()"> get city </button> -->
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
     </form>
   </div>
 </div>

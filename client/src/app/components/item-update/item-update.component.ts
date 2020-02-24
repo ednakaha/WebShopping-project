@@ -50,20 +50,15 @@ export class ItemUpdateComponent implements OnInit {
     this.uploader.onCompleteItem = (item: any, status: any) => {
       debugger;
       console.log('Uploaded File Details:', item);
-    //  this.toastr.success('File successfully uploaded!');
+      //  this.toastr.success('File successfully uploaded!');
     };
 
 
-    // this.form = this.formBuilder.group({
-    // uplImg: ['']
-    // });
   }
 
   getCategoryList() {
-    debugger;
     this.categoryService.getCategory()
       .subscribe(p => {
-        debugger;
         this.categoryArray = p
       });
   }
@@ -74,7 +69,6 @@ export class ItemUpdateComponent implements OnInit {
   }
 
   updateItem() {
-    debugger;
     this.uploader.uploadAll()
     this.SelfileName = this.SelfileName.split('\\').pop().split('/').pop(); //just filename
     this.item.picturePath = UPLOAD_ALIAS + '_' + this.SelfileName;
@@ -110,6 +104,7 @@ export class ItemUpdateComponent implements OnInit {
 
       this.itemService.addItem(this.item).subscribe(
         data => {
+          debugger;
           this.errorMessage = String(data);
           setTimeout(function () {
             this.errorMessage = '';
@@ -159,18 +154,9 @@ export class ItemUpdateComponent implements OnInit {
     debugger;
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
-      //  this.form.get('uplImg').setValue(file);
     }
   }
-  // onSubmit() {
-  //   debugger;
-  //   const formData = new FormData();
-  //   formData.append('file', this.form.get('uplImg').value);
-  //   this.itemService.upload(formData, this.loginService.getUserId()).subscribe(
-  //     (res) => this.uploadResponse = res,
-  //     (err) => this.error = err
-  //   );
-  // }
+
 }
 
 

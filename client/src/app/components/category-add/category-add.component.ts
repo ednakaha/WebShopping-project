@@ -20,7 +20,7 @@ export class CategoryAddComponent implements OnInit {
   //categoryArray: CategoryM[] | CategoryM;
   addResult: boolean;
   roleId: number;
-
+  errorMessage: string;
   constructor(private categoryService: CategoryService, private loginService: LoginService) { }
 
   categoryArray: CategoryM[] | CategoryM;
@@ -41,7 +41,20 @@ export class CategoryAddComponent implements OnInit {
     this.categoryService.addCategory({
       id: '',
       name: this.categoryName
-    })
+    }).subscribe(
+      data => {
+        this.errorMessage = String(data);
+        setTimeout(function () {
+          this.errorMessage = '';
+        }.bind(this), 3000);
+      },
+      error => {
+        this.errorMessage = error.error;
+        setTimeout(function () {
+          this.errorMessage = '';
+        }.bind(this), 3000);
+      }
+    )
   }
 
 

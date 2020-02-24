@@ -51,25 +51,13 @@ export class ItemService {
   }
 
   updateItem(item: ItemM) {
-    debugger;
-    return this.http.put<ItemM>(environment.url + '/item/update', item, httpOptions);//;.subscribe(
-    //  data => { })
+    return this.http.put<ItemM>(environment.url + '/item/update', item, httpOptions);
   }
 
 
   addItem(item: ItemM) {
-    debugger;
     return this.http.post<ItemM>(environment.url + '/item/add', item, httpOptions)
-    // .subscribe(
-    //   data => {
-    //     alert(data)
-    //     console.log("POST Request is successful ", data);
-    //   },
-    //   error => {
-    //     alert(error.error)
-    //     console.log("Error", error);
-    //   }
-    // )
+   
   };
 //https://www.techiediaries.com/angular-file-upload-progress-bar/
   public upload(data, userId) {

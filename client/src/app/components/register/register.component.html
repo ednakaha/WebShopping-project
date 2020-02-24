@@ -1,16 +1,18 @@
-<form #newUserForm="ngForm">
+  
+<form #newUserForm="ngForm" class="col-md-6 ml-5" style="background-color: beige;">
+ 
   <!-- <div class="form-register"> -->
-  <div class="w-25 p-3">
+  <div  class="ml-5" >
     <div class="form-group">
       <legend>Sign in -user "STEP 1"</legend>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
       <label> TZ:
         <input placeholder="tz" maxlength="9" [(ngModel)]='tz' required name="tz"
           class="form-control input-sm chat-input">
       </label>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
       <label> Email
         <input ngModel [email]="true" type="email" placeholder="email" #userEmail="ngModel" [(ngModel)]='email'
           class="form-control input-sm chat-input" required name="email">
@@ -20,17 +22,17 @@
         </div>
       </label>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
       <label> Password </label>
       <input type="password" class="form-control input-sm chat-input" placeholder="Password" [(ngModel)]='password'
         name="password" required>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-4">
       <label> Confirm password </label>
       <input type="password" class="form-control input-sm chat-input" placeholder="Confirm Password"
         [(ngModel)]='confirmPassword' name="confirmPassword" required>
     </div>
-    <div class="form-group">
+    <div class="form-group col-md-6">
       <button type="submit" class="pure-button pure-button-primary" (click)='addPerson1()'>
         SUBMIT
        <!-- todo arrow img -->

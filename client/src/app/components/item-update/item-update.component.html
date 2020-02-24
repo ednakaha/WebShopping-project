@@ -1,41 +1,33 @@
-<form  #itemForm="ngForm">
-<i class="fas fa-plus" style="float: right;" (click)="update()"></i>
-<div *ngIf="item">
-  <h4>{{item.name}}</h4>
-</div>
-<hr>
-<div class="col-md-12">
-  <div class="row">
-    <div *ngIf="errorMessage" class="col-md-10 alert alert-danger animation" role="alert">
-      {{errorMessage}}
-    </div>
+<form #itemForm="ngForm">
+  <i class="fas fa-plus" style="float: right;" (click)="update()"></i>
+  <div *ngIf="item">
+    <h4>{{item.name}}</h4>
   </div>
   <hr>
-</div> 
 
-<h6>Product name: </h6> <input [(ngModel)]="item.name" name="name" required>
+  <h6>Product name: </h6> <input [(ngModel)]="item.name" name="name" required>
 
-<div *ngIf="item._id">
-  <h6>Product id:</h6> <input [(ngModel)]="item._id" name="_id" required>
-</div>
-<h6>Product price: </h6> <input type="number" min="0.00" name="price" [(ngModel)]="item.price" required>₪
-<h6>Picture:</h6>
-<div class="wrapper">
-  <div class="file-upload">
-    <input [(ngModel)]="SelfileName" type="file" name="image" ng2FileSelect [uploader]="uploader"
-      accept="image/x-png,image/gif,image/jpeg" />
-    {{ "assets/images/" + item.picturePath}}
-    <img src='{{ "assets/images/" + item.picturePath}}' alt="no picture" style="max-width: 100px; max-height: 100px;" />
-    <!-- <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+  <div *ngIf="item._id">
+    <h6 class="mt-2">Product id:</h6> <input [(ngModel)]="item._id" name="_id" required>
+  </div>
+  <h6 class="mt-2">Product price: </h6> <input type="number" min="0.00" name="price" [(ngModel)]="item.price" required>₪
+  <h6 class="mt-2">Picture:</h6>
+  <div class="wrapper mt-2">
+    <div class="file-upload">
+      <input [(ngModel)]="SelfileName" type="file" name="image" ng2FileSelect [uploader]="uploader"
+        accept="image/x-png,image/gif,image/jpeg" />
+      {{ "assets/images/" + item.picturePath}}
+      <img src='{{ "assets/images/" + item.picturePath}}' alt="no picture"
+        style="max-width: 100px; max-height: 100px;" />
+      <!-- <button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
       Upload
     </button> -->
+    </div>
+
+
   </div>
-
-
-</div>
-<h6>Category:</h6>
-<div class="col-md-6">
-  <div class="row">
+  <h6 class="mt-2">Category:</h6>
+  <div class="col-md-8">
     <select [(ngModel)]='item.categoryId' name="itemCategoryId" #ctrl="ngModel" id="categoryId" class="form-control"
       required>
       <option value="">Select category</option>
@@ -44,15 +36,20 @@
       </option>
     </select>
   </div>
-</div>
 
- <div class="col-md-6">
-  <div class="row">
-    <!-- [disabled]="!itemForm.form.valid"  -->
-    <button type="button" [disabled]="!uploader.getNotUploadedItems().length"    
-      (click)="item._id!=undefined ? updateItem(): saveItem() ">Save
-    </button>
+  <div class="col-md-6">
+    <div class="mt-2">
+      <!-- [disabled]="!itemForm.form.valid"  -->
+      <button type="button" [disabled]="!uploader.getNotUploadedItems().length"
+        (click)="item._id!=undefined ? updateItem(): saveItem() ">Save
+      </button>
+    </div>
   </div>
-</div> 
-
+  <div class="col-md-12">
+    <div class="row">
+      <div *ngIf="errorMessage" class="col-md-10 alert alert-danger animation" role="alert">
+        {{errorMessage}}
+      </div>
+    </div>
+  </div>
 </form>

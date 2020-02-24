@@ -5,9 +5,10 @@ import { Observable, of } from 'rxjs';
 import { CategoryM } from '../../models/category';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' ,
-  'Authorization': 'Bearer <token>'
-})
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer <token>'
+  })
 };
 
 
@@ -21,28 +22,30 @@ export class CategoryService {
 
   getCategory(id?: string): Observable<CategoryM[]> {
     if (id) {
-      return this.http.get<CategoryM[]>(environment.url + '/category/get/' + id,httpOptions);
+      return this.http.get<CategoryM[]>(environment.url + '/category/get/' + id, httpOptions);
     }
     else {
-      return this.http.get<CategoryM[]>(environment.url + '/category/get',httpOptions);
+      return this.http.get<CategoryM[]>(environment.url + '/category/get', httpOptions);
     }
   }
 
-  addCategory(category: CategoryM) {//}: boolean {
-    result: Boolean;
-    //debugger;
-    this.http.post<CategoryM>(environment.url + '/category/add', category, httpOptions).subscribe(
-      data => {
-        alert(data)
-        // console.log("POST Request is successful ", data);
-        //result =   true;
-      },
-      error => {
-        alert(error.error)
-        console.log("Error", error);
-        // return false;
-      }
-    )
-    //return false;
-  };
+  addCategory(category: CategoryM): Observable<CategoryM[] | CategoryM> {//}: boolean {
+    return this.http.post<CategoryM>(environment.url + '/category/add', category, httpOptions);
+  }
+  //   result: Boolean;
+  //   //debugger;
+  //   this.http.post<CategoryM>(environment.url + '/category/add', category, httpOptions).subscribe(
+  //     data => {
+  //       alert(data)
+  //       // console.log("POST Request is successful ", data);
+  //       //result =   true;
+  //     },
+  //     error => {
+  //       alert(error.error)
+  //       console.log("Error", error);
+  //       // return false;
+  //     }
+  //   )
+  //   //return false;
+  // };
 }

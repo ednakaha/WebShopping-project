@@ -146,7 +146,7 @@ OrderRouter.route('/addOrder').post(function (req, res) {
 });
 //todo change geral.orderscount
 // Update document
-//todo update
+
 OrderRouter.put('/update/:id', function (req, res) {
     OrderSchema.findOneAndUpdate(
         {

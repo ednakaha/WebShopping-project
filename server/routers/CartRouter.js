@@ -147,6 +147,26 @@ CartRouter.delete('/delete/:id', function (req, res) {
             }
         });
 });
+//Update total sum
+CartRouter.put('/updateTotal', function (req, res) {
+    CartSchema.findOneAndUpdate(
+        {
+            _id: req.params.id
+        },
+        {
+            $set: {
+                sum: req.params.sum
+            }
+        },
+        function (err, updCart) {
+            if (err) {
+                console.log('updateTotal error occured');
+            } else {
+                console.log('updateTotal '+updCart);
+                res.status(204).send(updCart);
+            }
+        });
+});
 
 
 module.exports = CartRouter;

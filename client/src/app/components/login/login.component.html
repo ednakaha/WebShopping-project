@@ -5,7 +5,7 @@
 <!--Pulling Awesome Font -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
-<form #newUserForm="ngForm">
+<form newUserForm="ngForm"  style="background-color: beige;">
   <div class="form-login">
 
     <h4>Welcome back</h4>
@@ -20,11 +20,11 @@
     <div class="wrapper">
       <span class="group-btn  px-md-5">
         <div class="row">
-          <button class="p-3 border col-md-6  btn btn-primary btn-md" (click)="login()" [disabled]="!newUserForm.form.valid">Login
+          <button class="p-3 border col-md-6  btn btn-primary btn-md" (click)="login()"
+            [disabled]="!newUserForm.form.valid">Login
             <i class="fa fa-sign-in"></i></button>
 
-          <button class="p-3 border  col-md-6   btn btn-primary btn-md" *ngIf="logged" 
-            (click)="toShopping()">
+          <button class="p-3 border  col-md-6   btn btn-primary btn-md" *ngIf="logged" (click)="toShopping()">
             <div *ngIf="roleId===1">
               <!--admin-->
               <p>Defining products</p>
@@ -40,17 +40,14 @@
         <div class=" px-md-5">
           <a class="nav-link" href='#' [routerLink]='["/register"]'>Sign up</a>
         </div>
-        <div *ngIf="logged" >
+        <div *ngIf="logged">
           <div class="row">
             <div class="text-secondary">
-                <p class="h5" *ngIf="!isNew">Notification:</p>
-                <p class="h5" *ngIf="!isNew">You have open cart from: {{updateDateCart}}</p>
-                <p class="h5" *ngIf="!isNew && orderDate">Your last purchase was on: {{orderDate}}</p>
+              <p class="h5" *ngIf="!isNew">Notification:</p>
+              <p class="h5" *ngIf="!isNew">You have open cart from: {{updateDateCart}}</p>
+              <p class="h5" *ngIf="!isNew && orderDate">Your last purchase was on: {{orderDate}}</p>
             </div>
-        </div>
-        IsNew {{isNew}}
-        userId {{userId}}
-        firstName {{firstName}}
+          </div>
         </div>
       </span>
     </div>
