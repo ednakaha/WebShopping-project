@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { OrderService } from 'src/app/services/order/order.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { OrderM } from '../../models/order'
@@ -10,7 +10,7 @@ import { CartItemExpandedM } from 'src/app/models/cartItemExpanded';
 import { NgbDatepickerConfig, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { OrdersDateGroup } from 'src/app/models/ordersDateGroup';
 import * as moment from 'moment';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shipping-details',
@@ -30,7 +30,8 @@ export class ShippingDetailsComponent implements OnInit {
   calendar: NgbCalendar;
   filteredArrayDate: string[] = [];
   textFile: string;
-  ShipDate:Date;
+  ShipDate: Date;
+  @Input() finalSumInput: number;
 
   private setting = {
     element: {
@@ -40,8 +41,8 @@ export class ShippingDetailsComponent implements OnInit {
 
   cartItemExArray: CartItemExpandedM[] | CartItemExpandedM;
   errorMessage: string;
- 
-  
+
+
 
   markDisabled2(date: { year: number, month: number, date: number }): boolean {
 
@@ -51,7 +52,7 @@ export class ShippingDetailsComponent implements OnInit {
 
 
   constructor(private orderService: OrderService, private loginService: LoginService,
-    private cartItemService: CartItemService,private router: Router) {
+    private cartItemService: CartItemService, private router: Router) {
 
     this.loadGroupOrdersByDate();
 
@@ -65,14 +66,17 @@ export class ShippingDetailsComponent implements OnInit {
   ngOnInit() {
   }
   doOrder() {
+    debugger;
+    alert(this.finalSumInput)
+    const convertTime = new Date(moment(this.ShipDate).format("YYYY-MM-DD"));
     this.orderService.addOrder({
       id: "",
       personId: this.loginService.getUserId(),
       cartId: this.loginService.getCartId(),
-      finalSum: 0,  //todo total!!!!
+      finalSum: this.finalSumInput,  
       cityIdShip: this.emitCityId,
       streetShip: this.streetShip,
-      dateShip:this.ShipDate,// new Date(this.dateShip),//todo fix date from object to date - now it's null
+      dateShip: convertTime,
       createdDate: new Date(),
       lastPaymentCreditCard: String(this.creditCardNo).slice(-4),
       status: EnumStatusOrder.Close
@@ -81,23 +85,22 @@ export class ShippingDetailsComponent implements OnInit {
 
       this.errorMessage = String(orderRes);
       this.orderDone = orderRes;
-      setTimeout(function() {
+      setTimeout(function () {
         this.errorMessage = '';
-    }.bind(this), 3000);
+      }.bind(this), 3000);
     },
       error => {
-        // debugger;
         this.errorMessage = error.error;
-        setTimeout(function() {
+        setTimeout(function () {
           this.errorMessage = '';
-      }.bind(this), 3000);
+        }.bind(this), 3000);
       });
   }
 
 
-navigateToHome(){
-  this.router.navigate(['/first-Page']);
-}
+  navigateToHome() {
+    this.router.navigate(['/first-Page']);
+  }
   dynamicDownloadTxt(res: any) {
     this.textFile = JSON.stringify(res);
     this.textFile = this.textFile.split('"').join('').split('[').join('').split(']').join('').split(',').join('\r\n');
@@ -114,13 +117,13 @@ navigateToHome(){
     fileName: string,
     text: string
   }) {
-    //debugger;
+
     if (!this.setting.element.dynamicDownload) {
       this.setting.element.dynamicDownload = document.createElement('a');
     }
     const element = this.setting.element.dynamicDownload;
     const fileType = 'text/plain';
-    //debugger;
+
     element.setAttribute('href', `data:${fileType};charset=utf-8,${encodeURIComponent(arg.text)}`);
     element.setAttribute('download', arg.fileName);
 
@@ -135,9 +138,9 @@ navigateToHome(){
   //define calender 
   setCalender(groupOrdersByDateArray) {
     // customize default values of datepickers used by this component tree
-    debugger;
-    this.config.minDate = { year: 1900, month: 1, day: 1 };
-    this.config.maxDate = { year: 2099, month: 12, day: 31 };
+
+    //this.config.minDate = { year: 1900, month: 1, day: 1 };
+    //this.config.maxDate = { year: 2099, month: 12, day: 31 };
 
     // days that don't belong to current month are not visible
     this.config.outsideDays = 'hidden';
@@ -149,10 +152,10 @@ navigateToHome(){
     //const todayNGB = calendar.getToday();
     //const today = new Date(todayNGB.year, todayNGB.month, todayNGB.day);
     // var array = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
-    debugger;
+
     this.config.markDisabled = (date: NgbDateStruct) => {
       const d = new Date(date.year, date.month, date.day);
-      debugger;
+
       return (this.isDateInArray(groupOrdersByDateArray, d));
     }
 
@@ -161,13 +164,13 @@ navigateToHome(){
   };
 
   getCartItemExList() {
-    //debugger;
+
     this.cartItemService.getcartItemForTextFile(this.loginService.getCartId())
       .subscribe(cd => {
-        //debugger;
+
         this.cartItemExArray = cd;
         this.dynamicDownloadTxt(this.cartItemExArray);
-        //debugger;
+
       });
   }
 
@@ -180,13 +183,13 @@ navigateToHome(){
         });
 
         filteredOrders.forEach(val => {
-          debugger;
+
           var currDate = val["_id"];
           //  this.filteredArrayDate.push('new Date('+ new Date(currDate).toISOString().slice(0,10)+')');//new Date(currDate));
           this.filteredArrayDate.push('new Date(' + moment(String(currDate).slice(0, 16)).format('MMMM DD, YYYY HH:mm:ss') + ')');
 
         });
-        //  debugger;
+        //      
         //  var array1 = [new Date("December 10, 2019 00:00:00"), new Date("December 14, 2019 00:00:00"), new Date("December 28, 2016 00:00:00"), new Date("December 29, 2016 00:00:00")];
         this.setCalender(this.filteredArrayDate);
       }

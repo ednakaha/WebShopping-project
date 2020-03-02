@@ -13,12 +13,11 @@ import { CartItemExpandedM } from 'src/app/models/cartItemExpanded';
   styleUrls: ['./shopping-page.component.css']
 })
 export class ShoppingPageComponent implements OnInit {
-  itemArray: ItemM[];//| ItemM;
+  itemArray: ItemM[];
   cartItemExArray: CartItemExpandedM[];
   query: string;
   item_Emitter: ItemM;
   roleId: Number;
-  // @Output("itemArray") changeQueryEmitter: EventEmitter<ItemM[]> = new EventEmitter<ItemM[]>();
 
   filteredArray: ItemM[];
   errorMessage: string;
@@ -36,12 +35,10 @@ export class ShoppingPageComponent implements OnInit {
 
 
   getCartItemExList() {
-    //  //debugger;
-    //this.cartItemService.getCartItemExpanded()
     this.cartItemService.getCartItemExpanded(this.loginService.getCartId())
       .subscribe(cd => {
         this.cartItemExArray = cd;
-        debugger;
+            
       });
   }
 
@@ -83,11 +80,11 @@ export class ShoppingPageComponent implements OnInit {
   }
 
   filterByCategory(categoryId) {
-    debugger;
+        
     this.filteredArray = this.itemArray.filter(val =>{
-      debugger;
+          
       return  val.categoryId.includes(categoryId)});
-       debugger;
+           
 
   }
 

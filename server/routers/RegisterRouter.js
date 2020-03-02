@@ -72,19 +72,14 @@ function LegalTz(num) {
 }
 
 RegisterRouter.route('/addStep1').post(function (req, res) {
-    console.log('req.password ' + req.body.password);
-    if (LegalTz(req.body.tz)) {
-        //const PersonData = new PersonSchema(req.body);
-        console.log('before find');
-        PersonSchema.find({ $or: [{ tz: req.body.tz }, { email: req.body.email }] }, function (err, docs) {
+   if (LegalTz(req.body.tz)) {
+       PersonSchema.find({ $or: [{ tz: req.body.tz }, { email: req.body.email }] }, function (err, docs) {
             if (docs.length) {
                 res.status(499).send("TZ or Email are already exist");
             } else {
-                console.log('before add1');
                 p1.addStep1(req.body.tz,
                     req.body.email,
                     req.body.password);
-                //    console.log('after add1');
                 res.json('Person step1 passed successfully');
             }
         });
@@ -96,31 +91,24 @@ RegisterRouter.route('/addStep1').post(function (req, res) {
 
 
 function savePerson(personD) {
-    console.log('in save person')
     p1.addStep2(personD.cityId,
         personD.street,
         personD.firstName,
         personD.lastName,
         personD.roleId);
     const PersonData = new PersonSchema(p1.build());
-    // console.log(p1.street);
-    console.log('PersonData' + JSON.stringify(PersonData));
+   // console.log('PersonData' + JSON.stringify(PersonData));
     PersonData.save()
         .then(per => {
-            console.log('in save')
-            // res.json('Person added successfully');
             return ('Person added successfully');
         })
         .catch(err => {
-            console.log('in catch');
             return ("unable to save to database")
-            // res.status(400).send("unable to save to database");
         });
 }
 
 RegisterRouter.route('/addStep2').post(function (req, res) {
     //check there is no other admin
-    console.log('req.body.roleId ' + req.body.roleId)
     if (req.body.roleId === '1') {
         PersonSchema.find({ roleId: req.body.roleId }, function (err, docs) {
             if (docs.length) {

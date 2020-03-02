@@ -29,11 +29,8 @@ export class CartItemService {
   }
 
   getCartItemExpanded(id?: string): Observable<CartItemExpandedM[]> {
-    //debugger;
     if (id) {
       return this.http.get<CartItemExpandedM[]>(environment.url + '/cartItem/cartItemExpanded/' + id, httpOptions);
-      //debugger;
-      return null;
     }
     else {
       return this.http.get<CartItemExpandedM[]>(environment.url + '/cartItem/cartItemExpanded', httpOptions);
@@ -50,7 +47,7 @@ export class CartItemService {
   }
 
   addCartItem(cartItem: CartItemM) {//}: boolean {
-    //debugger;
+
     return this.http.post<CartItemM>(environment.url + '/cartItem/add', cartItem, httpOptions);
     // .subscribe(
     //   data => {
@@ -82,21 +79,21 @@ export class CartItemService {
 
 
   delAllItemsCart(cartId: string) {
-    //debugger;
-    return this.http.delete<any>(environment.url + '/cartItem/delete/' + cartId, httpOptions)
-  //     .subscribe(data => {
-  //       debugger;
-  //       alert('Delete successfuly----' +data);
-  //       //todo why data is null. in service there is data 
-  //       // res.status(204).send(JSON.stringify(cartItem['deletedCount']));
 
-  //     },
-  //       error => {
-  //         debugger;
-  //         alert(error.error)
-  //         console.log("Error", error);
-  //         // return false;
-  //       }
-  //     )
-   }
+    return this.http.delete<any>(environment.url + '/cartItem/delete/' + cartId, httpOptions)
+    //     .subscribe(data => {
+    //           
+    //       alert('Delete successfuly----' +data);
+    //       //todo why data is null. in service there is data 
+    //       // res.status(204).send(JSON.stringify(cartItem['deletedCount']));
+
+    //     },
+    //       error => {
+    //             
+    //         alert(error.error)
+    //         console.log("Error", error);
+    //         // return false;
+    //       }
+    //     )
+  }
 }

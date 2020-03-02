@@ -1,7 +1,7 @@
   
-<form #newUserForm="ngForm" class="col-md-6 ml-5" style="background-color: beige;">
+<form #newUserForm="ngForm" class="col-md-6 ml-5" >
+  <!-- style="background-color: beige;"> -->
  
-  <!-- <div class="form-register"> -->
   <div  class="ml-5" >
     <div class="form-group">
       <legend>Sign in -user "STEP 1"</legend>
@@ -16,12 +16,15 @@
       <label> Email
         <input ngModel [email]="true" type="email" placeholder="email" #userEmail="ngModel" [(ngModel)]='email'
           class="form-control input-sm chat-input" required name="email">
-        <!--{{userEmail.valid}}{{userEmail.touched}}-->
         <div *ngIf="!userEmail.valid && userEmail.touched">
           Email is not valid!
         </div>
       </label>
     </div>
+
+   
+
+
     <div class="form-group col-md-4">
       <label> Password </label>
       <input type="password" class="form-control input-sm chat-input" placeholder="Password" [(ngModel)]='password'
@@ -32,17 +35,19 @@
       <input type="password" class="form-control input-sm chat-input" placeholder="Confirm Password"
         [(ngModel)]='confirmPassword' name="confirmPassword" required>
     </div>
-    <div class="form-group col-md-6">
-      <button type="submit" class="pure-button pure-button-primary" (click)='addPerson1()'>
-        SUBMIT
-       <!-- todo arrow img -->
-      </button>
+   
+    <div class="mt-3">
+      <img style="max-width: 100px; max-height: 100px;"  src="assets/images/ARROW.jpg" alt="no picture" (click)="addPerson1()" />
+        <!-- style="max-width: 100px; max-height: 100px;" /> -->
+      <!-- <img src="@Href(myImagesFolder)/{{item.picturePath}}" /> -->
     </div>
+
+  
+
 
     <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
       {{errorMessage}}
     </div>
-    <!-- </div> -->
   </div>
 
 </form>

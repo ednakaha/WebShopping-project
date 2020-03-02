@@ -26,7 +26,7 @@ export class CategoryAddComponent implements OnInit {
   categoryArray: CategoryM[] | CategoryM;
 
   ngOnInit() {
-    debugger;
+        
     this.roleId = Number(this.loginService.getRoleId());
     this.allCategory();
 
@@ -56,12 +56,4 @@ export class CategoryAddComponent implements OnInit {
       }
     )
   }
-
-
-  // getListCategory() {
-  //   //  //debugger;
-  //   this.categoryService.getCategory()
-  //     .subscribe(p => this.categoryArray = p);
-  // }
-
 }

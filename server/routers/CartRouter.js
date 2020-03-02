@@ -22,10 +22,8 @@ CartRouter.get('/get/:id', function (req, res) {
         _id: req.params.id // body-parser did it !!!!
     }).exec(function (err, cart) {
         if (err) {
-            console.log(err);
-            res.send(404, 'Error Occurred!')
+             res.send(404, 'Error Occurred!')
         } else {
-            console.log(cart);
             res.json(cart);
         }
     });
@@ -33,13 +31,10 @@ CartRouter.get('/get/:id', function (req, res) {
 
 // get one Member
 CartRouter.get('/getCartByUser/:id', function (req, res) {
-    console.log('getting on Member');
-    CartSchema.findOne({ personId: req.params.id }, {}, { $orderby: { updateDate: -1 } }).exec(function (err, cart) {
+     CartSchema.findOne({ personId: req.params.id }, {}, { $orderby: { updateDate: -1 } }).exec(function (err, cart) {
         if (err) {
-            console.log(err);
             res.send(404, 'Error Occurred!')
         } else {
-            console.log(cart);
             res.json(cart);
         }
     });
@@ -47,12 +42,10 @@ CartRouter.get('/getCartByUser/:id', function (req, res) {
 
 //get exists cart , if not-create a new one
 CartRouter.get('/getOrSetCart/:id', function (req, res) {
-    let isNew = true; //todo update on open???
+    let isNew = true; 
 
-    console.log('getOrSet - ' + JSON.stringify(req.params));
     CartSchema.find({ personId: req.params.id }, function (err, data) {
         if (err) {
-            console.log('getorset error - ' + err);
             res.status(400).send('getorset error - ' + err);
         } else {
             if (data.length > 0) {
@@ -125,9 +118,8 @@ CartRouter.put('/update/:id', function (req, res) {
         },
         function (err, updCart) {
             if (err) {
-                console.log('error occured');
+                res.status(404).send(err);
             } else {
-                console.log(updCart);
                 res.status(204).send(updCart);
             }
         });

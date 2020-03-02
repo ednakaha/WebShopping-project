@@ -15,42 +15,25 @@
                 </label>
             </div>
             <div class="p-2 row col-md-10">
-                <label> Shipping Date:
-                    <!-- <form class="form-inline">
-                    <div class="form-group">
-                        <div class="input-group">
-                            <input class="form-control" placeholder="yyyy-mm-dd" name="dateShip" [(ngModel)]="dateShip"
-                                ngbDatepicker #d="ngbDatepicker" required>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()"
-                                    type="button"></button>
-                            </div>
-                        </div>
-                    </div>
-                </form> -->
-                    <!-- <form class="form-inline">
-                    <div class="form-group">
-                         <div class="input-group"> 
-                            <input type="text" ngbDatepicker #d="ngbDatepicker"/>
-                            <ngb-datepicker [(ngModel)]="model" #d="ngbDatepicker"></ngb-datepicker>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary calendar fa fa-calendar" (click)="d.toggle()"
-                                    type="button"></button> 
-                            </div>
-                         </div>
-                    </div>
-                </form> -->
+                <label> Shipping Date: 
                     <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="ShipDate" ngbDatepicker
-                            #d="ngbDatepicker">
+                        <input   type="text" class="form-control" name="dp" [(ngModel)]="ShipDate" datetime-picker="yyyy-MM-dd"
+                            ngbDatepicker #d="ngbDatepicker">
                         <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
-                                type="button"></button>
+                            <button class="fa fa-calendar" (click)="d.toggle()" type="button"></button>
                         </div>
                     </div>
+                    <!-- <p class="input-group">
+                    <input type="text" class="form-control" datetime-picker="MM/dd/yyyy HH:mm"
+                        ng-model="ShipDate" is-open="ctrl.picker3.open" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event, 'picker3')"><i
+                                class="fa fa-calendar"></i></button>
+                    </span>
+                </p>-->
+                <!-- <p class="form-control-static">{{ ShipDate.date}} - {{ShipDate}}</p>  -->
                 </label>
                 <hr />
-                <!-- <pre>Model: {{ model | json }}</pre> -->
             </div>
             <div class="p-2 row col-md-10">
                 <b> Payments: </b>
@@ -68,27 +51,20 @@
             </div>
         </div>
 
-        <!-- <div class="p-3">
-            <button class="btn btn-secondary" type="submit" (click)='getCartItemExList()'>
-                download text file
-            </button>
-        </div> -->
     </div>
- 
+
     <div class="container">
         <div class="row">
             <div class="col">
 
             </div>
-            <div *ngIf="orderDone" class="text-primary col-md-6" style="background-color: purple;">
-              
-                <label class="ml-5 mt-2"> קנייתך בוצעה בהצלחה </label><br>
+            <div *ngIf="orderDone" class="text-primary col-md-5" style="background-color: purple;">
 
-                <button class="ml-4 mt-2 btn btn-link" type="submit" (click)='getCartItemExList()'> כאן </button>
-                להורדת הקבלה לחץ
-
+                <label class="ml-2 mt-2"> קנייתך בוצעה בהצלחה </label><br>
+                <label class="ml-2 mt-2"> להורדת הקבלה לחץ </label><br>
+                <button class="ml-5 mt-1 btn btn-link" type="submit" (click)='getCartItemExList()'> כאן </button>
                 <div class="p-3">
-                    <button class="ml-5 btn btn-secondary" type="submit" (click)='navigateToHome()'> אישור </button>
+                    <button class="ml-4 btn btn-secondary" type="submit" (click)='navigateToHome()'> אישור </button>
                 </div>
             </div>
             <div class="col">

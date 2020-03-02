@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { CategoryService } from '../../services/category/category.service';
 import { CategoryM } from 'src/app/models/category';
-import { ItemM } from 'src/app/models/item';
 
 @Component({
   selector: 'app-category',
@@ -32,7 +31,7 @@ export class CategoryComponent implements OnInit {
   }
 
   allCategory() {
-    debugger;
+        
     this.categoryService.getCategory()
       .subscribe(cd =>{
          this.categoryArray = cd;

@@ -5,13 +5,11 @@ const CartSchema = require('../models/cart.model');
 
 
 CartItemRouter.get('/get', function (req, res) {
-    console.log('getting all cart items');
     CartItemSchema.find({})
         .exec(function (err, cartItems) {
             if (err) {
                 res.send(404, 'Error has occurred!')
             } else {
-                console.log(cartItems);
                 res.json(cartItems);
             }
         });
@@ -20,7 +18,6 @@ CartItemRouter.get('/get', function (req, res) {
 
 // get cart item's data with more data of username and price from Item table
 CartItemRouter.get('/cartItemForTextFile/:id', function (req, res) {
-    console.log('cartItemExpanded ' + JSON.stringify(req.params));
     CartItemSchema.aggregate([
         { $match: { 'cartId': req.params.id } },
         { "$addFields": { "itemId_obj": { "$toObjectId": "$itemId" } } },
@@ -71,10 +68,8 @@ CartItemRouter.get('/cartItemExpanded/:id', function (req, res) {
     ]).exec(function (err, cartItemsEx) {
         console.log('in lookup')
         if (err) {
-            console.log('error lookup - ' + err)
             res.status(404).send('Error has occurred! - ' + err);
         } else {
-            console.log(cartItemsEx);
             res.json(cartItemsEx);
         }
     });
@@ -83,15 +78,12 @@ CartItemRouter.get('/cartItemExpanded/:id', function (req, res) {
 
 // get one Member
 CartItemRouter.get('/get/:id', function (req, res) {
-    console.log('getting on Member');
     CartItemSchema.findOne({
         _id: req.params.id // body-parser did it !!!!
     }).exec(function (err, cartItem) {
         if (err) {
-            console.log(err);
             res.send(404, 'Error occurred!')
         } else {
-            console.log(cartItem);
             res.json(cartItem);
         }
     });
@@ -99,7 +91,6 @@ CartItemRouter.get('/get/:id', function (req, res) {
 
 
 CartItemRouter.post('/add', function (req, res) {
-    console.log('in cartItem-add');
     const cartItemData = new CartItemSchema(req.body);
     //check if exists same item and cart in the collection. so just do update 
     //  console.log( 'itemId:'+ req.body.itemId + 'cartId:'+req.body.cartId)
@@ -120,23 +111,6 @@ CartItemRouter.post('/add', function (req, res) {
                 //new
                 console.log('cartItemData ' + cartItemData);
                 cartItemData.save().then(cartItemD => {
-
-                    // try {
-                    //     console.log('cartid' + req.body.cartId)
-                    //     CartSchema.update({ cartId: req.body.cartId },
-                    //         { $set: { updateDate: new Date() } },
-                    //         function (err, response) {
-                    //             if (err) {
-                    //                 console.log('itemsCounter err ' + err);
-                    //             } else {
-                    //                 console.log('GeneralSchema response  ' + response + 'date' + new Date());
-                    //             }
-                    //         })
-                    // }
-                    // catch (e) {
-                    //     print('cartItem-update cart ' + e);
-                    // };
-
                     res.json('Item added successfully');
                 })
                     .catch(err => {
@@ -159,8 +133,7 @@ CartItemRouter.post('/add', function (req, res) {
                         if (err) {
                             console.log('cart -update date err ' + err);
                         } else {
-                            //console.log('response  ' + response + 'date' + new Date());
-                            //   res.status(204).send(updCart);
+                            console.log('response  ' + response + 'date' + new Date());
                         }
                     });
             }
@@ -170,9 +143,6 @@ CartItemRouter.post('/add', function (req, res) {
         });
 });
 
-// Update document
-//todo update
-//todo table with sum cartitems and.....
 CartItemRouter.put('/update/:id', function (req, res) {
     // CartSchema.findOneAndUpdate(
     //     {

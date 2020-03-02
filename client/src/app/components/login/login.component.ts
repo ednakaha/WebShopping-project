@@ -32,29 +32,29 @@ export class LoginComponent implements OnInit {
     this.user = {};
   }
   getOrders() {
-    debugger;
+        
     this.orderService.getOrderByUser(this.userId).subscribe(orderData => {
-      debugger;
+          
       this.orderDate = moment(String(orderData["createdDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');
-      debugger;
+          
     })
   }
 
 
   login() {
-    debugger;
+        
     this.loginService.login(this.user).subscribe(loginRes => {
       //create or get the cart of the user
       this.userId = this.loginService.getUserId();
       this.cartService.getOrSetCart(this.userId).subscribe(cartData => {
         this.roleId = Number(this.loginService.getRoleId());
         this.logged = true;
-        debugger;
+            
         this.updateDateCart = moment(String(cartData[0]["updateDate"]).slice(0, 16)).format('DD-MM-YYYY HH:mm:ss');
-       debugger;
+           
         this.getOrders();
       });
-      debugger;
+          
       console.log('login ' + loginRes);
       this.errorMessage = String(loginRes);
       setTimeout(function () {
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
       }.bind(this), 3000);
     },
       error => {
-        debugger;
+            
         this.errorMessage = 'Error user name or password';
         setTimeout(function () {
           this.errorMessage = '';

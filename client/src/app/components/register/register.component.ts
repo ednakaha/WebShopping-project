@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
   addPerson1() {
  //   alert('password' + this.password);
     if (this.validatePassword()) {
-      debugger;
+          
       this.registerService.addPersonStep1({
         id: -1,
         tz: this.tz,
@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
         roleId: -1
       }).subscribe(
         data => {
-          debugger;
+              
           this.errorMessage = String(data);
           setTimeout(function() {
             this.errorMessage = '';
@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/register2']);
          },
         error => {
-          debugger;
+              
           this.errorMessage = error.error;
           setTimeout(function() {
             this.errorMessage = '';

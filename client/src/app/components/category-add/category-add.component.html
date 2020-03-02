@@ -1,5 +1,4 @@
 <div *ngIf="roleId===1">
-  <!--admin-->
   <div class="row">
     <form #itemForm="ngForm" class="col-md-4 m-5" style="background-color: beige;">
       <div class="form-group">
@@ -7,7 +6,6 @@
         <h2>New category:</h2>
         <input placeholder="categoryName" [(ngModel)]='categoryName' required name="categoryName"
           class="form-control input-sm chat-input">
-        <!-- </label> -->
       </div>
       <div class="form-group">
         <button [disabled]="!itemForm.form.valid" (click)="addCategory()"> add category </button>

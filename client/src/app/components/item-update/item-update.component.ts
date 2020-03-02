@@ -21,11 +21,9 @@ const UPLOAD_ALIAS = 'image'
 export class ItemUpdateComponent implements OnInit {
 
   @Input() item: ItemM;
-  //itemPicturePath: string;
   categoryArray: CategoryM[] | CategoryM;
   errorMessage: string;
   bad_picture: boolean;
-  // form: FormGroup;
   SelfileName: string;
   error: string;
 
@@ -33,8 +31,7 @@ export class ItemUpdateComponent implements OnInit {
     url: URL_UPLOAD,
     itemAlias: UPLOAD_ALIAS // (in server the name is file.fieldname)
   });
-  //userId: number = 1;
-  // uploadResponse = { status: '', message: '', filePath: '' };
+
   constructor(private itemService: ItemService, private loginService: LoginService,
     private categoryService: CategoryService, private toastr: ToastrService) {
 
@@ -44,11 +41,9 @@ export class ItemUpdateComponent implements OnInit {
     this.getCategoryList();
 
     this.uploader.onAfterAddingFile = (file) => {
-      debugger;
       file.withCredentials = false;
     };
     this.uploader.onCompleteItem = (item: any, status: any) => {
-      debugger;
       console.log('Uploaded File Details:', item);
       //  this.toastr.success('File successfully uploaded!');
     };
@@ -89,12 +84,12 @@ export class ItemUpdateComponent implements OnInit {
         }.bind(this), 3000);
       }
     );
-    debugger;
+        
     this.item = new ItemM();
   }
 
   saveItem() {
-    debugger;
+        
     this.uploader.uploadAll()
     if (this.bad_picture == true)
       this.errorMessage = "The picture is too big"
@@ -104,14 +99,14 @@ export class ItemUpdateComponent implements OnInit {
 
       this.itemService.addItem(this.item).subscribe(
         data => {
-          debugger;
+              
           this.errorMessage = String(data);
           setTimeout(function () {
             this.errorMessage = '';
           }.bind(this), 3000);
         },
         error => {
-          debugger;
+              
           this.errorMessage = error.error;
           console.log("Error", error);
           setTimeout(function () {
@@ -119,19 +114,19 @@ export class ItemUpdateComponent implements OnInit {
           }.bind(this), 3000);
         }
       );
-      debugger;
+          
       this.item = new ItemM();
     }
   }
 
   readURL(event) {
-    debugger;
+        
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
       reader.onload = (event: any) => {
         //to do image
-        debugger;
+            
         this.item.picturePath = event.target.result;
       }
 
@@ -143,7 +138,7 @@ export class ItemUpdateComponent implements OnInit {
       }
       this.bad_picture = false;
       reader.onload = (event: any) => { // called once readAsDataURL is completed
-        debugger;
+            
         this.item.picturePath = event.target.result;
       }
     }
@@ -151,7 +146,7 @@ export class ItemUpdateComponent implements OnInit {
 
 
   onFileChange(event) {
-    debugger;
+        
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
     }

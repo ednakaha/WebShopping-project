@@ -26,37 +26,15 @@ export class RegisterService {
       return this.http.get<PersonM[]>(environment.url + '/register/get');
     }
   }
- 
+
 
   addPersonStep1(Person: PersonM) {
-    //debugger;
-     return this.http.post<PersonM>(environment.url + '/register/addStep1', Person, httpOptions);
-    //  .subscribe(
-    //   data => {
-    //     alert('person step 1 done');
-    //     // console.log("Person Request is successful ", data);
-    //     this.router.navigate(['/register2'])
-    //   },
-    //   error => {
-    //     alert('addPersonStep1 -' + error.error)
-    //  //   console.log("Error", error);
-    //   }
-    // )
+    return this.http.post<PersonM>(environment.url + '/register/addStep1', Person, httpOptions);
   };
-  
+
   addPersonStep2(Person: PersonM) {
-    debugger;
+        
     return this.http.post<PersonM>(environment.url + '/register/addStep2', Person, httpOptions)
-      // data => {
-      //   alert('Registration successfully passed');
-      //   this.router.navigate(['first-Page']);
-      //   console.log("Person Request is successful ", data);
-      // },
-      // error => {
-      //   alert('Registration failed: ' + error.error);
-      //   console.log("Error", error);
-      // }
-    
   };
 }
 

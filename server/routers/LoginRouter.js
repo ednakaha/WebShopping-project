@@ -16,21 +16,17 @@ LoginRouter.route('/').post(function (req, res) {
         console.log('400' + err);
       }
       else {
-        debugger;
+            
         if (LoginD.length > 0) {
           console.log('get login id postData' + postData.email + '-' + postData.password);
 
           let loginData = LoginD[0].toObject();
-        //  console.log('get login id params' + JSON.stringify(loginData));
           const token = jwt.sign({ email: postData.email }, JWT_KEY);
-        //  var cart =  globalFile.getCartData(loginData['_id']);
       
-       //   console.log('before json. token=' + token);
           res.json({
             token: token,
             user: loginData,
-           // cart: globalFile.getCartData(loginData['_id']),//JSON.stringify(loginData['_id'], 1, new Date(), new Date()),// CartRouter.getCartData(loginData['_id']),
-            isAuthenticated: true,
+           isAuthenticated: true,
             roleId: loginData.roleId === "2" ? true : false
           });
         }

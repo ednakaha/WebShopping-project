@@ -22,7 +22,7 @@ export class AppComponent {
   constructor(private loginService: LoginService) {
 
     this.loginService.currentUser.subscribe(cuUser => {
-      debugger;
+          
       if (cuUser.hasOwnProperty('firstName')) {
         this.aCurrentUser = cuUser;
         this.firstName = this.aCurrentUser['firstName'];

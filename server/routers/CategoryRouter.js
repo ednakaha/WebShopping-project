@@ -10,20 +10,18 @@ CategoryRouter.route('/get').get(function (req, res) {
       console.log('400' + err);
     }
     else {
-   //   console.log('in get Category' + JSON.stringify(categoryD, undefined, 2));
       res.json(categoryD);
     }
   });
 });
 
 CategoryRouter.route('/get/:id').get(function (req, res) {
-  console.log('get Category id');
   CategorySchema.find({ name: req.params.name }, function (err, categoryD) {
     if (err) {
-      console.log('400' + err);
+     res.json(err)
     }
     else {
-      console.log('in get Category id' + JSON.stringify(categoryD, undefined, 2));
+     // console.log('in get Category id' + JSON.stringify(categoryD, undefined, 2));
       res.json(categoryD);
     }
   });

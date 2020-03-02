@@ -5,8 +5,6 @@ import { ItemService } from 'src/app/services/item/item.service';
 import { CartItemExpandedM } from 'src/app/models/cartItemExpanded';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Router } from '@angular/router';
-import { ItemM } from 'src/app/models/item';
-import { CartItemM } from 'src/app/models/cartItem';
 import { CartM } from 'src/app/models/cart';
 
 @Component({
@@ -20,15 +18,15 @@ export class CartItemComponent implements OnInit {
   rerender = true;
   @Output() deleteItemEmitter: EventEmitter<void> = new EventEmitter<void>();
   errorMessage: any;
-  // currCart: CartM;
+  currCart: CartM;
+
 
   constructor(private loginService: LoginService, private cartService: CartService,
     private cartItemService: CartItemService, private router: Router, private itemService: ItemService) {
-    //  this.cartItem = new CartItemM();
   }
 
   ngOnInit() {
-
+    this.currCart = new CartM();
   }
 
   rerunGuradsAndResolvers() {
@@ -39,20 +37,20 @@ export class CartItemComponent implements OnInit {
     });
     this.router.onSameUrlNavigation = defaltOnSameUrlNavigation;
   }
+
+
   delCartItem(id: string) {
     //this.rerender = false;
     if (confirm("Are you sure you want to delete the item?")) {
       this.cartItemService.delItemCartById(id)
         .subscribe(
           data => {
-            debugger;
+
             this.errorMessage = String(data);
             this.deleteItemEmitter.emit()
             setTimeout(function () {
               this.errorMessage = '';
             }.bind(this), 3000);
-            // console.log("POST Request is successful ", data);
-            //result =   true;
           },
           error => {
             this.errorMessage = error.error;
@@ -64,6 +62,27 @@ export class CartItemComponent implements OnInit {
     }
   }
 
+  UpdateSum() {
+    //save total sum in Cart table
+    this.currCart.id = this.loginService.getCartId();
+    this.currCart.sum = this.totalAmount;
+    this.cartService.updateTotalSumByCartId(this.currCart).subscribe(
+      data => {
+        this.errorMessage = String(data)
+        setTimeout(function () {
+          this.errorMessage = '';
+        }.bind(this), 3000);
+      },
+      error => {
+        this.errorMessage = error.error;
+        console.log("Error", error);
+        setTimeout(function () {
+          this.errorMessage = '';
+        }.bind(this), 3000);
+      }
+    );
+  }
+
 
   //Total Amount
   getTotal() {
@@ -72,26 +91,6 @@ export class CartItemComponent implements OnInit {
       if (this.cartItemExArray[i].sum) {
         total += this.cartItemExArray[i].sum;
         this.totalAmount = total;
-        //save total sum in Cart table for Order.Sum column
-        //   debugger;
-        //   this.currCart.id = this.loginService.getCartId();
-        //   this.currCart.sum = this.totalAmount;
-        //   this.cartService.updateTotalSumByCartId(this.currCart).subscribe(
-        //     data => {
-        //       debugger;
-        //       this.errorMessage = String(data)
-        //       setTimeout(function () {
-        //         this.errorMessage = '';
-        //       }.bind(this), 3000);
-        //     },
-        //     error => {
-        //       this.errorMessage = error.error;
-        //       console.log("Error", error);
-        //       setTimeout(function () {
-        //         this.errorMessage = '';
-        //       }.bind(this), 3000);
-        //     }
-        //   );
       }
     }
     return total.toFixed(2);

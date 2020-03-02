@@ -3,7 +3,6 @@ const GeneralRouter = express.Router();
 const GeneralSchema = require('../models/general.model');
 
 GeneralRouter.get('/get', function (req, res) {
-    console.log('in generalrouter');
     GeneralSchema.find({})
         .exec(function (err, general) {
             if (err) {

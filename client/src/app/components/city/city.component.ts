@@ -25,7 +25,7 @@ export class CityComponent implements OnInit {
 
 
   addCity() {
-    debugger;
+        
     this.cityService.addCity({
       id:-1, 
       name: this.cityname
@@ -45,7 +45,6 @@ export class CityComponent implements OnInit {
     );
   }
   getListCity() {
-    //  //debugger;
     this.cityService.getCity()
       .subscribe(p => this.cityArray = p);
   }

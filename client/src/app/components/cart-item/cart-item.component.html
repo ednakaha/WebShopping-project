@@ -11,20 +11,18 @@
     <div class="col-md-8">
         <hr>
     </div>
-    <div *ngIf="rerender" class="ml-4 link">
+    <div  class="ml-4 link">
         <b> Total: <input readonly id="inputTotal" type="text" value='{{ getTotal() }}₪' /></b>
     </div>
     <div class="ml-4 link">
         <div class="m-2">
-            <a href='#' [routerLink]='["/order-page"]'>Order</a>
+            <a [routerLink]="['/order-page']" [state]="{finalSumOrder:totalAmount}">Order</a>
         </div>
         <div class="m-2">
             <a href='#' [routerLink]='["/shopping-page"]'>Back to shop</a>
         </div>
     </div>
-    <!--todo order just on state shopping , back to shop on order state-->
 </footer>
 <div *ngIf="errorMessage" class="alert alert-danger" role="alert" data-auto-dismiss="500">
     {{errorMessage}}
 </div>
-<!-- <router-outlet></router-outlet> -->

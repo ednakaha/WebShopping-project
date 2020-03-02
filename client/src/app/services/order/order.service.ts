@@ -43,25 +43,8 @@ export class OrderService {
     }
   }
 
-  addOrder(Order: OrderM): Observable<any> {
-    debugger;
+  addOrder(Order: OrderM): Observable<any> {    
     return this.http.post<OrderM>(environment.url + '/order/addOrder', Order, httpOptions);
-    // .pipe(
-    //   catchError((errorRes) => {
-    //     //debugger;
-    // //    alert('Order failed: ' + errorRes.error)
-    //     console.log(' login error' + errorRes);
-    //     return errorRes;
-    //   }),
-    //   map((orderRes: string) => {
-    //     if (orderRes) {
-    //       //debugger;
-    //   //    alert('Order is done successfully');
-    //       console.log(orderRes);
-    //       return true;
-    //     }
-    //   })
-    // );
   }
 
 

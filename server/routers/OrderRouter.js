@@ -6,7 +6,6 @@ const CartSchema = require('../models/cart.model');
 
 
 OrderRouter.get('/get', function (req, res) {
-    console.log('getting all orders');
     OrderSchema.find({})
         .exec(function (err, order) {
             if (err) {
@@ -51,7 +50,7 @@ OrderRouter.get('/getGroupingOrders', function (req, res) {
             console.log('getGroupingOrders error lookup - ' + err)
             res.status(404).send('getGroupingOrder Error has occurred! - ' + err);
         } else {
-            console.log(orderGroup);
+        //    console.log(orderGroup);
             res.json(orderGroup);
         }
     });
@@ -76,7 +75,6 @@ OrderRouter.get('/get/:id', function (req, res) {
 
 // get one Member
 OrderRouter.get('/getByCart/:id', function (req, res) {
-    console.log('getting on cart');
     OrderSchema.findOne({
         cartId: req.params.id // body-parser did it !!!!
     }).exec(function (err, order) {
@@ -90,7 +88,6 @@ OrderRouter.get('/getByCart/:id', function (req, res) {
     });
 });
 
-///cart with status open????
 OrderRouter.route('/addOrder').post(function (req, res) {
     //OrderRouter.post('/add', function (req, res) {
     const orderData = new OrderSchema(req.body);
@@ -106,7 +103,6 @@ OrderRouter.route('/addOrder').post(function (req, res) {
             orderData.save()
                 .then(orderD => {
                     //inc orders in general.ordersCount
-                    //  GeneralSchema.find({}, function (err, docs) {
                     GeneralSchema.findOneAndUpdate({}, { $inc: { ordersCounter: 1 } },
                         { new: true }, function (err, response) {
                             if (err) {
@@ -120,19 +116,18 @@ OrderRouter.route('/addOrder').post(function (req, res) {
                     //Change status of Cart to closed
                     CartSchema.findOneAndUpdate(
                         {
-                            _id: req.body.cartId // [query]
+                            _id: req.body.cartId
                         },
                         {
                             $set: {
-                                status: 2 // closed after ordering [doc]
+                                status: 2 // closed after ordering 
                             }
                         },
                         function (err, response) {
                             if (err) {
                                 console.log('cart -update status err ' + err);
                             } else {
-                                //console.log('response  ' + response + 'date' + new Date());
-                                //   res.status(204).send(updCart);
+                                console.log('response  ' + response + 'date' + new Date());
                             }
                         });
                     res.json('Order added successfully');
@@ -144,22 +139,19 @@ OrderRouter.route('/addOrder').post(function (req, res) {
         }
     });
 });
-//todo change geral.orderscount
-// Update document
 
 OrderRouter.put('/update/:id', function (req, res) {
     OrderSchema.findOneAndUpdate(
         {
-            _id: req.params._id // [query]
+            _id: req.params._id
         },
         {
             $set: {
-                //todo update
-                count: req.body.count // [doc]
+                count: req.body.count 
             }
         },
         {
-            upsert: true      // [options] if this document has no title create one
+            upsert: true     
         },
         function (err, updOrder) {
             if (err) {

@@ -1,24 +1,4 @@
-/*
-const express = require('express');
-const uploadRouter = express.Router();
-const fs = require('fs');
-const path = require('path');
 
-uploadRouter.route('/save').get(function (req, res) {
-
-    let baseDir = path.join(__dirname, '/./niktoResults/');
-    fs.open(`${baseDir}+result.txt`, 'wx', (err, desc) => {
-        if (!err && desc) {
-            fs.writeFile(desc, 'sample data', (err) => {
-                // Rest of your code
-                if (err) throw err;
-                console.log('Results Received');
-            })
-
-        }
-    });
-});
-*/
 //https://www.positronx.io/angular-8-node-express-js-file-upload-tutorial/
 
 const express = require('express'),

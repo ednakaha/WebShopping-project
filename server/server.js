@@ -39,13 +39,11 @@ mongoose.connect(config.DB, { useNewUrlParser: true }, function (err, db) {   //
       }
       else {
         GeneralSchema.findOne({}, function (err, response) {
-          console.log('GeneralSchema.response ' + response != null);
           if (err) {
             console.log('GeneralSchema.exists ' + err);
           } else {
             if (response === null)//generalColl doesn't exist
             {
-              console.log('New DB - in GeneralSchema.response ');
               const generalData = new GeneralSchema();
               generalData.ordersCounter = 0;//init
               generalData.itemsCounter = 0;
@@ -59,14 +57,12 @@ mongoose.connect(config.DB, { useNewUrlParser: true }, function (err, db) {   //
 
               console.log('Added new Category');
               const CategoryData = new CategorySchema();
-              CategoryData.name = 'Fruits'
+              CategoryData.name = 'Fruits & Vegetable'
               CategoryData.save();
 
             }
           }
         });
-
-        // console.log('generalColl result ' + result.ops);
       }
     });
   }
@@ -87,12 +83,11 @@ app.use(function (req, res, next) {
     (req.path === '/general/get') ||
     (req.path === '/api/upload') ||
     (req.path === '/register/addStep2')) {
-    console.log('in login');
+  //  console.log('in login');
     next();
   }
   else if (!req.headers.authorization) {
-    //debugger;
-    console.log('in authorization - ' + req.header.authorization);
+   // console.log('in authorization - ' + req.header.authorization);
     return res.status(403).json(
       {
         error: 'No credentials sent!',

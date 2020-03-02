@@ -43,9 +43,7 @@ export class ItemShowComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.toggle = true;
     this.setCategoryId();
-    // this.getListItemByCat();
     this.cartId = this.loginService.getCartId();
     this.userId = this.loginService.getUserId();
     this.roleId = Number(this.loginService.getRoleId());
@@ -54,7 +52,6 @@ export class ItemShowComponent implements OnInit {
 
   addToCartItem(currItem: ItemM) {
     this.cartItem.itemId = currItem['_id'];
-    // this.cartItem.count = this.count;
     this.cartItem.sum = currItem.price * this.selCount;
     this.cartItem.count = this.selCount;
     this.cartItem.cartId = this.cartId;
@@ -70,8 +67,6 @@ export class ItemShowComponent implements OnInit {
           setTimeout(function() {
             this.errorMessage = '';
         }.bind(this), 3000);
-          // console.log("POST Request is successful ", data);
-          //result =   true;
         },
         error => {
           this.errorMessage = error.error;

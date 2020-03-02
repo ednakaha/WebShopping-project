@@ -31,10 +31,8 @@ export class ItemAddComponent implements OnInit {
   }
 
   getCategoryList() {
-    //debugger;
     // this.categoryService.getCategory()
     //   .subscribe(p => this.categoryArray = p);
-    //edna
   }
   addItem() {
     this.itemService.addItem({
@@ -45,7 +43,7 @@ export class ItemAddComponent implements OnInit {
       picturePath: this.itemPicturePath
     }).subscribe(
       data => {
-        debugger;
+            
         this.errorMessage = String(data)
         console.log("POST Request is successful ", data);
         setTimeout(function() {

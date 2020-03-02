@@ -24,7 +24,6 @@ export class ItemService {
   constructor(private http: HttpClient,private loginService:LoginService) { }
 
   getItemByCategory(category: string): Observable<ItemM[] | ItemM> {
-    //debugger;
     if (category) {
       return this.http.get<ItemM>(environment.url + '/item/getByCategory/' + category, httpOptions);
     }
@@ -36,13 +35,13 @@ export class ItemService {
   }
 
   getItemById(id?: string): Observable<ItemM[]> {  //by id
-      debugger;
+          
       return this.http.get<ItemM[]>(environment.url + '/item/getById/' + id);   
   }
 
   getItem(id?: string): Observable<ItemM[]> {//| ItemM> {  //by name
     if (id) {
-      debugger;
+          
       return this.http.get<ItemM[]>(environment.url + '/item/get/' + id);
     }
     else {
@@ -66,7 +65,7 @@ export class ItemService {
       reportProgress: true,
       observe: 'events'
     }).pipe(map((event) => {
-      debugger;
+          
       switch (event.type) {
 
         case HttpEventType.UploadProgress:

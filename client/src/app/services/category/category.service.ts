@@ -32,20 +32,5 @@ export class CategoryService {
   addCategory(category: CategoryM): Observable<CategoryM[] | CategoryM> {//}: boolean {
     return this.http.post<CategoryM>(environment.url + '/category/add', category, httpOptions);
   }
-  //   result: Boolean;
-  //   //debugger;
-  //   this.http.post<CategoryM>(environment.url + '/category/add', category, httpOptions).subscribe(
-  //     data => {
-  //       alert(data)
-  //       // console.log("POST Request is successful ", data);
-  //       //result =   true;
-  //     },
-  //     error => {
-  //       alert(error.error)
-  //       console.log("Error", error);
-  //       // return false;
-  //     }
-  //   )
-  //   //return false;
-  // };
+ 
 }

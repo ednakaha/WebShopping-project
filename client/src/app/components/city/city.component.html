@@ -7,12 +7,10 @@
       <div class="form-group">
 
         <label>Name:
-          <input   name="itemName" [(ngModel)]='cityname' required />
+          <input name="itemName" [(ngModel)]='cityname' required />
         </label>
       </div>
-
-       <!-- (click) passes input value to add() and then clears the input -->
-      <button (click)="addCity()"  [disabled]="!itemForm.form.valid"> add city </button>
+      <button (click)="addCity()" [disabled]="!itemForm.form.valid"> add city </button>
       <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
         {{errorMessage}}
       </div>

@@ -1,21 +1,15 @@
 <header>
 
     <nav class="navbar navbar-expand-lg navbar navbar-dark"  style="background-color:purple" >
-        <!-- todo -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href='#' [routerLink]='[""]'>Home</a>
                 </li>
-                <!-- <li [style.visibility]="hidden" class="nav-item active"> -->
-                <!-- <ng-container *ngIf="roleId=1"> -->
                 <li class="nav-item active" *ngIf="roleId===1">
                     <a class="nav-link" href='#' [routerLink]='["/city"]'>Add city</a>
                 </li>
-                <!-- <li class="nav-item active" *ngIf="roleId===1">
-                    <a class="nav-link" href='#' [routerLink]='["/city-show"]'>Show city</a>
-                </li> -->
                 <li class="nav-item active" *ngIf="roleId===1">
                     <a class="nav-link" href='#' [routerLink]='["/category-add"]'>Add category</a>
                 </li>
@@ -32,7 +26,7 @@
             </ul>
         </div>
         <div class="col-md-3">
-            <div> <label class="text-white"> {{firstName}}   ;    {{email}} </label></div>
+            <div> <label class="text-white"> {{firstName}}  ;    {{email}} </label></div>
             <!-- <div> <label class="text-secondary"> {{email}} </label></div> -->
             <div *ngIf="roleId===1"> <label class="text-white">Adminstrator</label></div>          
             <div *ngIf="roleId>1"> <label class="text-white">User</label></div>

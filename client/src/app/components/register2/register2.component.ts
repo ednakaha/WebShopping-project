@@ -16,29 +16,20 @@ export enum EnumRole1 {
 })
 export class Register2Component {//} implements OnInit {
 
-  //model:
+
   firstName: string;
   lastName: string;
   street: string;
   roleId: number;
-
   errorMessage: string;
-  // roleEnum:EnumRole1;
-  // keys: any[];
-
   emitCityId: string;
 
 
   constructor(private registerService: RegisterService, private router: Router) {
-    // debugger;
-    //todo?
-    // this.keys = Object.keys(this.roleEnum).filter(Number);
-
-
   }
 
   ngOnInit() {
-    debugger;
+        
   }
 
 
@@ -47,20 +38,19 @@ export class Register2Component {//} implements OnInit {
   }
 
   addPerson2() {
-    debugger;
+        
     this.registerService.addPersonStep2({
       id: -1,
       tz: '',
       email: '',
-      password: '',// this.password,
+      password: '',
       firstName: this.firstName,
       lastName: this.lastName,
-      cityId: this.emitCityId,//this.cityId,
+      cityId: this.emitCityId,
       street: this.street,
       roleId: this.roleId
     }).subscribe(
       data => {
-        // debugger;
         this.errorMessage = String(data);
         setTimeout(function () {
           this.errorMessage = '';
@@ -68,14 +58,12 @@ export class Register2Component {//} implements OnInit {
         this.router.navigate(['/first-Page']);
       },
       error => {
-        // debugger;
         //edna todo return null
         this.errorMessage = error.error;
         console.log("Error", error);
         setTimeout(function () {
           this.errorMessage = '';
         }.bind(this), 3000);
-        // return false;
       }
     )
 
