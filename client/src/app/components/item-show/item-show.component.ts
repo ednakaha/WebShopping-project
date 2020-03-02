@@ -82,7 +82,6 @@ export class ItemShowComponent implements OnInit {
   updateItemByAdmin(item) {
     //emitter for <app-item-update>
     this.updateItemEmitter.emit(item)
-    // alert('update item');
   }
 
   // getItemDataById(id: string) {

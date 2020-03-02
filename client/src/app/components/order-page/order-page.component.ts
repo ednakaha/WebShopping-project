@@ -12,7 +12,6 @@ export class OrderPageComponent implements OnInit {
 
   constructor(private _Activatedroute: ActivatedRoute,
     private router: Router) {
-      debugger;
       this.finalSumOrder = this.router.getCurrentNavigation().extras.state;
      }
 

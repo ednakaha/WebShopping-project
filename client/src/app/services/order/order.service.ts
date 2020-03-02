@@ -43,7 +43,7 @@ export class OrderService {
     }
   }
 
-  addOrder(Order: OrderM): Observable<any> {    
+  addOrder(Order: OrderM): Observable<any> {
     return this.http.post<OrderM>(environment.url + '/order/addOrder', Order, httpOptions);
   }
 

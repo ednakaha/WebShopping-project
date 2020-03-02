@@ -27,6 +27,7 @@ export class CartItemComponent implements OnInit {
 
   ngOnInit() {
     this.currCart = new CartM();
+    this.totalAmount = Number(this.getTotal);
   }
 
   rerunGuradsAndResolvers() {

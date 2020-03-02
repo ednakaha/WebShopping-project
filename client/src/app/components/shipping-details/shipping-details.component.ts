@@ -31,7 +31,7 @@ export class ShippingDetailsComponent implements OnInit {
   filteredArrayDate: string[] = [];
   textFile: string;
   ShipDate: Date;
-  @Input() finalSumInput: number;
+  @Input() finalSumInput;
 
   private setting = {
     element: {
@@ -66,14 +66,13 @@ export class ShippingDetailsComponent implements OnInit {
   ngOnInit() {
   }
   doOrder() {
-    debugger;
-    alert(this.finalSumInput)
+    alert(this.finalSumInput.finalSumOrder)
     const convertTime = new Date(moment(this.ShipDate).format("YYYY-MM-DD"));
     this.orderService.addOrder({
       id: "",
       personId: this.loginService.getUserId(),
       cartId: this.loginService.getCartId(),
-      finalSum: this.finalSumInput,  
+      finalSum: Number(this.finalSumInput.finalSumOrder),  
       cityIdShip: this.emitCityId,
       streetShip: this.streetShip,
       dateShip: convertTime,

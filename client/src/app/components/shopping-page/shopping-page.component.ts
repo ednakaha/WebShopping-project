@@ -37,8 +37,7 @@ export class ShoppingPageComponent implements OnInit {
   getCartItemExList() {
     this.cartItemService.getCartItemExpanded(this.loginService.getCartId())
       .subscribe(cd => {
-        this.cartItemExArray = cd;
-            
+        this.cartItemExArray = cd;            
       });
   }
 
@@ -89,7 +88,6 @@ export class ShoppingPageComponent implements OnInit {
   }
 
   getSelectedItem(item) {
-  //  console.log("--getSelectedItem---", item)
     this.item_Emitter = item
   }
   updateArry() {
