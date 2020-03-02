@@ -63,12 +63,9 @@ export class CartService {
     {
       this.http.post<CartM>(environment.url + '/cart/add', cart, httpOptions).subscribe(
         data => {
-          alert(data)
-          // console.log("POST Request is successful ", data);
-          //result =   true;
+           console.log("addCart POST Request is successful ");
         },
         error => {
-          alert(error.error)
           console.log("Error", error);
         }
       )

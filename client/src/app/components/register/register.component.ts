@@ -23,7 +23,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() { }
   validatePassword() {
     if (this.password != this.confirmPassword) {
-      // alert("Passwords Don't Match");
       this.errorMessage = "Passwords don't Match";
       this.confirmPassword = '';
       return false;
@@ -33,7 +32,6 @@ export class RegisterComponent implements OnInit {
   }
 
   addPerson1() {
- //   alert('password' + this.password);
     if (this.validatePassword()) {
           
       this.registerService.addPersonStep1({

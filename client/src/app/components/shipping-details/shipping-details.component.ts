@@ -66,7 +66,6 @@ export class ShippingDetailsComponent implements OnInit {
   ngOnInit() {
   }
   doOrder() {
-    alert(this.finalSumInput.finalSumOrder)
     const convertTime = new Date(moment(this.ShipDate).format("YYYY-MM-DD"));
     this.orderService.addOrder({
       id: "",

@@ -49,51 +49,18 @@ export class CartItemService {
   addCartItem(cartItem: CartItemM) {//}: boolean {
 
     return this.http.post<CartItemM>(environment.url + '/cartItem/add', cartItem, httpOptions);
-    // .subscribe(
-    //   data => {
-    //     alert(data)
-    //     // console.log("POST Request is successful ", data);
-    //     //result =   true;
-    //   },
-    //   error => {
-    //     alert(error.error)
-    //     console.log("Error", error);
-    //     // return false;
-    //   }
-    // )
+
   };
 
   delItemCartById(id: string) {
     return this.http.delete<any>(environment.url + '/cartItem/deleteCartItem/' + id, httpOptions)
-    // .subscribe(data => {
-    //   alert('Delete cart item successfuly');
 
-    // },
-    //   error => {
-    //     alert(error.error)
-    //     console.log("Error", error);
-    //     // return false;
-    //   }
-    // )
   }
 
 
   delAllItemsCart(cartId: string) {
 
     return this.http.delete<any>(environment.url + '/cartItem/delete/' + cartId, httpOptions)
-    //     .subscribe(data => {
-    //           
-    //       alert('Delete successfuly----' +data);
-    //       //todo why data is null. in service there is data 
-    //       // res.status(204).send(JSON.stringify(cartItem['deletedCount']));
 
-    //     },
-    //       error => {
-    //             
-    //         alert(error.error)
-    //         console.log("Error", error);
-    //         // return false;
-    //       }
-    //     )
   }
 }

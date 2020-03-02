@@ -137,8 +137,8 @@ app.listen(PORT, () => {
 
 // File upload settings  
 const PATH =
-//  './uploads';
-'../client/src/assets/images';
+ './uploads';
+//'../client/src/assets/images';
 
 
 let storage = multer.diskStorage(
